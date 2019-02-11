@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 public class Board{
 
-    int num_players;
+    int num_players;    
+    private ArrayList<Player> player_list = new ArrayList<Player>();
+    private ArrayList<Room> room_list = new ArrayList<Room>();
     
-    public ArrayList<Player> player_list = new ArrayList<Player>();
-
     Board(int numPlayers){
 	num_players = numPlayers;
     }
@@ -12,6 +12,10 @@ public class Board{
     
     public void addPlayer(Player player){
 	player_list.add(player);	
+    }
+
+    public void addRoom(Room room){
+	room_list.add(room);
     }
 
 }

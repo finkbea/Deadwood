@@ -1,7 +1,7 @@
 
 public class Player{
 
-    int pid;
+    private int pid;
     
     Player(int p_id){
 	pid = p_id;
