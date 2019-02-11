@@ -2,8 +2,8 @@
 public class Deadwood{
 
     public static void main(String args[]){
-	if(args.length != 1){
-	    System.out.println("Please specify number of players");
+	if(args.length != 1 || Integer.parseInt(args[0]) < 1){
+	    System.out.println("Please specify a correct number of players");
 	}
 	else{
 	    int num_players = Integer.parseInt(args[0]);
@@ -21,40 +21,105 @@ public class Deadwood{
 	    i++;
 	}
 
-	setupRooms(board);
+	setupRooms(board); // also sets up roles for each room
 	setupScenes(board);
     }
 
     private static void setupRooms(Board board){
-	Room castingOffice = new Room("Casting Office");
+	Room castingOffice = new Room("Casting Office", 0);
 	board.addRoom(castingOffice);
-	Room trailers = new Room("Trailers");
+	Room trailers = new Room("Trailers", 0);
 	board.addRoom(trailers);
-	Room mainStreet = new Room("Main Street");
+	Room mainStreet = new Room("Main Street", 3);
 	board.addRoom(mainStreet);
-	Room saloon = new Room("Saloon");
+	setupRoomRoles(mainStreet);
+	Room saloon = new Room("Saloon", 2);
 	board.addRoom(saloon);
-	Room ranch = new Room("Ranch");
+	setupRoomRoles(saloon);
+	Room ranch = new Room("Ranch", 2);
 	board.addRoom(ranch);
-	Room secretHideout = new Room("Secret Hideout");
+	setupRoomRoles(ranch);
+	Room secretHideout = new Room("Secret Hideout", 3);
 	board.addRoom(secretHideout);
-	Room bank = new Room("Bank");
+	setupRoomRoles(secretHideout);
+	Room bank = new Room("Bank", 1);
 	board.addRoom(bank);
-	Room hotel = new Room("Hotel");
+	setupRoomRoles(bank);	
+	Room hotel = new Room("Hotel", 3);
 	board.addRoom(hotel);
-	Room church = new Room("Church");
+	setupRoomRoles(hotel);	
+	Room church = new Room("Church", 2);
 	board.addRoom(church);
-	Room jail = new Room("jail");
+	setupRoomRoles(church);
+	Room jail = new Room("Jail", 1);
 	board.addRoom(jail);
-	Room trainStation = new Room("Train Station");
+	setupRoomRoles(jail);      
+	Room trainStation = new Room("Train Station", 3);
 	board.addRoom(trainStation);
-	Room generalStore = new Room("General Store");
+	setupRoomRoles(trainStation);	
+	Room generalStore = new Room("General Store", 2);
 	board.addRoom(generalStore);
+	setupRoomRoles(generalStore);	
     }
 
     private static void setupScenes(Board board){
-	// call Scene to setup scene cards
-	// then call something else to store the cards somewhere else?
+	/* 1. call Scene to setup scene cards by reading xml file and store
+              all those in board.unused_scenes
+	
+	   2. call board.hydrateSets 
+	*/
 
+    }
+
+    private static void setupRoomRoles(Room room){
+	if(room.getName().equals("Main Street")){
+	    room.addRole(1, "Railroad Worker", "I'm a steel-drivin' man!");
+	    room.addRole(2, "Falls off Roof", "Aaa aii iig ggghh!");
+	    room.addRole(2, "Woman in Black Dress", "Well, I'll be!");
+	    room.addRole(4, "Mayor McGinty", "People of Deadwood!");
+	}
+	else if(room.getName().equals("Saloon")){
+	    room.addRole(1, "Reluctant Farmer", "I ain't so sure about that!");
+	    room.addRole(2, "Woman in Red Dress", "Come up and see me!");
+	}
+	else if(room.getName().equals("Ranch")){
+	    room.addRole(3, "Man Under Horse", "A little help here!");
+	    room.addRole(2, "Saucy Fred", "That's what she said!");
+	    room.addRole(1, "Shot in Leg", "Ow! Me Leg!");
+	}
+	else if(room.getName().equals("Secret Hideout")){
+	    room.addRole(1, "Clumsy Pit Fighter", "Hit me!");
+	    room.addRole(2, "Thug with Knife", "Meet Suzy, my murderin' knife.");
+	    room.addRole(3, "Dangerous Tom", "There's two ways we can do this..");
+	    room.addRole(4, "Penny, who is Lost", "Oh, Woe! For I am lost!");
+	}
+	else if(room.getName().equals("Bank")){
+	    room.addRole(2, "Suspicious Gentleman", "Can you be more specific?");
+	    room.addRole(3, "Flustered Teller", "Would you like a large bill, sir?");
+	}
+	else if(room.getName().equals("Hotel")){
+	    room.addRole(1, "Sleeping Drunkard", "Zzzzzz.. Whiskey!");
+	    room.addRole(1, "Faro Player", "Hit me!");
+	    room.addRole(2, "Falls from Balcony", "Arrrgghh!!");
+	    room.addRole(3, "Australian Bartender", "What'll it be, mate?");
+	}
+	else if(room.getName().equals("Church")){
+	    room.addRole(2, "Crying Woman", "Oh, the humanity!");
+	    room.addRole(1, "Dead Man", ".. ..");
+	}
+	else if(room.getName().equals("Jail")){
+	    room.addRole(3, "Feller in Irons", "Ah kilt the wrong man!");
+	    room.addRole(2, "Prisoner in Cell", "Zzzzzzz... Whiskey!");
+	}
+	else if(room.getName().equals("Train Station")){
+	    room.addRole(1, "Crusty Prospector", "Aww, peaches!");
+	    room.addRole(1, "Dragged by Train", "Omgeezers!");
+	    room.addRole(2, "Preacher with Bag", "The lord will provide.");
+	    room.addRole(4, "Cyrus the Gunfighter", "Git to fightin' or gitaway!");
+	}
+	else if(room.getName().equals("General Store")){
+	    room.addRole(1, "Man in Overalls", "Looks like a storm's comin' in..");
+	    room.addRole(3, "Mister Keach", "Howdy, stranger.");
+	}
     }
 }
