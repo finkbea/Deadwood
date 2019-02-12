@@ -7,12 +7,13 @@ public class Deadwood{
 	}
 	else{
 	    int num_players = Integer.parseInt(args[0]);
-	    setupGame(num_players);
+	    Board board = new Board(num_players);
+	    setupGame(num_players, board);
+	    setupScenes(args, board);
 	}
     }
 
-    private static void setupGame(int num_players){
-	Board board = new Board(num_players);
+    private static void setupGame(int num_players, Board board){	
 
 	int i = 0;
 	while(i < num_players){ //Adding players to board object
@@ -20,9 +21,7 @@ public class Deadwood{
 	    board.addPlayer(new_player);
 	    i++;
 	}
-
 	setupRooms(board); // also sets up roles for each room
-	setupScenes(board);
     }
 
     private static void setupRooms(Board board){
@@ -62,13 +61,15 @@ public class Deadwood{
 	setupRoomRoles(generalStore);	
     }
 
-    private static void setupScenes(Board board){
+    private static void setupScenes(String[] args, Board board){      
 	/* 1. call Scene to setup scene cards by reading xml file and store
               all those in board.unused_scenes
 	
-	   2. call board.hydrateSets 
+	   2. call board.hydrateSets (or just call startgame and have it just
+              hydrateSets like it would normally do? .. not sure yet)
 	*/
-
+	
+	XmlReader.main(args, board);
     }
 
     private static void setupRoomRoles(Room room){

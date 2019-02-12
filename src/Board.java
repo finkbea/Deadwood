@@ -27,8 +27,11 @@ public class Board{
     }
 
     private void updateScenes(Scene scene){
-	unused_scenes.remove(scene);
 	used_scenes.add(scene);
+	unused_scenes.remove(scene);
     }
 
+    public void addScenes(Scene scene){
+	unused_scenes.add(scene);
+    }
 }
