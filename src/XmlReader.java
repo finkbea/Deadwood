@@ -99,11 +99,10 @@ public class XmlReader {
      * Simplified main.  It is now just parse the file and print the cards.
      * Helper functions (above) do all of the real work. 
      */
-    public static void main(String argv[], Board board) {
- 
+    public static void main(String argv[], Board board) { 
 	Element doc = parse_doc("cards.xml");
 	for_each(doc.getElementsByTagName("card"),
-		 (Element card) -> makeCard(card));
+		 (Element card) -> board.addScene(makeCard(card)));
     }
 
     public static Scene makeCard(Element card) {

@@ -18,5 +18,8 @@ public class Scene{
 	System.out.println(name + " with # of roles as "+numRoles);
     }
 
+    public String getName(){
+	return _name;
+    }
     //add getter methods
 }

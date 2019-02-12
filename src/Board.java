@@ -31,7 +31,8 @@ public class Board{
 	unused_scenes.remove(scene);
     }
 
-    public void addScenes(Scene scene){
+    public void addScene(Scene scene){
 	unused_scenes.add(scene);
+	System.out.println("added scene: "+scene.getName());
     }
 }
