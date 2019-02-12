@@ -14,16 +14,18 @@ public class Deadwood{
     }
 
     private static void setupGame(int num_players, Board board){	
-
 	int i = 0;
 	while(i < num_players){ //Adding players to board object
 	    Player new_player = new Player(i+1);
 	    board.addPlayer(new_player);
 	    i++;
 	}
-	setupRooms(board); // also sets up roles for each room
+	setupRooms(board);
     }
 
+    /* Creates all room objects, adds them to board object, and 
+       also creates the room neighbors relationships for each
+       room */
     private static void setupRooms(Board board){
 	Room castingOffice = new Room("Casting Office", 0);
 	board.addRoom(castingOffice);
@@ -59,17 +61,59 @@ public class Deadwood{
 	Room generalStore = new Room("General Store", 2);
 	board.addRoom(generalStore);
 	setupRoomRoles(generalStore);	
+
+	castingOffice.addNeighbor(trainStation);
+	castingOffice.addNeighbor(ranch);
+	castingOffice.addNeighbor(secretHideout);
+	trailers.addNeighbor(mainStreet);
+	trailers.addNeighbor(saloon);
+	trailers.addNeighbor(hotel);	
+	mainStreet.addNeighbor(trailers);
+	mainStreet.addNeighbor(saloon);
+	mainStreet.addNeighbor(jail);
+	saloon.addNeighbor(mainStreet);
+        saloon.addNeighbor(trailers);
+	saloon.addNeighbor(bank);
+	saloon.addNeighbor(generalStore);
+	ranch.addNeighbor(generalStore);
+	ranch.addNeighbor(bank);
+	ranch.addNeighbor(secretHideout);
+	ranch.addNeighbor(castingOffice);
+	secretHideout.addNeighbor(ranch);
+        secretHideout.addNeighbor(castingOffice);
+	secretHideout.addNeighbor(church);
+        bank.addNeighbor(saloon);
+	bank.addNeighbor(hotel);
+	bank.addNeighbor(church);
+	bank.addNeighbor(ranch);
+	hotel.addNeighbor(trailers);
+	hotel.addNeighbor(bank);
+	hotel.addNeighbor(church);
+	church.addNeighbor(secretHideout);
+	church.addNeighbor(bank);
+	church.addNeighbor(hotel);
+	jail.addNeighbor(trainStation);
+	jail.addNeighbor(generalStore);
+	jail.addNeighbor(mainStreet);
+	trainStation.addNeighbor(jail);
+	trainStation.addNeighbor(generalStore);
+	trainStation.addNeighbor(castingOffice);
+	generalStore.addNeighbor(jail);
+        generalStore.addNeighbor(saloon);
+        generalStore.addNeighbor(ranch);
+	generalStore.addNeighbor(trainStation);
     }
 
     private static void setupScenes(String[] args, Board board){      
 	/* 1. call Scene to setup scene cards by reading xml file and store
               all those in board.unused_scenes
-	
+	         --DONE--
+
 	   2. call board.hydrateSets (or just call startgame and have it just
               hydrateSets like it would normally do? .. not sure yet)
 	*/
 	
-	XmlReader.main(args, board);
+	XmlReader.main(args, board); //adds scenes to board object in XmlReader.java
     }
 
     private static void setupRoomRoles(Room room){
@@ -123,4 +167,5 @@ public class Deadwood{
 	    room.addRole(3, "Mister Keach", "Howdy, stranger.");
 	}
     }
+
 }

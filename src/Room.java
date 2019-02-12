@@ -21,4 +21,8 @@ public class Room{
     public String getName(){
 	return _name;
     }
+
+    public void addNeighbor(Room room){
+	neighbors.add(room);
+    }
 }
