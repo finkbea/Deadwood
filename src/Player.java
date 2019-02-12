@@ -5,6 +5,7 @@ public class Player{
     private int dollars;
     private int credits;
     private int rank;
+    private Room _room;
     
     Player(int p_id){
 	pid = p_id;
@@ -14,4 +15,24 @@ public class Player{
 	System.out.println("Created player with pid of "+p_id);
     }
 
+    public int getPid(){
+	return pid;
+    }
+
+    public int getDollars(){
+	return dollars;
+    }
+
+    public int getCredits(){
+	return credits;
+    }
+
+    public int getRank(){
+	return rank;
+    }
+
+    public void updateRoom(Room room){
+	_room = room;
+    }
+    
 }

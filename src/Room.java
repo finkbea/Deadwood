@@ -4,6 +4,7 @@ public class Room{
 
     private ArrayList<Room> neighbors = new ArrayList<Room>();
     private ArrayList<Role> roles = new ArrayList<Role>();
+    private Scene _scene;
     public String _name;
     public int shotCounters;
     
@@ -24,5 +25,9 @@ public class Room{
 
     public void addNeighbor(Room room){
 	neighbors.add(room);
+    }
+
+    public void placeScene(Scene scene){
+	_scene = scene;
     }
 }

@@ -10,6 +10,7 @@ public class Deadwood{
 	    Board board = new Board(num_players);
 	    setupGame(num_players, board);
 	    setupScenes(args, board);
+	    GameKeeper.startGame(board);
 	}
     }
 
@@ -20,7 +21,7 @@ public class Deadwood{
 	    board.addPlayer(new_player);
 	    i++;
 	}
-	setupRooms(board);
+	setupRooms(board);	
     }
 
     /* Creates all room objects, adds them to board object, and 
@@ -104,15 +105,7 @@ public class Deadwood{
 	generalStore.addNeighbor(trainStation);
     }
 
-    private static void setupScenes(String[] args, Board board){      
-	/* 1. call Scene to setup scene cards by reading xml file and store
-              all those in board.unused_scenes
-	         --DONE--
-
-	   2. call board.hydrateSets (or just call startgame and have it just
-              hydrateSets like it would normally do? .. not sure yet)
-	*/
-	
+    private static void setupScenes(String[] args, Board board){      	
 	XmlReader.main(args, board); //adds scenes to board object in XmlReader.java
     }
 

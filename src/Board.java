@@ -20,10 +20,17 @@ public class Board{
     public void addRoom(Room room){
 	room_list.add(room);
     }
-
+ 
+    // 1. get scenes from unused_scenes and hydrate the sets with them
+    // 2. move used scenes to used_scenes array by calling updateScenes
     public void hydrateSets(){
-	// 1. get scenes from unused_scenes and hydrate the sets with them
-	// 2. move used scenes to used_scenes array by calling updateScenes
+	int i = 0;
+	while(!room_list.get(i).getName().equals("Casting Office") &&
+	      !room_list.get(i).getName().equals("Trailers") && i < room_list.size() - 2){
+	    room_list.get(i).placeScene(unused_scenes.get(i));
+	    updateScenes(unused_scenes.get(i));
+	    i++;
+	}
     }
 
     private void updateScenes(Scene scene){
@@ -34,5 +41,38 @@ public class Board{
     public void addScene(Scene scene){
 	unused_scenes.add(scene);
 	System.out.println("added scene: "+scene.getName());
+    }
+
+    public Player getPlayer(int pid){
+	Player temp = player_list.get(0); 
+	int i = 0;
+	while(i < player_list.size()){
+	    if(player_list.get(i).getPid() == pid){
+		temp = player_list.get(i);
+		break;
+	    }
+	    i++;
+	}
+	return temp;
+    }
+
+    public int getNumPlayers(){
+	return num_players;
+    }
+
+    public int getPlayerListSize(){
+	return (player_list.size());
+    }
+
+    public Room getCastingOffice(){
+	Room temp = room_list.get(0);
+	int i = 0;
+	while(i < room_list.size()){
+	    if(room_list.get(i).getName().equals("Casting Office")){
+		temp = room_list.get(i);
+	    }
+	    i++;
+	}
+	return temp;
     }
 }
