@@ -29,5 +29,10 @@ public class Room{
 
     public void placeScene(Scene scene){
 	_scene = scene;
+	System.out.println("Placing scene on room "+_name);
+    }
+
+    public Scene getScene(){
+	return _scene;
     }
 }

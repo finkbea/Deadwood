@@ -64,11 +64,23 @@ public class Board{
 	return (player_list.size());
     }
 
-    public Room getCastingOffice(){
+    public Room getTrailers(){
 	Room temp = room_list.get(0);
 	int i = 0;
 	while(i < room_list.size()){
-	    if(room_list.get(i).getName().equals("Casting Office")){
+	    if(room_list.get(i).getName().equals("Trailers")){
+		temp = room_list.get(i);
+	    }
+	    i++;
+	}
+	return temp;
+    }
+
+    public Room getRoom(String desired_room){
+	Room temp = room_list.get(0);
+	int i = 0;
+	while(i < room_list.size()){
+	    if(room_list.get(i).getName().equals(desired_room)){
 		temp = room_list.get(i);
 	    }
 	    i++;

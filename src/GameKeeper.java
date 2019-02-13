@@ -29,7 +29,7 @@ public class GameKeeper{
 	int turnEnd = 0;
 	while(turnEnd == 0){
 	    sc = new Scanner(System.in);
-	    command = sc.next();
+	    command = sc.nextLine();
 	    turnEnd = (inputAdmin(command, turn, board));	    
 	    //System.out.println(command);
 	}
@@ -42,15 +42,43 @@ public class GameKeeper{
 	}
 	else if(command.equals("who")){
 	    Player temp = board.getPlayer(turn);
-	    System.out.println("Player "+turn+": ($"+temp.getDollars()+", "+temp.getCredits()+
-			       "cr)");
+	    System.out.println("Player "+turn+": ($:"+temp.getDollars()+", cr:"+temp.getCredits()+
+			       ", rank:"+temp.getRank()+")");
 	    System.out.println("also need to add compatibility if the current player is working on any parts");
 	}
 	else if(command.equals("where")){
 	    Player temp = board.getPlayer(turn);
-	    System.out.println("do where stuff here");
+	    Scene temp_scene = temp.getCurrentRoom().getScene();
+	    System.out.println("in "+temp.getCurrentRoom().getName()+" shooting "+temp_scene);
+	    System.out.println("TODO: make sure its returning the scene properly..");
 	}
+	else if(command.contains("move")){
+	    Player temp = board.getPlayer(turn);
+	    String desired_room_string = getDesiredRoom(command);
+	    Room desired_room = board.getRoom(desired_room_string);
+	    temp.updateRoom(desired_room);
+	    System.out.println("todo: need to check if room is neighboring room first");
+	}
+	else if(command.equals("rehearse")){
+	    Player temp = board.getPlayer(turn);
+	    temp.rehearse();
+	    System.out.println("TODO: make sure in a role");
+	}
+	else if(command.equals("act")){
+	    Player temp = board.getPlayer(turn);
+	    System.out.println("do act stuff here. call randomNumGen");
+	}
+	else if(command.contains("upgrade")){
+	    Player temp = board.getPlayer(turn);
+	    int money_type = getMoneyType(command);
+	    int new_rank = getNewRank(command);
 
+	    temp.updateRankAndMoney(new_rank, money_type);
+	    System.out.println("new rank: "+temp.getRank());
+	    
+	    System.out.println("todo: make sure we're in casting office to upgrade and make sure we have the funds to do the transaction and make sure rank isn't above 6");
+	    
+	}
 	return(turnEnd);
     }
 
@@ -58,10 +86,50 @@ public class GameKeeper{
 	int pnum = 1;
 	int i = 0;
 	while(i < board.getPlayerListSize()){
-	    board.getPlayer(pnum).updateRoom(board.getCastingOffice());
+	    board.getPlayer(pnum).updateRoom(board.getTrailers());
+	    board.getPlayer(pnum).resetRehearseTokens();
 	    pnum++;
 	    i++;
 	}
     }
 
+    private static String getDesiredRoom(String command){
+	String temp = "";
+	String[] tokens = command.split(" ");
+	if(tokens.length > 2){
+	    temp += tokens[1] + " " + tokens[2];
+	}
+	else{
+	    temp += tokens[1];
+	}
+	return temp;
+    }
+
+    // returns 0 for dollars, 1 for credits
+    private static int getMoneyType(String command){
+	int type = 0;
+	String temp = "";
+	String[] tokens = command.split(" ");	
+	temp += tokens[1];
+	if(temp.equals("$")){
+	    type = 0;
+	}
+	else if(temp.equals("cr")){
+	    type = 1;
+	}
+	else{
+	    System.out.println("Bad money type. You messed things up. Everything is messed up now. Nice.");
+	}
+	return type;
+    }
+
+    private static int getNewRank(String command){
+	int type;
+	String temp = "";
+	String[] tokens = command.split(" ");	
+	temp += tokens[2];
+	type = Integer.parseInt(temp);
+	
+	return type;
+    }
 }
