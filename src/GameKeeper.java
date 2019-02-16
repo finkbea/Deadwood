@@ -1,4 +1,5 @@
 import java.util.*;
+//import java.util.Random;
 
 public class GameKeeper{
 
@@ -66,7 +67,16 @@ public class GameKeeper{
 	}
 	else if(command.equals("act")){
 	    Player temp = board.getPlayer(turn);
-	    System.out.println("do act stuff here. call randomNumGen");
+	    int roll = rollDice(1);	   
+	    int budget = temp.getCurrentRoom().getScene().getBudget();
+
+	    if(roll < budget){
+		System.out.println("fail roll");
+	    }
+	    else if(roll >= budget){
+		System.out.println("success roll");
+	    }
+	    System.out.println("TODO: make sure player is in a part, and did not just move");
 	}
 	else if(command.contains("upgrade")){
 	    Player temp = board.getPlayer(turn);
@@ -76,8 +86,20 @@ public class GameKeeper{
 	    temp.updateRankAndMoney(new_rank, money_type);
 	    System.out.println("new rank: "+temp.getRank());
 	    
-	    System.out.println("todo: make sure we're in casting office to upgrade and make sure we have the funds to do the transaction and make sure rank isn't above 6");
+	    System.out.println("todo: make sure we're in casting office to upgrade and make sure we have the funds to do the transaction and make sure 2 < newrank < 6");	    
+	}
+	else if(command.contains("work")){
+	    Player temp = board.getPlayer(turn);
+	    String desired_role_string = getDesiredRoleString(command);
+	    Role role = findRole(desired_role_string, temp);      
 	    
+	    temp.setRole(role);
+
+	    System.out.println("player just took the role: "+temp.getRole().getName());
+	    System.out.println("need to make sure not in another role, and role is not already taken");
+	}
+	else{
+	    System.out.println("Command not recognized, please try again. ");
 	}
 	return(turnEnd);
     }
@@ -131,5 +153,51 @@ public class GameKeeper{
 	type = Integer.parseInt(temp);
 	
 	return type;
+    }
+
+    private static int rollDice(int numberOfDice){
+	Random rand = new Random();
+	int roll = rand.nextInt(7);
+	return roll;
+    }
+
+    private static String getDesiredRoleString(String command){
+	String temp = "";
+	String[] tokens = command.split(" ");
+
+	if(tokens.length > 2){
+	    temp += tokens[1] + " " + tokens[2];
+	}
+	else{
+	    temp += tokens[1];
+	}
+
+	System.out.println("Role: "+temp);
+	return temp;
+    }
+
+    private static Role findRole(String desired_role, Player p){
+	Role role = new Role(1, "Fake Role", "You messed something up and now the roles are messed up");
+	int found = 0;
+	Room room = p.getCurrentRoom();
+	for(int i = 0; i < room.getNumberOfRoles(); i++){
+	    if(room.getRoles().get(i).getName().equals(desired_role)){
+		role = room.getRoles().get(i);
+		found = 1;
+	    }
+	}
+	if(found == 0){
+	    Scene scene = room.getScene();
+	    for(int i = 0; i < scene.getNumberOfRoles(); i++){
+		if(scene.getRoles().get(i).getName().equals(desired_role)){
+		    role = scene.getRoles().get(i);
+		    found = 1;
+		}
+	    }
+	}
+	if(found == 0){
+	    System.out.println("You input bad role.. things are messed up now. nice. ");
+	}
+	return role;
     }
 }

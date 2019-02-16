@@ -7,6 +7,8 @@ public class Player{
     private int rank;
     private Room _room;
     private int rehearseTokens;
+    private Role _role;
+    private int roleType; // 0 and 1
     
     Player(int p_id){
 	pid = p_id;
@@ -87,5 +89,13 @@ public class Player{
 	else if(new_rank == 6 && money_type == 1){
 	    credits = credits - 25;
 	}
+    }
+
+    public void setRole(Role role){
+	_role = role;
+    }
+
+    public Role getRole(){
+	return _role;
     }
 }

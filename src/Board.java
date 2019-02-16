@@ -25,10 +25,12 @@ public class Board{
     // 2. move used scenes to used_scenes array by calling updateScenes
     public void hydrateSets(){
 	int i = 0;
-	while(!room_list.get(i).getName().equals("Casting Office") &&
-	      !room_list.get(i).getName().equals("Trailers") && i < room_list.size() - 2){
+	while(i < room_list.size()){
+	    if(!room_list.get(i).getName().equals("Casting Office") &&
+	       !room_list.get(i).getName().equals("Trailers")){
 	    room_list.get(i).placeScene(unused_scenes.get(i));
 	    updateScenes(unused_scenes.get(i));
+	    }
 	    i++;
 	}
     }

@@ -35,4 +35,12 @@ public class Room{
     public Scene getScene(){
 	return _scene;
     }
+
+    public int getNumberOfRoles(){
+	return (roles.size());
+    }
+
+    public ArrayList<Role> getRoles(){
+	return roles;
+    }
 }

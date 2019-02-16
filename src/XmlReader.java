@@ -107,6 +107,8 @@ public class XmlReader {
 
     public static Scene makeCard(Element card) {
 	String cardName = card.getAttribute("name");
+	int cardBudget = Integer.parseInt(card.getAttribute("budget"));
+	System.out.println("AND BUDGET IS: "+card.getAttribute("budget"));
 	ArrayList<String> partNames = new ArrayList<String>();
 	ArrayList<Integer> levels = new ArrayList<Integer>();
 	ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
@@ -128,12 +130,12 @@ public class XmlReader {
 	    roles.add(temp);
 	    i++;
 	}
-	Scene scene = new Scene(num_roles, cardName, roles);
+	Scene scene = new Scene(num_roles, cardName, roles, cardBudget);
 	return scene;
     }
 
     public static String getPartName(Element part) {
-	String name = part.getAttribute("name");
+	String name = part.getAttribute("name");	
 	return name;
     }
 
