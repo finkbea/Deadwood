@@ -114,9 +114,11 @@ public class Player{
 
     public void resetRole(){
 	_role = null;
+	roleType = 0;
     }
 
     public int getRoleType(){
 	return roleType;
     }
+    
 }

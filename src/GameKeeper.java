@@ -313,7 +313,29 @@ public class GameKeeper{
 	    }
 	}
 	
+	if(main_role_players.size() > 0){
+	    ArrayList<Integer> rolls = new ArrayList<Integer>();
+	    for(int i = 0; i < room.getScene().getBudget(); i++){
+		rolls.add(rollDice(1));
+	    }
+	    Collections.sort(rolls);
+	    int j = rolls.size()-1;
+	    for(int i = 0; i < rolls.size(); i++){
+		main_role_players.get(i).addCurrency(0, rolls.get(j));
+		j--;
+		if( (i+1) == main_role_players.size() ){
+		    i = 0;
+		}
+	    }
+	}
 	
+	for(int i = 0; i < players_in_room_with_roles.size(); i++){
+	    players_in_room_with_roles.get(i).resetRole();
+	}
+
+	for(int i = 0; i < main_role_players.size(); i++){
+	    main_role_players.get(i).resetRole();
+	}
 	room.wrapScene();
 	
     }
