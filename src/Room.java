@@ -63,4 +63,12 @@ public class Room{
     public void removeShot(){
 	shotCounters--;
     }
+
+    public int getShotCounters(){
+	return shotCounters;
+    }
+
+    public void wrapScene(){
+	_scene = null;
+    }
 }

@@ -84,22 +84,32 @@ public class GameKeeper{
 	}
 	else if(command.equals("act")){
 	    Player temp = board.getPlayer(turn);
-	    if(temp.getRole() == null){
-		System.out.println("No current role. Try something else.");
+	    if(temp.getCurrentRoom().getShotCounters() > 0){
+		if(temp.getRole() == null){
+		    System.out.println("No current role. Try something else.");
+		}
+		else{
+		    int roll = rollDice(1);	   
+		    int budget = temp.getCurrentRoom().getScene().getBudget();
+		    
+		    if(roll < budget){
+			payoutFail(temp);
+			System.out.println("fail roll");
+		    }
+		    else if(roll >= budget){
+			System.out.println("success roll");
+			temp.getCurrentRoom().removeShot();
+			payoutSuccess(temp);
+			if(temp.getCurrentRoom().getShotCounters() == 0){
+			    wrapScene(temp.getCurrentRoom(), board);
+			}
+		    }
+		}
 	    }
 	    else{
-	    int roll = rollDice(1);	   
-	    int budget = temp.getCurrentRoom().getScene().getBudget();
-
-	    if(roll < budget){
-		System.out.println("fail roll");
-	    }
-	    else if(roll >= budget){
-		System.out.println("success roll");
+		System.out.println("Scene is wrapped already.");
 	    }
 	    System.out.println("TODO: make sure player did not just move/rehearse/work");
-	    }
-	    
 	}
 	else if(command.contains("upgrade")){
 	    Player temp = board.getPlayer(turn);	
@@ -126,10 +136,12 @@ public class GameKeeper{
 	else if(command.contains("work")){
 	    Player temp = board.getPlayer(turn);
 	    String desired_role_string = getDesiredRoleString(command);
-	    Role role = findRole(desired_role_string, temp);      
+	    Role role = findRole(desired_role_string, temp);
+	    int role_type = getRoleType(desired_role_string, temp);
 	    if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
 		temp.setRole(role);
 		role.workRole();
+		temp.setRoleType(role_type);
 		System.out.println("player just took the role: "+temp.getRole().getName());
 	    }
 	    else{
@@ -267,7 +279,7 @@ public class GameKeeper{
 	    enough_money = 1;
 	}
 	else if(new_rank == 4 && money_type == 1 && temp.getCredits() >= 15){
-	    enough_money = 1;;
+	    enough_money = 1;
 	}
 	else if(new_rank == 5 && money_type == 0 && temp.getDollars() >= 28){
 	    enough_money = 1;
@@ -276,7 +288,7 @@ public class GameKeeper{
 	    enough_money = 1;
 	}
 	else if(new_rank == 6 && money_type == 0 && temp.getDollars() >= 40){
-	    enough_money = 1;;
+	    enough_money = 1;
 	}
 	else if(new_rank == 6 && money_type == 1 && temp.getCredits() >= 25){
 	    enough_money = 1;
@@ -284,4 +296,71 @@ public class GameKeeper{
       
 	return enough_money;
     }
+
+    private static void wrapScene(Room room, Board board){
+	ArrayList<Player> players_in_room_with_roles = new ArrayList<Player>();
+	for(int i = 0; i < board.getPlayerListSize(); i++){
+	    if(board.getPlayer(i+1).getCurrentRoom().getName().equals(room.getName())
+	       && board.getPlayer(i+1).getRole() != null){		
+		players_in_room_with_roles.add(board.getPlayer(i+1));
+	    }
+	}
+
+	ArrayList<Player> main_role_players = new ArrayList<Player>();
+	for(int i = 0; i < board.getPlayerListSize(); i++){
+	    if(board.getPlayer(i+1).getRoleType() == 1){
+		main_role_players.add(board.getPlayer(i+1));
+	    }
+	}
+	
+	
+	room.wrapScene();
+	
+    }
+
+    // returns 0 for room role, 1 for scene role
+    private static int getRoleType(String desired_role, Player p){
+	int role_type = -1;
+	Role role = new Role(1, "Fake Role", "You messed something up and now the roles are messed up");
+	int found = 0;
+	Room room = p.getCurrentRoom();
+	for(int i = 0; i < room.getNumberOfRoles(); i++){
+	    if(room.getRoles().get(i).getName().equals(desired_role)){
+		role = room.getRoles().get(i);
+		found = 1;
+		role_type = 0;
+	    }
+	}
+	if(found == 0){
+	    Scene scene = room.getScene();
+	    for(int i = 0; i < scene.getNumberOfRoles(); i++){
+		if(scene.getRoles().get(i).getName().equals(desired_role)){
+		    role = scene.getRoles().get(i);
+		    found = 1;
+		    role_type = 1;
+		}
+	    }
+	}
+	if(found == 0){
+	    System.out.println("You input bad role.. things are messed up now. nice. ");
+	}
+	return role_type;
+    }
+
+    private static void payoutSuccess(Player p){
+	if(p.getRoleType() == 0){
+	    p.addCurrency(0, 1);
+	    p.addCurrency(1, 1);
+	}
+	else{
+	    p.addCurrency(1, 2);
+	}
+    }
+
+    private static void payoutFail(Player p){
+	if(p.getRoleType() == 0){
+	    p.addCurrency(0, 1);
+	}
+    }
 }
+

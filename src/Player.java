@@ -8,7 +8,7 @@ public class Player{
     private Room _room;
     private int rehearseTokens;
     private Role _role;
-    private int roleType; // 0 and 1
+    private int roleType; // 0 for room, and 1 for scene
     
     Player(int p_id){
 	pid = p_id;
@@ -19,6 +19,15 @@ public class Player{
 	System.out.println("Created player with pid of "+p_id);
     }
 
+    public void addCurrency(int money_type, int amount){
+	if(money_type == 0){
+	    dollars += amount;
+	}
+	else{
+	    credits += amount;
+	}
+    }
+    
     public int getPid(){
 	return pid;
     }
@@ -95,11 +104,19 @@ public class Player{
 	_role = role;
     }
 
+    public void setRoleType(int type){
+	roleType = type;
+    }
+    
     public Role getRole(){
 	return _role;
     }
 
     public void resetRole(){
 	_role = null;
+    }
+
+    public int getRoleType(){
+	return roleType;
     }
 }
