@@ -7,14 +7,23 @@ public class GameKeeper{
 	System.out.println("Get ready to rumble! Starting game!");
 	int turn;
 	int day = 1;
-	resetPlayers(board);
 
-	hydrateSets(board);
-	turn = 1;
-	while(turn <= board.getNumPlayers()){
-	    listener(board, turn);
-	    turn++;
+	while(day <= 4){
+	    resetPlayers(board);
+	    hydrateSets(board);
+	    turn = 1;
+	    while(isEndOfDay(board) == 0){
+		if(turn > board.getNumPlayers()){
+		    turn = 1;
+		}
+		listener(board, turn);
+		turn++;
+	    }
+	    day++;
 	}
+
+	System.out.println("Game is over!");
+	calculateWinner(board);
     }
 
     private static void hydrateSets(Board board){
@@ -336,8 +345,8 @@ public class GameKeeper{
 	for(int i = 0; i < main_role_players.size(); i++){
 	    main_role_players.get(i).resetRole();
 	}
-	room.wrapScene();
-	
+	board.wrapScene();
+	room.wrapScene();	
     }
 
     // returns 0 for room role, 1 for scene role
@@ -383,6 +392,32 @@ public class GameKeeper{
 	if(p.getRoleType() == 0){
 	    p.addCurrency(0, 1);
 	}
+    }
+
+    // returns 0 for no, 1 for yes
+    private static int isEndOfDay(Board board){
+	int eod = 0;
+	if(board.numWrappedScenes() == 9){
+	    eod = 1;
+	}
+	return eod;
+    }
+
+    private static void calculateWinner(Board board){
+	int winning_pid = 0;
+	int top_score = 0;
+
+	for(int i = 0; i < board.getPlayerListSize(); i++){
+	    Player temp_player = board.getPlayer(i+1);
+	    int temp_score = temp_player.getDollars() + temp_player.getCredits() +
+		(temp_player.getRank() * 5);
+	    if(temp_score > top_score){
+		top_score = temp_score;
+		winning_pid = i + 1;
+	    }
+	}
+
+	System.out.println("The winner is: Player "+winning_pid+"!");
     }
 }
 

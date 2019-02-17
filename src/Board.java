@@ -7,10 +7,11 @@ public class Board{
     private ArrayList<Room> room_list = new ArrayList<Room>();
     private ArrayList<Scene> used_scenes = new ArrayList<Scene>();
     private ArrayList<Scene> unused_scenes = new ArrayList<Scene>();
-
+    private int numWrappedScenes;
     
     Board(int numPlayers){
 	num_players = numPlayers;
+	numWrappedScenes = 0;
     }
     
     public void addPlayer(Player player){
@@ -88,5 +89,13 @@ public class Board{
 	    i++;
 	}
 	return temp;
+    }
+
+    public void wrapScene(){
+	numWrappedScenes++;
+    }
+
+    public int numWrappedScenes(){
+	return numWrappedScenes;
     }
 }
