@@ -43,4 +43,20 @@ public class Room{
     public ArrayList<Role> getRoles(){
 	return roles;
     }
+
+    public int isNeighbor(Room room){
+	Room temproom = neighbors.get(0);
+	int i = 0;
+	int is_neighbor = 0;
+	while(i < neighbors.size()){
+	    if(neighbors.get(i).getName().equals(room.getName())){
+		is_neighbor = 1;
+	    }
+	    else{
+		temproom = neighbors.get(i);
+	    }
+	    i++;
+	}
+	return is_neighbor;
+    }
 }

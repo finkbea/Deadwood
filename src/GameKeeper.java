@@ -7,7 +7,7 @@ public class GameKeeper{
 	System.out.println("Get ready to rumble! Starting game!");
 	int turn;
 	resetPlayers(board);
-	
+	//make sure on end of day to reset being_worked in Role.java
 	hydrateSets(board);
 	turn = 1;
 	while(turn <= board.getNumPlayers()){
@@ -43,30 +43,50 @@ public class GameKeeper{
 	}
 	else if(command.equals("who")){
 	    Player temp = board.getPlayer(turn);
-	    System.out.println("Player "+turn+": ($:"+temp.getDollars()+", cr:"+temp.getCredits()+
-			       ", rank:"+temp.getRank()+")");
-	    System.out.println("also need to add compatibility if the current player is working on any parts");
+	    System.out.print("Player "+turn+": ($:"+temp.getDollars()+", cr:"+temp.getCredits()+
+			       ", rank:"+temp.getRank());
+	    if(temp.getRole() != null){
+		System.out.print(", role:"+temp.getRole().getName()+")\n");
+	    }
+	    else{
+		System.out.print(")\n");
+	    }
 	}
 	else if(command.equals("where")){
 	    Player temp = board.getPlayer(turn);
-	    Scene temp_scene = temp.getCurrentRoom().getScene();
-	    System.out.println("in "+temp.getCurrentRoom().getName()+" shooting "+temp_scene);
-	    System.out.println("TODO: make sure its returning the scene properly..");
+	    if(temp.getCurrentRoom().getScene() != null){
+		Scene temp_scene = temp.getCurrentRoom().getScene();
+		System.out.println("in "+temp.getCurrentRoom().getName()+" shooting "+temp_scene.getName());
+	    }
+	    else{
+		    System.out.println("in "+temp.getCurrentRoom().getName());
+	    }
 	}
 	else if(command.contains("move")){
 	    Player temp = board.getPlayer(turn);
 	    String desired_room_string = getDesiredRoom(command);
 	    Room desired_room = board.getRoom(desired_room_string);
-	    temp.updateRoom(desired_room);
-	    System.out.println("todo: need to check if room is neighboring room first");
+	    Room current_room = temp.getCurrentRoom();
+	    if(current_room.isNeighbor(desired_room) == 1){
+		temp.updateRoom(desired_room);
+	    }
+	    else{
+		System.out.println("Room is not neighboring room. Try something else.");
+	    }
+	    System.out.println("todo:make sure we didn't act/rehearse/move/work already");
 	}
 	else if(command.equals("rehearse")){
 	    Player temp = board.getPlayer(turn);
 	    temp.rehearse();
 	    System.out.println("TODO: make sure in a role");
+	    turnEnd = 1;
 	}
 	else if(command.equals("act")){
 	    Player temp = board.getPlayer(turn);
+	    if(temp.getRole() == null){
+		System.out.println("No current role. Try something else.");
+	    }
+	    else{
 	    int roll = rollDice(1);	   
 	    int budget = temp.getCurrentRoom().getScene().getBudget();
 
@@ -76,27 +96,46 @@ public class GameKeeper{
 	    else if(roll >= budget){
 		System.out.println("success roll");
 	    }
-	    System.out.println("TODO: make sure player is in a part, and did not just move");
+	    System.out.println("TODO: make sure player did not just move/rehearse/work");
+	    }
+	    turnEnd = 1;
 	}
 	else if(command.contains("upgrade")){
-	    Player temp = board.getPlayer(turn);
-	    int money_type = getMoneyType(command);
-	    int new_rank = getNewRank(command);
-
-	    temp.updateRankAndMoney(new_rank, money_type);
-	    System.out.println("new rank: "+temp.getRank());
-	    
-	    System.out.println("todo: make sure we're in casting office to upgrade and make sure we have the funds to do the transaction and make sure 2 < newrank < 6");	    
+	    Player temp = board.getPlayer(turn);	
+	    if(!temp.getCurrentRoom().getName().equals("Casting Office")){
+		System.out.println("Not in Casting Office. Try again.");
+	    }
+	    else{
+		int money_type = getMoneyType(command);
+		int new_rank = getNewRank(command);
+		if(new_rank < 2 || new_rank > 6){
+		    System.out.println("Bad rank. Try again.");
+		}
+		else{
+		    if(getPlayerFunds(temp, money_type, new_rank) == 0){
+			System.out.println("Not enough money for upgrade.");
+		    }
+		    else{
+			temp.updateRankAndMoney(new_rank, money_type);
+			System.out.println("new rank: "+temp.getRank());
+		    }
+		}
+	    }
 	}
 	else if(command.contains("work")){
 	    Player temp = board.getPlayer(turn);
 	    String desired_role_string = getDesiredRoleString(command);
 	    Role role = findRole(desired_role_string, temp);      
-	    
-	    temp.setRole(role);
-
-	    System.out.println("player just took the role: "+temp.getRole().getName());
-	    System.out.println("need to make sure not in another role, and role is not already taken");
+	    if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
+		temp.setRole(role);
+		role.workRole();
+		System.out.println("player just took the role: "+temp.getRole().getName());
+	    }
+	    else{
+		System.out.println("The role rank is larger than player rank or "+
+		    "the player already has a role or the role is already taken. Try again.");
+	    }
+	    turnEnd = 1;
 	}
 	else{
 	    System.out.println("Command not recognized, please try again. ");
@@ -165,8 +204,14 @@ public class GameKeeper{
 	String temp = "";
 	String[] tokens = command.split(" ");
 
-	if(tokens.length > 2){
+	if(tokens.length == 3){
 	    temp += tokens[1] + " " + tokens[2];
+	}
+	else if(tokens.length == 4){
+	    temp += tokens[1] + " " + tokens[2] + " " + tokens[3];
+	}
+	else if(tokens.length == 5){
+	    temp += tokens[1] + " " + tokens[2] + " " + tokens[3] + " " + tokens[4];
 	}
 	else{
 	    temp += tokens[1];
@@ -199,5 +244,42 @@ public class GameKeeper{
 	    System.out.println("You input bad role.. things are messed up now. nice. ");
 	}
 	return role;
+    }
+
+    // returns 0 for not enough, 1 for enough funds for rank
+    private static int getPlayerFunds(Player temp, int money_type, int new_rank){
+	int enough_money = 0;
+        if(new_rank == 2 && money_type == 0 && temp.getDollars() >= 4){
+	    enough_money = 1;
+	}
+	else if(new_rank == 2 && money_type == 1 && temp.getCredits() >= 5){
+	    enough_money = 1;
+	}
+	else if(new_rank == 3 && money_type == 0 && temp.getDollars() >= 10){
+	    enough_money = 1;
+	}
+	else if(new_rank == 3 && money_type == 1 && temp.getCredits() >= 10){
+	    enough_money = 1;
+	}
+	else if(new_rank == 4 && money_type == 0 && temp.getDollars() >= 18){
+	    enough_money = 1;
+	}
+	else if(new_rank == 4 && money_type == 1 && temp.getCredits() >= 15){
+	    enough_money = 1;;
+	}
+	else if(new_rank == 5 && money_type == 0 && temp.getDollars() >= 28){
+	    enough_money = 1;
+	}
+	else if(new_rank == 5 && money_type == 1 && temp.getCredits() >= 20){
+	    enough_money = 1;
+	}
+	else if(new_rank == 6 && money_type == 0 && temp.getDollars() >= 40){
+	    enough_money = 1;;
+	}
+	else if(new_rank == 6 && money_type == 1 && temp.getCredits() >= 25){
+	    enough_money = 1;
+	}
+      
+	return enough_money;
     }
 }
