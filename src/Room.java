@@ -59,4 +59,8 @@ public class Room{
 	}
 	return is_neighbor;
     }
+
+    public void removeShot(){
+	shotCounters--;
+    }
 }

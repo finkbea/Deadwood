@@ -98,4 +98,8 @@ public class Player{
     public Role getRole(){
 	return _role;
     }
+
+    public void resetRole(){
+	_role = null;
+    }
 }

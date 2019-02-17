@@ -6,8 +6,9 @@ public class GameKeeper{
     public static void startGame(Board board){
 	System.out.println("Get ready to rumble! Starting game!");
 	int turn;
+	int day = 1;
 	resetPlayers(board);
-	//make sure on end of day to reset being_worked in Role.java
+
 	hydrateSets(board);
 	turn = 1;
 	while(turn <= board.getNumPlayers()){
@@ -40,6 +41,7 @@ public class GameKeeper{
 	int turnEnd = 0;
 	if(command.equals("end")){
 	    turnEnd = 1;
+	    System.out.println("Player "+turn+" turn is over.");
 	}
 	else if(command.equals("who")){
 	    Player temp = board.getPlayer(turn);
@@ -79,7 +81,6 @@ public class GameKeeper{
 	    Player temp = board.getPlayer(turn);
 	    temp.rehearse();
 	    System.out.println("TODO: make sure in a role");
-	    turnEnd = 1;
 	}
 	else if(command.equals("act")){
 	    Player temp = board.getPlayer(turn);
@@ -98,7 +99,7 @@ public class GameKeeper{
 	    }
 	    System.out.println("TODO: make sure player did not just move/rehearse/work");
 	    }
-	    turnEnd = 1;
+	    
 	}
 	else if(command.contains("upgrade")){
 	    Player temp = board.getPlayer(turn);	
@@ -135,7 +136,7 @@ public class GameKeeper{
 		System.out.println("The role rank is larger than player rank or "+
 		    "the player already has a role or the role is already taken. Try again.");
 	    }
-	    turnEnd = 1;
+
 	}
 	else{
 	    System.out.println("Command not recognized, please try again. ");
@@ -149,6 +150,7 @@ public class GameKeeper{
 	while(i < board.getPlayerListSize()){
 	    board.getPlayer(pnum).updateRoom(board.getTrailers());
 	    board.getPlayer(pnum).resetRehearseTokens();
+	    board.getPlayer(pnum).resetRole();
 	    pnum++;
 	    i++;
 	}
