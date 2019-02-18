@@ -1,4 +1,5 @@
-
+/* Each Player has its own player class. Keeps track of current role, current room, currency, 
+   and rank. */
 public class Player{
 
     private int pid;
@@ -8,7 +9,7 @@ public class Player{
     private Room _room;
     private int rehearseTokens;
     private Role _role;
-    private int roleType; // 0 for room, and 1 for scene
+    private int roleType; // 0 for room(side role), and 1 for scene(main role)
     
     Player(int p_id){
 	pid = p_id;
@@ -19,6 +20,7 @@ public class Player{
 	System.out.println("Created player with pid of "+p_id);
     }
 
+    // Adds currency to player fields
     public void addCurrency(int money_type, int amount){
 	if(money_type == 0){
 	    dollars += amount;
@@ -44,6 +46,7 @@ public class Player{
 	return rank;
     }
 
+    // Since Player object keeps track of room, updateRoom()
     public void updateRoom(Room room){
 	_room = room;
 	System.out.println("updating room to: "+_room.getName());
@@ -65,6 +68,7 @@ public class Player{
 	rehearseTokens = 0;
     }
 
+    // Used only when upgrade is called
     public void updateRankAndMoney(int new_rank, int money_type){
 	rank = new_rank;
 	
@@ -112,6 +116,7 @@ public class Player{
 	return _role;
     }
 
+    // Used when scene is wrapped or day is over
     public void resetRole(){
 	_role = null;
 	roleType = 0;

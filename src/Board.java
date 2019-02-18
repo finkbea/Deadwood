@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/* The Board object is a singleton and it holds all the players, rooms, used/unused scenes,
+   and number of players. It does not keep track of which player is in each room (Player object
+   does this). After the game is setup, this object is passed to GameKeeper.java in order to
+   properly run the game. */
 public class Board{
 
     private int num_players;    
@@ -36,16 +40,19 @@ public class Board{
 	}
     }
 
+    // Removes scene from unused_scenes and adds it to used_scenes
     private void updateScenes(Scene scene){
 	used_scenes.add(scene);
 	unused_scenes.remove(scene);
     }
 
+    // Used on game startup and new days
     public void addScene(Scene scene){
 	unused_scenes.add(scene);
 	System.out.println("added scene: "+scene.getName());
     }
 
+    // pid number is 1 <= pid <= total_num_players
     public Player getPlayer(int pid){
 	Player temp = player_list.get(0); 
 	int i = 0;
@@ -63,10 +70,13 @@ public class Board{
 	return num_players;
     }
 
+    /* This function is so we can get the player_list size without actually returning
+       the player list */
     public int getPlayerListSize(){
 	return (player_list.size());
     }
 
+    /* Call on game startup and on new days */
     public Room getTrailers(){
 	Room temp = room_list.get(0);
 	int i = 0;
@@ -79,6 +89,7 @@ public class Board{
 	return temp;
     }
 
+    // Returns the room specified
     public Room getRoom(String desired_room){
 	Room temp = room_list.get(0);
 	int i = 0;

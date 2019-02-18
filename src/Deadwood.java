@@ -1,8 +1,9 @@
-
 public class Deadwood{
 
+    /* A gateway to start the program. Captures number of players and instantiates the singleton 
+       Board object that is passed around through the rest of the classes. */
     public static void main(String args[]){
-	if(args.length != 1 || Integer.parseInt(args[0]) < 1){
+	if(args.length != 1 || Integer.parseInt(args[0]) < 2 || Integer.parseInt(args[0]) > 8){
 	    System.out.println("Please specify a correct number of players");
 	}
 	else{
@@ -14,6 +15,7 @@ public class Deadwood{
 	}
     }
 
+    // Adds players to Board object and calls setupRooms()
     private static void setupGame(int num_players, Board board){	
 	int i = 0;
 	while(i < num_players){ //Adding players to board object
@@ -26,7 +28,7 @@ public class Deadwood{
 
     /* Creates all room objects, adds them to board object, and 
        also creates the room neighbors relationships for each
-       room */
+       room. Hard coded, not read through XMLReader */
     private static void setupRooms(Board board){
 	Room castingOffice = new Room("Casting Office", 0);
 	board.addRoom(castingOffice);
@@ -105,10 +107,13 @@ public class Deadwood{
 	generalStore.addNeighbor(trainStation);
     }
 
+    /* Calls XmlReader to add scenes to Board unused_scenes arraylist to be used
+       when hydrating sets*/
     private static void setupScenes(String[] args, Board board){      	
 	XmlReader.main(args, board); //adds scenes to board object in XmlReader.java
     }
 
+    // Hard coding in the roles for each Room on the Board object
     private static void setupRoomRoles(Room room){
 	if(room.getName().equals("Main Street")){
 	    room.addRole(1, "Railroad Worker", "I'm a steel-drivin' man!");

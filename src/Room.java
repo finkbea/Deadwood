@@ -1,3 +1,5 @@
+/* Each room has an instance of the Room class. Each room and its roles, neighbors, and shotcounters
+   are hard-coded in from Deadwood.java. Scene is added in accordingly on start game and hydrateSet() */
 import java.util.ArrayList;
 
 public class Room{
@@ -44,6 +46,7 @@ public class Room{
 	return roles;
     }
 
+    // Parses all neighbors in the neighbors arraylist and returns 0 (no) or 1 (yes) if neighbor or not
     public int isNeighbor(Room room){
 	Room temproom = neighbors.get(0);
 	int i = 0;

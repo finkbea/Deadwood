@@ -1,4 +1,7 @@
 /* Full credit to Aran Clauson */
+
+/* Used to parse the Xml file for each scene card. Creates one scene object per card, and 
+   how ever many role object for each card. */
 import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;

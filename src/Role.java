@@ -1,4 +1,4 @@
-
+/* Used for main roles and side roles. Keeps track of rank, name, line, and being worked or not. */
 public class Role{
 
     private int _rank;

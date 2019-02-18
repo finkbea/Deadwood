@@ -1,3 +1,5 @@
+/* Parsed in from XmlReader. Each scene is assigned roles. Getter methods are used to
+   provide encapsulation from user. */
 import java.util.ArrayList;
 
 public class Scene{
@@ -7,10 +9,7 @@ public class Scene{
     private int _numRoles;
     private String _name;
     private ArrayList<Role> _roles;
-    private int _budget;
-    //private String _description;
-    //private int _sceneNum;
-    
+    private int _budget;    
     
     Scene(int numRoles, String name, ArrayList<Role> roles, int budget){     
 	_numRoles = numRoles;

@@ -1,8 +1,11 @@
 import java.util.*;
-//import java.util.Random;
 
 public class GameKeeper{
 
+    /* Called once from Deadwood object. The outer while loop keeps track of if the game
+       is over, and the inner while loop keeps track of the number of days. Turn keeps
+       track of the current turn and cycles back to 1 when it goes over the number of 
+       players. When game is over, calculateWinner() is called to print the winner.*/
     public static void startGame(Board board){
 	System.out.println("Get ready to rumble! Starting game!");
 	int turn;
@@ -34,6 +37,8 @@ public class GameKeeper{
 	return(turn+1);
     }
 
+    /* While the end command has not been given, the current player can do whatever
+       they want by inputting commands. */
     private static void listener(Board board, int turn){
 	String command="";
 	Scanner sc;
@@ -42,122 +47,38 @@ public class GameKeeper{
 	    sc = new Scanner(System.in);
 	    command = sc.nextLine();
 	    turnEnd = (inputAdmin(command, turn, board));	    
-	    //System.out.println(command);
 	}
     }
 
+    /* Responsible for handling all the input strings on a players turn. If the command
+       is not recognized, a 'bad input' message is printed out. */
     private static int inputAdmin(String command, int turn, Board board){
 	int turnEnd = 0;
+	
 	if(command.equals("end")){
 	    turnEnd = 1;
 	    System.out.println("Player "+turn+" turn is over.");
 	}
 	else if(command.equals("who")){
-	    Player temp = board.getPlayer(turn);
-	    System.out.print("Player "+turn+": ($:"+temp.getDollars()+", cr:"+temp.getCredits()+
-			       ", rank:"+temp.getRank());
-	    if(temp.getRole() != null){
-		System.out.print(", role:"+temp.getRole().getName()+")\n");
-	    }
-	    else{
-		System.out.print(")\n");
-	    }
+	    whoInput(command, turn, board);
 	}
 	else if(command.equals("where")){
-	    Player temp = board.getPlayer(turn);
-	    if(temp.getCurrentRoom().getScene() != null){
-		Scene temp_scene = temp.getCurrentRoom().getScene();
-		System.out.println("in "+temp.getCurrentRoom().getName()+" shooting "+temp_scene.getName());
-	    }
-	    else{
-		    System.out.println("in "+temp.getCurrentRoom().getName());
-	    }
+	    whereInput(command, turn, board);
 	}
 	else if(command.contains("move")){
-	    Player temp = board.getPlayer(turn);
-	    String desired_room_string = getDesiredRoom(command);
-	    Room desired_room = board.getRoom(desired_room_string);
-	    Room current_room = temp.getCurrentRoom();
-	    if(current_room.isNeighbor(desired_room) == 1){
-		temp.updateRoom(desired_room);
-	    }
-	    else{
-		System.out.println("Room is not neighboring room. Try something else.");
-	    }
-	    System.out.println("todo:make sure we didn't act/rehearse/move/work already");
+	    moveInput(command, turn, board);
 	}
 	else if(command.equals("rehearse")){
-	    Player temp = board.getPlayer(turn);
-	    temp.rehearse();
-	    System.out.println("TODO: make sure in a role");
+	    rehearseInput(command, turn, board);
 	}
 	else if(command.equals("act")){
-	    Player temp = board.getPlayer(turn);
-	    if(temp.getCurrentRoom().getShotCounters() > 0){
-		if(temp.getRole() == null){
-		    System.out.println("No current role. Try something else.");
-		}
-		else{
-		    int roll = rollDice(1);	   
-		    int budget = temp.getCurrentRoom().getScene().getBudget();
-		    
-		    if(roll < budget){
-			payoutFail(temp);
-			System.out.println("fail roll");
-		    }
-		    else if(roll >= budget){
-			System.out.println("success roll");
-			temp.getCurrentRoom().removeShot();
-			payoutSuccess(temp);
-			if(temp.getCurrentRoom().getShotCounters() == 0){
-			    wrapScene(temp.getCurrentRoom(), board);
-			}
-		    }
-		}
-	    }
-	    else{
-		System.out.println("Scene is wrapped already.");
-	    }
-	    System.out.println("TODO: make sure player did not just move/rehearse/work");
+	    actInput(command, turn, board);
 	}
 	else if(command.contains("upgrade")){
-	    Player temp = board.getPlayer(turn);	
-	    if(!temp.getCurrentRoom().getName().equals("Casting Office")){
-		System.out.println("Not in Casting Office. Try again.");
-	    }
-	    else{
-		int money_type = getMoneyType(command);
-		int new_rank = getNewRank(command);
-		if(new_rank < 2 || new_rank > 6){
-		    System.out.println("Bad rank. Try again.");
-		}
-		else{
-		    if(getPlayerFunds(temp, money_type, new_rank) == 0){
-			System.out.println("Not enough money for upgrade.");
-		    }
-		    else{
-			temp.updateRankAndMoney(new_rank, money_type);
-			System.out.println("new rank: "+temp.getRank());
-		    }
-		}
-	    }
+	    upgradeInput(command, turn, board);
 	}
 	else if(command.contains("work")){
-	    Player temp = board.getPlayer(turn);
-	    String desired_role_string = getDesiredRoleString(command);
-	    Role role = findRole(desired_role_string, temp);
-	    int role_type = getRoleType(desired_role_string, temp);
-	    if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
-		temp.setRole(role);
-		role.workRole();
-		temp.setRoleType(role_type);
-		System.out.println("player just took the role: "+temp.getRole().getName());
-	    }
-	    else{
-		System.out.println("The role rank is larger than player rank or "+
-		    "the player already has a role or the role is already taken. Try again.");
-	    }
-
+	    workInput(command, turn, board);
 	}
 	else{
 	    System.out.println("Command not recognized, please try again. ");
@@ -165,6 +86,8 @@ public class GameKeeper{
 	return(turnEnd);
     }
 
+    /* Used on game startup and new days. Puts players back in Trailers,
+       resets each players rehearse tokens, and resets all roles. */
     private static void resetPlayers(Board board){
 	int pnum = 1;
 	int i = 0;
@@ -177,6 +100,7 @@ public class GameKeeper{
 	}
     }
 
+    // Returns String of room name from command line when 'move' is called
     private static String getDesiredRoom(String command){
 	String temp = "";
 	String[] tokens = command.split(" ");
@@ -207,6 +131,7 @@ public class GameKeeper{
 	return type;
     }
 
+    // Returns new desired rank from when 'upgrade' is called
     private static int getNewRank(String command){
 	int type;
 	String temp = "";
@@ -217,12 +142,14 @@ public class GameKeeper{
 	return type;
     }
 
+    // Rolls dice, returns roll
     private static int rollDice(int numberOfDice){
 	Random rand = new Random();
 	int roll = rand.nextInt(7);
 	return roll;
     }
 
+    // Returns the String name of the desired role when 'work' is called
     private static String getDesiredRoleString(String command){
 	String temp = "";
 	String[] tokens = command.split(" ");
@@ -244,6 +171,9 @@ public class GameKeeper{
 	return temp;
     }
 
+    /* Parses through room roles then scene roles for the room that the player is in and
+       returns the role once it is found. If it is never found, an error message is printed
+       out. */
     private static Role findRole(String desired_role, Player p){
 	Role role = new Role(1, "Fake Role", "You messed something up and now the roles are messed up");
 	int found = 0;
@@ -305,7 +235,10 @@ public class GameKeeper{
       
 	return enough_money;
     }
-
+    /* First goes through the current room and finds all the players that are in a role
+       at all. Then it looks to see if anyone of those players is in a main role.
+       If at least one person is, bonus is calculated and distributed accordingly. Then, 
+       player roles are reset, and scenes are wrapped accordingly. */
     private static void wrapScene(Room room, Board board){
 	ArrayList<Player> players_in_room_with_roles = new ArrayList<Player>();
 	for(int i = 0; i < board.getPlayerListSize(); i++){
@@ -378,6 +311,7 @@ public class GameKeeper{
 	return role_type;
     }
 
+    // Gives player payout on success roll based on their role type
     private static void payoutSuccess(Player p){
 	if(p.getRoleType() == 0){
 	    p.addCurrency(0, 1);
@@ -388,6 +322,7 @@ public class GameKeeper{
 	}
     }
 
+    // Gives player payout only if they are side role on fail roll
     private static void payoutFail(Player p){
 	if(p.getRoleType() == 0){
 	    p.addCurrency(0, 1);
@@ -403,6 +338,8 @@ public class GameKeeper{
 	return eod;
     }
 
+    /* Parses through all players when the game is over to calculate the winner by 
+       adding up dollars, credits, and (rank * 5). Prints winner to console. */
     private static void calculateWinner(Board board){
 	int winning_pid = 0;
 	int top_score = 0;
@@ -419,5 +356,137 @@ public class GameKeeper{
 
 	System.out.println("The winner is: Player "+winning_pid+"!");
     }
+
+    /* Prints the current player who's turn it is along with dollars, credits, and role
+       if they have one. */
+    private static void whoInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);
+	System.out.print("Player "+turn+": ($:"+temp.getDollars()+", cr:"+temp.getCredits()+
+			 ", rank:"+temp.getRank());
+	if(temp.getRole() != null){
+	    System.out.print(", role:"+temp.getRole().getName()+")\n");
+	}
+	else{
+	    System.out.print(")\n");
+	}
+    }
+
+    /* Prints the current room of the Player who called the command, along with a scene
+       if there is a scene in that room. Trailers, Casting Office, and already wrapped 
+       rooms will not print a scene currently shooting. */
+    private static void whereInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);
+	if(temp.getCurrentRoom().getScene() != null){
+	    Scene temp_scene = temp.getCurrentRoom().getScene();
+	    System.out.println("in "+temp.getCurrentRoom().getName()+" shooting "+temp_scene.getName());
+	}
+	else{
+	    System.out.println("in "+temp.getCurrentRoom().getName());
+	}	
+    }
+
+    /* Grabs the desired room that the player wants to move to and first checks if
+       it is a neighboring room of their current room. If it is, it updates the players
+       room. If not, it prints an error message. */
+    private static void moveInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);
+	String desired_room_string = getDesiredRoom(command);
+	Room desired_room = board.getRoom(desired_room_string);
+	Room current_room = temp.getCurrentRoom();
+	if(current_room.isNeighbor(desired_room) == 1){
+	    temp.updateRoom(desired_room);
+	}
+	else{
+	    System.out.println("Room is not neighboring room. Try something else.");
+	}
+	System.out.println("todo:make sure we didn't act/rehearse/move/work already");	
+    }
+
+    // Adds a rehearse token to player
+    private static void rehearseInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);
+	temp.rehearse();
+	System.out.println("TODO: make sure in a role");	
+    }
+
+    /* First checks if player is in role. If not, prints error. Then rolls dice
+       to check for success or fail and calculates currency accordingly depending
+       on main role or side role. */
+    private static void actInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);
+	if(temp.getCurrentRoom().getShotCounters() > 0){
+	    if(temp.getRole() == null){
+		System.out.println("No current role. Try something else.");
+	    }
+	    else{
+		int roll = rollDice(1);	   
+		int budget = temp.getCurrentRoom().getScene().getBudget();
+		
+		if(roll < budget){
+		    payoutFail(temp);
+		    System.out.println("fail roll");
+		}
+		else if(roll >= budget){
+		    System.out.println("success roll");
+		    temp.getCurrentRoom().removeShot();
+		    payoutSuccess(temp);
+		    if(temp.getCurrentRoom().getShotCounters() == 0){
+			wrapScene(temp.getCurrentRoom(), board);
+		    }
+		}
+	    }
+	}
+	else{
+	    System.out.println("Scene is wrapped already.");
+	}
+	System.out.println("TODO: make sure player did not just move/rehearse/work");	
+    }
+
+    /* Upgrades current player to desired rank. First checks that they're in casting
+       office, then checks for 2 <= rank <= 6, then checks if there is enough money.
+       Prints error messages accordingly. */
+    private static void upgradeInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);	
+	if(!temp.getCurrentRoom().getName().equals("Casting Office")){
+	    System.out.println("Not in Casting Office. Try again.");
+	}
+	else{
+	    int money_type = getMoneyType(command);
+	    int new_rank = getNewRank(command);
+	    if(new_rank < 2 || new_rank > 6){
+		System.out.println("Bad rank. Try again.");
+	    }
+	    else{
+		if(getPlayerFunds(temp, money_type, new_rank) == 0){
+		    System.out.println("Not enough money for upgrade.");
+		}
+		else{
+		    temp.updateRankAndMoney(new_rank, money_type);
+		    System.out.println("new rank: "+temp.getRank());
+		}
+	    }
+	}	
+    }
+
+    /* Updates player to be working in desired role. First checks if the role exists, then if
+       the player rank is >= the role rank, then checks if the role is not already taken. Prints
+       error messages accordingly. */
+    private static void workInput(String command, int turn, Board board){
+	Player temp = board.getPlayer(turn);
+	String desired_role_string = getDesiredRoleString(command);
+	Role role = findRole(desired_role_string, temp);
+	int role_type = getRoleType(desired_role_string, temp);
+	if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
+	    temp.setRole(role);
+	    role.workRole();
+	    temp.setRoleType(role_type);
+	    System.out.println("player just took the role: "+temp.getRole().getName());
+	}
+	else{
+	    System.out.println("The role rank is larger than player rank or "+
+	 	       "the player already has a role or the role is already taken. Try again.");
+	}	
+    }
+    
 }
 
