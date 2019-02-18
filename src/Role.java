@@ -11,7 +11,6 @@ public class Role{
 	_name = name;
 	_line = line;
 	being_worked = 0;
-	System.out.println("Creating Role named "+name+" with rank "+rank+" and the line: "+line);
     }
 
     public String getName(){

@@ -13,7 +13,6 @@ public class Room{
     Room(String name, int shots){
 	_name = name;
 	shotCounters = shots;
-	System.out.println("Making room called "+name + " with " + shots + " shot counters.");
     }
 
     public void addRole(int rank, String name, String line){
@@ -31,7 +30,6 @@ public class Room{
 
     public void placeScene(Scene scene){
 	_scene = scene;
-	System.out.println("Placing scene on room "+_name);
     }
 
     public Scene getScene(){

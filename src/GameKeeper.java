@@ -167,7 +167,6 @@ public class GameKeeper{
 	    temp += tokens[1];
 	}
 
-	System.out.println("Role: "+temp);
 	return temp;
     }
 
@@ -399,14 +398,12 @@ public class GameKeeper{
 	else{
 	    System.out.println("Room is not neighboring room. Try something else.");
 	}
-	System.out.println("todo:make sure we didn't act/rehearse/move/work already");	
     }
 
     // Adds a rehearse token to player
     private static void rehearseInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	temp.rehearse();
-	System.out.println("TODO: make sure in a role");	
     }
 
     /* First checks if player is in role. If not, prints error. Then rolls dice
@@ -439,7 +436,6 @@ public class GameKeeper{
 	else{
 	    System.out.println("Scene is wrapped already.");
 	}
-	System.out.println("TODO: make sure player did not just move/rehearse/work");	
     }
 
     /* Upgrades current player to desired rank. First checks that they're in casting
@@ -480,7 +476,6 @@ public class GameKeeper{
 	    temp.setRole(role);
 	    role.workRole();
 	    temp.setRoleType(role_type);
-	    System.out.println("player just took the role: "+temp.getRole().getName());
 	}
 	else{
 	    System.out.println("The role rank is larger than player rank or "+

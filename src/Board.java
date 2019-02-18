@@ -49,7 +49,6 @@ public class Board{
     // Used on game startup and new days
     public void addScene(Scene scene){
 	unused_scenes.add(scene);
-	System.out.println("added scene: "+scene.getName());
     }
 
     // pid number is 1 <= pid <= total_num_players

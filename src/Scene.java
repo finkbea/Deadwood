@@ -16,7 +16,6 @@ public class Scene{
 	_name = name;
 	_roles = roles;
 	_budget = budget;
-	System.out.println(name + " with # of roles as "+numRoles);
     }
 
     public String getName(){
