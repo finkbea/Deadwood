@@ -174,7 +174,7 @@ public class GameKeeper{
        returns the role once it is found. If it is never found, an error message is printed
        out. */
     private static Role findRole(String desired_role, Player p){
-	Role role = new Role(1, "Fake Role", "You messed something up and now the roles are messed up");
+	Role role = new Role(1, null, "fake role", "this is a fake role");
 	int found = 0;
 	Room room = p.getCurrentRoom();
 	for(int i = 0; i < room.getNumberOfRoles(); i++){
@@ -284,7 +284,7 @@ public class GameKeeper{
     // returns 0 for room role, 1 for scene role
     private static int getRoleType(String desired_role, Player p){
 	int role_type = -1;
-	Role role = new Role(1, "Fake Role", "You messed something up and now the roles are messed up");
+	Role role = new Role(1, null, "fake role", "this is a fake role");
 	int found = 0;
 	Room room = p.getCurrentRoom();
 	for(int i = 0; i < room.getNumberOfRoles(); i++){
