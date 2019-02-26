@@ -30,6 +30,7 @@ public class Deadwood{
        also creates the room neighbors relationships for each
        room. Hard coded, not read through XMLReader */
     private static void setupRooms(Board board){
+	/*
 	Room castingOffice = new Room("Casting Office", 0);
 	board.addRoom(castingOffice);
 	Room trailers = new Room("Trailers", 0);
@@ -105,6 +106,7 @@ public class Deadwood{
         generalStore.addNeighbor(saloon);
         generalStore.addNeighbor(ranch);
 	generalStore.addNeighbor(trainStation);
+	*/
     }
 
     /* Calls XmlReader to add scenes to Board unused_scenes arraylist to be used
@@ -115,6 +117,7 @@ public class Deadwood{
 
     // Hard coding in the roles for each Room on the Board object
     private static void setupRoomRoles(Room room){
+	/*
 	if(room.getName().equals("Main Street")){
 	    room.addRole(1, "Railroad Worker", "I'm a steel-drivin' man!");
 	    room.addRole(2, "Falls off Roof", "Aaa aii iig ggghh!");
@@ -164,6 +167,7 @@ public class Deadwood{
 	    room.addRole(1, "Man in Overalls", "Looks like a storm's comin' in..");
 	    room.addRole(3, "Mister Keach", "Howdy, stranger.");
 	}
+	*/
     }
 
 }
