@@ -7,7 +7,7 @@ public class Upgrade{
   private int amount;
   private ArrayList<Integer> area;
 
-  public Upgrade(int l, String c, int a, ArraList<Integer> ar){
+  public Upgrade(int l, String c, int a, ArrayList<Integer> ar){
     this.level=l;
     this.amount=a;
     this.area=ar;

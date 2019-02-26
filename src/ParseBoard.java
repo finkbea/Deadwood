@@ -69,10 +69,10 @@ public class ParseBoard {
     Element doc = parse_doc("board.xml");
     for_each(doc.getElementsByTagName("set"),
              (Element set) -> board.addRoom(createRoom(set)));
-    /*for_each(doc.getElementsByTagName("office"),
-             (Element office) -> board.addOffice(createOffice(office)));
+    for_each(doc.getElementsByTagName("office"),
+             (Element office) -> board.addRoom(createOffice(office)));
     for_each(doc.getElementsByTagName("trailer"),
-             (Element trailer) -> board.addTrailer(createTrailer(trailer)));*/
+             (Element trailer) -> board.addRoom(createTrailer(trailer)));
   }
 
   //helper method, once I am inside neighbor I just have to pull the name and return it, at which point it is added to my ArrayList of neighbors
@@ -147,25 +147,45 @@ public class ParseBoard {
   }
 
   //creates the trailer, copied and pasted from createRoom, the trailer only has neighbors and no other parameters so it calls getNeighbors to find those and does nothing else
-  /*public static Trailer createTrailer(Element trailer){
+  public static Room createTrailer(Element trailer){
     ArrayList<String> neighbors = new ArrayList<String>();
     for_each(trailer.getElementsByTagName("neighbor"),
              (Element neighbor) -> {
                 neighbors.add(getNeighbors(neighbor));
               });
-    Trailer realTrailer = new Trailer(neighbors);
+    Room realTrailer = new Room("trailer", neighbors);
     return realTrailer;
-  }*/
+  }
 
   /*creates the casting office, its the same as the method to create the trailer because I decided to hardcode the upgrade prices
   */
-  /*public static CastingOffice createOffice(Element office){
+  public static Room createOffice(Element office){
     ArrayList<String> neighbors = new ArrayList<String>();
     for_each(office.getElementsByTagName("neighbor"),
              (Element neighbor) -> {
                 neighbors.add(getNeighbors(neighbor));
               });
-    CastingOffice realOffice = new CastingOffice(neighbors);
+    ArrayList<Upgrade> upgrades = new ArrayList<Upgrade>();
+    for_each(office.getElementsByTagName("upgrade"),
+             (Element upgrade) -> {
+               upgrades.add(getUpgrades(upgrade));
+             });
+    Room realOffice = new Room("office", neighbors, upgrades);
     return realOffice;
-  }*/
+  }
+  public static Upgrade getUpgrades(Element upgrade){
+    int level = Integer.parseInt(upgrade.getAttribute("level"));
+    String currency = upgrade.getAttribute("currency");
+    int amount = Integer.parseInt(upgrade.getAttribute("amt"));
+    ArrayList<Integer> areaList = new ArrayList<Integer>();
+    for_each(upgrade.getElementsByTagName("area"),
+             (Element area) -> {
+               areaList.add(Integer.parseInt(area.getAttribute("x")));
+               areaList.add(Integer.parseInt(area.getAttribute("y")));
+               areaList.add(Integer.parseInt(area.getAttribute("h")));
+               areaList.add(Integer.parseInt(area.getAttribute("w")));
+             });
+    Upgrade upgrades = new Upgrade(level, currency, amount, areaList);
+    return upgrades;
+  }
 }
