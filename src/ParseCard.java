@@ -73,7 +73,7 @@ public class ParseCard {
   of roles. The only different part here is getting the line, I basically kept it the same as it was in the source document only instead of printing it I added each part to an ArrayList
   which I then turned into a String.
   */
-  public static Star createRole(Element part) {
+  public static Role createRole(Element part) {
     String name = part.getAttribute("name");
     int level = Integer.parseInt(part.getAttribute("level"));
     String line="";
@@ -93,10 +93,9 @@ public class ParseCard {
                areaList.add(Integer.parseInt(area.getAttribute("h")));
                areaList.add(Integer.parseInt(area.getAttribute("w")));
              });
-    Star role = new Star(name, areaList, line, level);
+    Role role = new Role(level, areaList, name, line);
     return role ;
   }
-
 
   /*Each card is a scene, each scene has a name, a budget, a number, a line, and several parts. To get the number and line I had to go inside card to scene in the xml file, I used
   ArrayList helper functions because it wouldn't let me assign a value to a number inside the for_each loop. Basically I search each card for the important information and pass it
@@ -116,13 +115,13 @@ public class ParseCard {
               });
     String line = lineHelper.get(0);
     int number = Integer.parseInt(numberHelper.get(0));
-    ArrayList<Star> list = new ArrayList<Star>();
+    ArrayList<Role> list = new ArrayList<Role>();
     for_each(card.getElementsByTagName("part"),
              (Element part) -> {
                list.add(createRole(part));
              });
     String image = card.getAttribute("img");
-    Scene scene = new Scene(name, line, number, image, budget, list);
+    Scene scene = new Scene(name, line, number, image, list, budget);
     return scene;
   }
 }

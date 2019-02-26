@@ -5,18 +5,23 @@ import java.util.ArrayList;
 public class Room{
 
     private ArrayList<Room> neighbors = new ArrayList<Room>();
+    private ArrayList<String> neighborHelper = new ArrayList<String>();
     private ArrayList<Role> roles = new ArrayList<Role>();
+    private ArrayList<Integer> area = new ArrayList<Integer>();
     private Scene _scene;
     public String _name;
     public int shotCounters;
-    
-    Room(String name, int shots){
-	_name = name;
-	shotCounters = shots;
+
+    Room(String name, int shots, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a){
+	     _name = name;
+	     shotCounters = shots;
+       this.roles=r;
+       this.neighborHelper=h;
+       this.area=a;
     }
 
-    public void addRole(int rank, String name, String line){
-	Role role = new Role(rank, name, line);
+    public void addRole(int rank, ArrayList<Integer> r, String name, String line){
+	Role role = new Role(rank, r, name, line);
 	roles.add(role);
     }
 

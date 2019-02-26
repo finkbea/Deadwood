@@ -68,11 +68,11 @@ public class ParseBoard {
   public ParseBoard(Board board) {
     Element doc = parse_doc("board.xml");
     for_each(doc.getElementsByTagName("set"),
-             (Element set) -> board.addSet(createRoom(set)));
-    for_each(doc.getElementsByTagName("office"),
+             (Element set) -> board.addRoom(createRoom(set)));
+    /*for_each(doc.getElementsByTagName("office"),
              (Element office) -> board.addOffice(createOffice(office)));
     for_each(doc.getElementsByTagName("trailer"),
-             (Element trailer) -> board.addTrailer(createTrailer(trailer)));
+             (Element trailer) -> board.addTrailer(createTrailer(trailer)));*/
   }
 
   //helper method, once I am inside neighbor I just have to pull the name and return it, at which point it is added to my ArrayList of neighbors
@@ -88,7 +88,7 @@ public class ParseBoard {
   }
   /*Exact same as the createRole method from ParseCard
   */
-  public static Star createRole(Element part) {
+  public static Role createRole(Element part) {
     String name = part.getAttribute("name");
     int level = Integer.parseInt(part.getAttribute("level"));
     String line="";
@@ -108,7 +108,7 @@ public class ParseBoard {
                areaList.add(Integer.parseInt(area.getAttribute("h")));
                areaList.add(Integer.parseInt(area.getAttribute("w")));
              });
-    Star role = new Star(name, areaList, line, level);
+    Role role = new Role(level, areaList, name, line);
     return role ;
   }
 
@@ -116,7 +116,7 @@ public class ParseBoard {
   the parts, which is done using the createRole method from ParseCard, and lastly the neighbors, I choose to just store them as an ArrayList of Strings that just contains their names
   for the time being, once     this.sets=this.rooms;I have all that I just construct the set and return it to the constructor where it is added to the boards ArrayList of rooms.
   */
-  public static Set createRoom(Element set) {
+  public static Room createRoom(Element set) {
     String name = set.getAttribute("name");
     ArrayList<String> takesHelper = new ArrayList<String>();
     for_each(set.getElementsByTagName("take"),
@@ -124,7 +124,7 @@ public class ParseBoard {
                 takesHelper.add(getTakes(take));
               });
     int takes = Integer.parseInt(takesHelper.get(0));
-    ArrayList<Extra> list = new ArrayList<Extra>();
+    ArrayList<Role> list = new ArrayList<Role>();
     for_each(set.getElementsByTagName("part"),
              (Element part) -> {
                list.add(createRole(part));
@@ -142,12 +142,12 @@ public class ParseBoard {
                areaList.add(Integer.parseInt(area.getAttribute("h")));
                areaList.add(Integer.parseInt(area.getAttribute("w")));
              });
-    Set realSet = new Set(name, takes, list, neighbors, areaList);
+    Room realSet = new Room(name, takes, list, neighbors, areaList);
     return realSet;
   }
 
   //creates the trailer, copied and pasted from createRoom, the trailer only has neighbors and no other parameters so it calls getNeighbors to find those and does nothing else
-  public static Trailer createTrailer(Element trailer){
+  /*public static Trailer createTrailer(Element trailer){
     ArrayList<String> neighbors = new ArrayList<String>();
     for_each(trailer.getElementsByTagName("neighbor"),
              (Element neighbor) -> {
@@ -155,11 +155,11 @@ public class ParseBoard {
               });
     Trailer realTrailer = new Trailer(neighbors);
     return realTrailer;
-  }
+  }*/
 
   /*creates the casting office, its the same as the method to create the trailer because I decided to hardcode the upgrade prices
   */
-  public static CastingOffice createOffice(Element office){
+  /*public static CastingOffice createOffice(Element office){
     ArrayList<String> neighbors = new ArrayList<String>();
     for_each(office.getElementsByTagName("neighbor"),
              (Element neighbor) -> {
@@ -167,5 +167,5 @@ public class ParseBoard {
               });
     CastingOffice realOffice = new CastingOffice(neighbors);
     return realOffice;
-  }
+  }*/
 }
