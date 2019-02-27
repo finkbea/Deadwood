@@ -30,6 +30,7 @@ public class Deadwood{
        also creates the room neighbors relationships for each
        room. Hard coded, not read through XMLReader */
     private static void setupRooms(Board board){
+	ParseBoard parsableBoard = new ParseBoard(board);
 	/*
 	Room castingOffice = new Room("Casting Office", 0);
 	board.addRoom(castingOffice);
@@ -112,7 +113,8 @@ public class Deadwood{
     /* Calls XmlReader to add scenes to Board unused_scenes arraylist to be used
        when hydrating sets*/
     private static void setupScenes(String[] args, Board board){      	
-	XmlReader.main(args, board); //adds scenes to board object in XmlReader.java
+	ParseCard parsableCard = new ParseCard(board);
+	//XmlReader.main(args, board); //adds scenes to board object in XmlReader.java
     }
 
     // Hard coding in the roles for each Room on the Board object

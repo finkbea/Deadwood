@@ -1,5 +1,4 @@
-/* Each room has an instance of the Room class. Each room and its roles, neighbors, and shotcounters
-   are hard-coded in from Deadwood.java. Scene is added in accordingly on start game and hydrateSet() */
+// Each room has an instance of the Room class. Scene is added in accordingly on start game and hydrateSet()
 import java.util.ArrayList;
 
 public class Room{
@@ -14,11 +13,11 @@ public class Room{
     public int shotCounters;
 
     Room(String name, int shots, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a){
-	     _name = name;
-	     shotCounters = shots;
-       this.roles=r;
-       this.neighborHelper=h;
-       this.area=a;
+	_name = name;
+	shotCounters = shots;
+	this.roles=r;
+	this.neighborHelper=h;
+	this.area=a;
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o){
@@ -32,6 +31,10 @@ public class Room{
       this.neighborHelper=h;
     }
 
+    public ArrayList<String> getNeighborHelper(){
+	return neighborHelper;
+    }
+    
     public void addRole(int rank, ArrayList<Integer> r, String name, String line){
 	Role role = new Role(rank, r, name, line);
 	roles.add(role);

@@ -24,6 +24,11 @@ public class Board{
 
     public void addRoom(Room room){
 	room_list.add(room);
+	int i = 0;
+	while(i < room.getNeighborHelper().size()){
+	    room.addNeighbor(getRoom(room.getNeighborHelper().get(i)));
+	    i++;
+	}
     }
  
     // 1. get scenes from unused_scenes and hydrate the sets with them
