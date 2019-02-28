@@ -1,10 +1,39 @@
+import java.awt.event.*;
+import javax.swing.*;
+import javax.imageio.*;
+import java.io.*;
+import java.awt.image.*;
+
 import java.util.*;
 
 public class Deadwood{
 
+    private JFrame mainFrame;
+
+
+    private Deadwood() throws IOException{
+	mainFrame = new JFrame();
+	mainFrame.setTitle("Deadwood");
+	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("board.jpg")))));
+	
+	mainFrame.pack();
+	mainFrame.setSize(1200, 900);
+
+	mainFrame.setVisible(true);
+	mainFrame.setResizable(false);
+    }
+
+    
     /* A gateway to start the program. Captures number of players and instantiates the singleton 
        Board object that is passed around through the rest of the classes. */
     public static void main(String args[]){
+	try{
+	    Deadwood dw = new Deadwood();
+	}
+	catch(IOException e){
+	    e.printStackTrace();
+	}
 	if(args.length != 1 || Integer.parseInt(args[0]) < 2 || Integer.parseInt(args[0]) > 8){
 	    System.out.println("Please specify a correct number of players");
 	}
