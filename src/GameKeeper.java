@@ -20,6 +20,8 @@ public class GameKeeper{
 		    turn = 1;
 		}
 		listener(board, turn);
+		board.getPlayer(turn).resetMove();
+		board.getPlayer(turn).resetAction();
 		turn++;
 	    }
 	    day++;
@@ -44,12 +46,40 @@ public class GameKeeper{
 	Scanner sc;
 	int turnEnd = 0;
 	while(turnEnd == 0){
+	    printTurnOptions(board, turn);
 	    sc = new Scanner(System.in);
 	    command = sc.nextLine();
 	    turnEnd = (inputAdmin(command, turn, board));	    
 	}
     }
 
+    // Prints the available options for the player to do on their turn
+    private static void printTurnOptions(Board board, int turn){
+	Player player = board.getPlayer(turn);
+	if(player.getJustMoved() == false && player.getActionUsed() == false){
+	    if(player.getCurrentRoom().getName().equals("Casting Office")){
+		System.out.println("end | who | where | move [room name] | rehearse |"+
+				   "act | upgrade [type] [rank] | work [role name]");
+	    }
+	    else{
+		System.out.println("end | who | where | move [room name] | rehearse |"+
+				   "act | work [role name]");
+	    }
+	}
+	else if((player.getJustMoved() == false && player.getActionUsed() == true) ||
+		(player.getJustMoved() == true && player.getActionUsed() == true)){
+	    System.out.println("end | who | where");
+	}
+	else if(player.getJustMoved() == true && player.getActionUsed() == false){
+	    if(player.getCurrentRoom().getName().equals("Casting Office")){
+		System.out.println("end | who | where | upgrade [type] [rank] | work [role name]");
+	    }
+	    else{
+		System.out.println("end | who | where | work [role name]");
+	    }
+	}
+    }
+    
     /* Responsible for handling all the input strings on a players turn. If the command
        is not recognized, a 'bad input' message is printed out. */
     private static int inputAdmin(String command, int turn, Board board){
@@ -83,6 +113,7 @@ public class GameKeeper{
 	else{
 	    System.out.println("Command not recognized, please try again. ");
 	}
+    
 	return(turnEnd);
     }
 
@@ -92,6 +123,8 @@ public class GameKeeper{
 	int pnum = 1;
 	int i = 0;
 	while(i < board.getPlayerListSize()){
+	    board.getPlayer(pnum).resetAction();
+	    board.getPlayer(pnum).resetMove();
 	    board.getPlayer(pnum).updateRoom(board.getTrailers());
 	    board.getPlayer(pnum).resetRehearseTokens();
 	    board.getPlayer(pnum).resetRole();
@@ -394,6 +427,7 @@ public class GameKeeper{
 	Room current_room = temp.getCurrentRoom();
 	if(current_room.isNeighbor(desired_room) == 1){
 	    temp.updateRoom(desired_room);
+	    temp.move();
 	}
 	else{
 	    System.out.println("Room is not neighboring room. Try something else.");
@@ -404,6 +438,7 @@ public class GameKeeper{
     private static void rehearseInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	temp.rehearse();
+	temp.useAction();
     }
 
     /* First checks if player is in role. If not, prints error. Then rolls dice
@@ -416,6 +451,7 @@ public class GameKeeper{
 		System.out.println("No current role. Try something else.");
 	    }
 	    else{
+		temp.useAction();
 		int roll = rollDice(1);	   
 		int budget = temp.getCurrentRoom().getScene().getBudget();
 		
@@ -457,6 +493,7 @@ public class GameKeeper{
 		    System.out.println("Not enough money for upgrade.");
 		}
 		else{
+		    temp.useAction();
 		    temp.updateRankAndMoney(new_rank, money_type);
 		    System.out.println("new rank: "+temp.getRank());
 		}
@@ -473,6 +510,7 @@ public class GameKeeper{
 	Role role = findRole(desired_role_string, temp);
 	int role_type = getRoleType(desired_role_string, temp);
 	if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
+	    temp.useAction();
 	    temp.setRole(role);
 	    role.workRole();
 	    temp.setRoleType(role_type);

@@ -10,15 +10,43 @@ public class Player{
     private int rehearseTokens;
     private Role _role;
     private int roleType; // 0 for room(side role), and 1 for scene(main role)
-    
+    private boolean justMoved;
+    private boolean actionUsed;
+
     Player(int p_id){
 	pid = p_id;
 	dollars = 0;
 	credits = 0;
 	rank = 1;
 	rehearseTokens = 0;
+	justMoved = false;
+	actionUsed = false;       
     }
 
+    public boolean getJustMoved(){
+	return justMoved;
+    }
+    
+    public boolean getActionUsed(){
+	return actionUsed;
+    }
+    
+    public void resetAction(){
+	actionUsed = false;
+    }
+    
+    public void resetMove(){
+	justMoved = false;
+    }
+    
+    public void useAction(){
+	actionUsed = true;
+    }
+
+    public void move(){
+	justMoved = true;
+    }
+    
     // Adds currency to player fields
     public void addCurrency(int money_type, int amount){
 	if(money_type == 0){
