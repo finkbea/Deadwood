@@ -3,7 +3,8 @@ import javax.swing.*;
 import javax.imageio.*;
 import java.io.*;
 import java.awt.image.*;
-
+import java.awt.FlowLayout;
+import java.awt.Color;
 import java.util.*;
 
 public class Deadwood{
@@ -15,13 +16,22 @@ public class Deadwood{
 	mainFrame = new JFrame();
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("board.jpg")))));
-	
-	mainFrame.pack();
-	mainFrame.setSize(1200, 900);
+	//mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("board.jpg")))));
 
+	JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	BufferedImage image = ImageIO.read(new File("board.jpg"));
+	JLabel label = new JLabel(new ImageIcon(image));
+	panel.add(label);
+
+	mainFrame.add(panel);
+
+	mainFrame.pack();
+	mainFrame.setSize(1400, 1050);
+	
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
+
+	
     }
 
     
