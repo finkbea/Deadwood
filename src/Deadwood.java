@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class Deadwood{
 
     /* A gateway to start the program. Captures number of players and instantiates the singleton 
@@ -31,6 +33,8 @@ public class Deadwood{
        room. Hard coded, not read through XMLReader */
     private static void setupRooms(Board board){
 	ParseBoard parsableBoard = new ParseBoard(board);
+	board.addNeighbors();
+
 	/*
 	Room castingOffice = new Room("Casting Office", 0);
 	board.addRoom(castingOffice);

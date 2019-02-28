@@ -21,13 +21,13 @@ public class Room{
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o){
-      this._name=name;
+      this._name="Casting Office";
       this.neighborHelper=h;
       this.officeUpgrades=o;
     }
     //constructor for the trailer
     Room(String name, ArrayList<String> h){
-      this._name=name;
+      this._name="Trailers";
       this.neighborHelper=h;
     }
 

@@ -6,6 +6,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ParseBoard {
 
@@ -142,6 +143,7 @@ public class ParseBoard {
                areaList.add(Integer.parseInt(area.getAttribute("h")));
                areaList.add(Integer.parseInt(area.getAttribute("w")));
              });
+    System.out.println(Arrays.toString(neighbors.toArray()));
     Room realSet = new Room(name, takes, list, neighbors, areaList);
     return realSet;
   }
@@ -153,7 +155,8 @@ public class ParseBoard {
              (Element neighbor) -> {
                 neighbors.add(getNeighbors(neighbor));
               });
-    Room realTrailer = new Room("trailer", neighbors);
+    System.out.println("trailers neighbors:"+Arrays.toString(neighbors.toArray()));
+    Room realTrailer = new Room("Trailers", neighbors);
     return realTrailer;
   }
 
@@ -170,7 +173,7 @@ public class ParseBoard {
              (Element upgrade) -> {
                upgrades.add(getUpgrades(upgrade));
              });
-    Room realOffice = new Room("office", neighbors, upgrades);
+    Room realOffice = new Room("Casting Office", neighbors, upgrades);
     return realOffice;
   }
   public static Upgrade getUpgrades(Element upgrade){

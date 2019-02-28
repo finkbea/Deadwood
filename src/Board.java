@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /* The Board object is a singleton and it holds all the players, rooms, used/unused scenes,
    and number of players. It does not keep track of which player is in each room (Player object
@@ -24,13 +25,25 @@ public class Board{
 
     public void addRoom(Room room){
 	room_list.add(room);
-	int i = 0;
-	while(i < room.getNeighborHelper().size()){
-	    room.addNeighbor(getRoom(room.getNeighborHelper().get(i)));
-	    i++;
+	System.out.println(room.getName());
+    }
+
+    public void addNeighbors(){
+	int j = 0;
+	Room room;
+	while(j < room_list.size()){
+	    room  = room_list.get(j);
+	    int i = 0;
+	    while(i < room.getNeighborHelper().size()){
+		System.out.println(room.getName()+": "+getRoom(room.getNeighborHelper().get(i)).getName());
+		room.addNeighbor(getRoom(room.getNeighborHelper().get(i)));
+		i++;
+	    }
+	    room = room_list.get(j);
+	    j++;
 	}
     }
- 
+    
     // 1. get scenes from unused_scenes and hydrate the sets with them
     // 2. move used scenes to used_scenes array by calling updateScenes
     public void hydrateSets(){
@@ -97,8 +110,18 @@ public class Board{
     public Room getRoom(String desired_room){
 	Room temp = room_list.get(0);
 	int i = 0;
+	String d_room = "";
+	if(desired_room.equals("office")){
+	    d_room += "Casting Office";
+	}
+	else if(desired_room.equals("trailer")){
+	    d_room += "Trailers";
+	}
+	else{
+	    d_room = desired_room;
+	}
 	while(i < room_list.size()){
-	    if(room_list.get(i).getName().equals(desired_room)){
+	    if(room_list.get(i).getName().equals(d_room)){
 		temp = room_list.get(i);
 	    }
 	    i++;
@@ -112,5 +135,9 @@ public class Board{
 
     public int numWrappedScenes(){
 	return numWrappedScenes;
+    }
+
+    public ArrayList<Room> getRoomList(){
+	return room_list;
     }
 }
