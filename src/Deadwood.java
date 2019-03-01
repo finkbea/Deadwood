@@ -6,31 +6,49 @@ import java.awt.image.*;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.util.*;
+import java.awt.BorderLayout;
 
 public class Deadwood{
 
     private JFrame mainFrame;
-
+    private RoomView rView;
 
     private Deadwood() throws IOException{
+	rView= new RoomView();
+
 	mainFrame = new JFrame();
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	//mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("board.jpg")))));
-
-	JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	mainFrame.setLayout(null);
+	
+	//JPanel boardpanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	JPanel boardpanel = new JPanel();
 	BufferedImage image = ImageIO.read(new File("board.jpg"));
 	JLabel label = new JLabel(new ImageIcon(image));
-	panel.add(label);
+	boardpanel.add(label);
+	boardpanel.setBounds(200, 0, 1200, 900);
+	
+	JPanel panel2 = new JPanel();
+	BufferedImage image2 = ImageIO.read(new File("01.png"));
+	JLabel label2 = new JLabel(new ImageIcon(image2));
+	panel2.add(label2);	
+	panel2.setBounds(220, 70, 205, 115);
 
-	mainFrame.add(panel);
+	JPanel panel3 = new JPanel();
+	BufferedImage image3 = ImageIO.read(new File("02.png"));
+	JLabel label3 = new JLabel(new ImageIcon(image3));
+	panel3.add(label3);	
+	panel3.setBounds(480, 30, 205, 115);
 
+	mainFrame.add(panel3);
+	mainFrame.add(panel2);
+	mainFrame.add(boardpanel);
+	
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
 	
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
-
 	
     }
 
