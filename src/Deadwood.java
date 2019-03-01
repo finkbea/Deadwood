@@ -20,8 +20,18 @@ public class Deadwood{
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	mainFrame.setLayout(null);
+
+	createSceneCardPanels(mainFrame);
 	
-	//JPanel boardpanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+	mainFrame.pack();
+	mainFrame.setSize(1400, 1050);
+	
+	mainFrame.setVisible(true);
+	mainFrame.setResizable(false);
+	
+    }
+
+    private static void createSceneCardPanels(JFrame mainFrame) throws IOException{
 	JPanel boardpanel = new JPanel();
 	BufferedImage image = ImageIO.read(new File("board.jpg"));
 	JLabel label = new JLabel(new ImageIcon(image));
@@ -43,15 +53,7 @@ public class Deadwood{
 	mainFrame.add(panel3);
 	mainFrame.add(panel2);
 	mainFrame.add(boardpanel);
-	
-	mainFrame.pack();
-	mainFrame.setSize(1400, 1050);
-	
-	mainFrame.setVisible(true);
-	mainFrame.setResizable(false);
-	
     }
-
     
     /* A gateway to start the program. Captures number of players and instantiates the singleton 
        Board object that is passed around through the rest of the classes. */
