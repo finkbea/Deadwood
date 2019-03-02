@@ -1,5 +1,6 @@
 /* Used for main roles and side roles. Keeps track of rank, name, line, and being worked or not. */
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Role{
 
@@ -14,7 +15,7 @@ public class Role{
 	_name = name;
 	_line = line;
 	being_worked = 0;
-  this.area=a;
+	this.area=a;
     }
 
     public String getName(){

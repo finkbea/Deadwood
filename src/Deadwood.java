@@ -22,6 +22,7 @@ public class Deadwood{
 	mainFrame.setLayout(null);
 
 	createSceneCardPanels(mainFrame);
+	createShotCountersPanels(mainFrame);
 	
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
@@ -31,6 +32,11 @@ public class Deadwood{
 	
     }
 
+    private static void createShotCountersPanels(JFrame mainFrame) throws IOException{
+	
+    }
+    
+    // Creates the x,y corrdinated panels for each scene and adds them to mainFrame
     private static void createSceneCardPanels(JFrame mainFrame) throws IOException{
 	JPanel boardpanel = new JPanel();
 	BufferedImage image = ImageIO.read(new File("board.jpg"));
@@ -38,8 +44,8 @@ public class Deadwood{
 	boardpanel.add(label);
 	boardpanel.setBounds(200, 0, 1200, 900);
 	
-	JPanel panel2 = new JPanel();
-	panel2.setBounds(220, 70, 205, 115);
+	JPanel trainStationScene = new JPanel();
+	trainStationScene.setBounds(220, 70, 205, 115);
 
 	JPanel jailScene = new JPanel();
 	jailScene.setBounds(480, 30, 205, 115);
@@ -77,7 +83,7 @@ public class Deadwood{
 	mainFrame.add(hotelScene);
 	mainFrame.add(mainStreetScene);
 	mainFrame.add(jailScene);
-	mainFrame.add(panel2);
+	mainFrame.add(trainStationScene);
 	mainFrame.add(boardpanel);
     }
     
