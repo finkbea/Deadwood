@@ -50,6 +50,62 @@ public class Deadwood{
 	panel3.add(label3);	
 	panel3.setBounds(480, 30, 205, 115);
 
+	JPanel panel4 = new JPanel();
+	BufferedImage image4 = ImageIO.read(new File("03.png"));
+	JLabel label4 = new JLabel(new ImageIcon(image4));
+	panel4.add(label4);	
+	panel4.setBounds(1170, 30, 205, 115);
+
+	JPanel panel5 = new JPanel();
+	BufferedImage image5 = ImageIO.read(new File("04.png"));
+	JLabel label5 = new JLabel(new ImageIcon(image5));
+	panel5.add(label5);	
+	panel5.setBounds(1170, 745, 205, 115);
+	
+	JPanel panel6 = new JPanel();
+	BufferedImage image6 = ImageIO.read(new File("05.png"));
+	JLabel label6 = new JLabel(new ImageIcon(image6));
+	panel6.add(label6);	
+	panel6.setBounds(227, 732, 205, 115);
+
+	JPanel panel7 = new JPanel();
+	BufferedImage image7 = ImageIO.read(new File("06.png"));
+	JLabel label7 = new JLabel(new ImageIcon(image7));
+	panel7.add(label7);	
+	panel7.setBounds(480, 30, 205, 115);
+
+	JPanel panel8 = new JPanel();
+	BufferedImage image8 = ImageIO.read(new File("07.png"));
+	JLabel label8 = new JLabel(new ImageIcon(image8));
+	panel8.add(label8);	
+	panel8.setBounds(480, 30, 205, 115);
+
+	JPanel panel9 = new JPanel();
+	BufferedImage image9 = ImageIO.read(new File("08.png"));
+	JLabel label9 = new JLabel(new ImageIcon(image9));
+	panel9.add(label9);	
+	panel9.setBounds(480, 30, 205, 115);
+
+	JPanel panel10 = new JPanel();
+	BufferedImage image10 = ImageIO.read(new File("09.png"));
+	JLabel label10 = new JLabel(new ImageIcon(image10));
+	panel10.add(label10);	
+	panel10.setBounds(480, 30, 205, 115);
+
+	JPanel panel11 = new JPanel();
+	BufferedImage image11 = ImageIO.read(new File("10.png"));
+	JLabel label11 = new JLabel(new ImageIcon(image11));
+	panel11.add(label11);	
+	panel11.setBounds(480, 30, 205, 115);
+
+	mainFrame.add(panel11);
+	mainFrame.add(panel10);
+	mainFrame.add(panel9);
+	mainFrame.add(panel8);
+	mainFrame.add(panel7);
+	mainFrame.add(panel6);
+	mainFrame.add(panel5);
+	mainFrame.add(panel4);
 	mainFrame.add(panel3);
 	mainFrame.add(panel2);
 	mainFrame.add(boardpanel);
