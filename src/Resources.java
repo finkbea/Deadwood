@@ -10,8 +10,8 @@ public class Resources{
     public Resources(){
 	final Class cls = Resources.class;
 	sceneHolder = new ImageIcon[40];
-	for(int i = 0; i < 40; i++){
-	    String fn = String.format("%d.png", i);
+	for(int i = 1; i <= 40; i++){
+	    String fn = String.format("0%d.png", i);
 	    try(InputStream r = cls.getResiyrceAsStrem(fn)){
 		sceneHolder[i] = new ImageIcon (ImageIO.read(r));
 	    }
