@@ -14,12 +14,13 @@ public class PlayerView extends JPanel implements Player.Listener{
   public PlayerView(){
   super(null);
 
-  setSize(700, 167);
   setDoubleBuffered(true);
 
   p1 = new JLabel();
   add(p1);
-  p1.setBounds(0, 0, 100, 167);
+  p1.setBounds(700, 300, 40, 40);
+  setVisible(true);
+setFocusable(true);
   }
 
   public void changeUpgrade(Player p){

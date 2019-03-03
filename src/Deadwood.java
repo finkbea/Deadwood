@@ -11,10 +11,12 @@ import java.awt.BorderLayout;
 public class Deadwood{
 
     private JFrame mainFrame;
-    private RoomView rView;    
-    
+    private RoomView rView;
+    private PlayerView pView;
+
     private Deadwood(Board board) throws IOException{
 	//rView= new RoomView();
+    pView = new PlayerView();
 
 	mainFrame = new JFrame();
 	mainFrame.setTitle("Deadwood");
@@ -24,20 +26,22 @@ public class Deadwood{
 	createSceneCardPanels(mainFrame, board);
 	createShotCountersPanels(mainFrame, board);
 	createRolePanels(mainFrame, board);
-	
+  mainFrame.getContentPane().add(pView);
 	JPanel boardpanel = makeBoardPanel();
 	mainFrame.add(boardpanel);
-
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
-	
+
+  //        pView.changeUpgrade(board.getPlayer(1));
+
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
-	
+
+  pView.requestFocus();
     }
 
-    
-    
+
+
     // Creates all role panels on the rooms
     private static void createRolePanels(JFrame mainFrame, Board board) throws IOException{
 	ArrayList<Room> room_list = board.getRoomList();
@@ -60,7 +64,7 @@ public class Deadwood{
 	    i++;
 	}
     }
-    
+
     // Creates all the shot counter location panels
     private static void createShotCountersPanels(JFrame mainFrame, Board board) throws IOException{
 
@@ -163,9 +167,9 @@ public class Deadwood{
 
 	return boardpanel;
     }
-    
+
     // Creates the x,y corrdinated panels for each scene and adds them to mainFrame
-    private static void createSceneCardPanels(JFrame mainFrame, Board board) throws IOException{	
+    private static void createSceneCardPanels(JFrame mainFrame, Board board) throws IOException{
 	ArrayList<Room> room_list = board.getRoomList();
 	int x;
 	int y;
@@ -182,14 +186,14 @@ public class Deadwood{
 		mainFrame.add(room);
 	    }
 	    i++;
-	}	
+	}
     }
 
     // Adds the scene role panels to each scene
     private static void createSceneRolePanels(Room room, JPanel room_panel){
 	JPanel sceneRole;
 	int x;
-	int y;	
+	int y;
 	Scene scene = room.getScene();
 	if(scene != null){
 	    ArrayList<Role> roles = scene.getRoles();
@@ -200,14 +204,14 @@ public class Deadwood{
 		y = roles.get(i).getArea().get(1);
 		sceneRole = new JPanel();
 		sceneRole.setBounds(x, y, 40, 40);
-		room_panel.add(sceneRole);			    
+		room_panel.add(sceneRole);
 		i++;
 	    }
 	}
     }
 
 
-    /* A gateway to start the program. Captures number of players and instantiates the singleton 
+    /* A gateway to start the program. Captures number of players and instantiates the singleton
        Board object that is passed around through the rest of the classes. */
     public static void main(String args[]){
 	if(args.length != 1 || Integer.parseInt(args[0]) < 2 || Integer.parseInt(args[0]) > 8){
@@ -217,7 +221,7 @@ public class Deadwood{
 	    int num_players = Integer.parseInt(args[0]);
 	    Board board = new Board(num_players);
 	    setupGame(num_players, board);
-	    setupScenes(args, board);	    
+	    setupScenes(args, board);
 	    try{
 		Deadwood dw = new Deadwood(board);
 	    }
@@ -229,17 +233,17 @@ public class Deadwood{
     }
 
     // Adds players to Board object and calls setupRooms()
-    private static void setupGame(int num_players, Board board){	
+    private static void setupGame(int num_players, Board board){
 	int i = 0;
 	while(i < num_players){ //Adding players to board object
 	    Player new_player = new Player(i+1);
 	    board.addPlayer(new_player);
 	    i++;
 	}
-	setupRooms(board);	
+	setupRooms(board);
     }
 
-    /* Creates all room objects, adds them to board object, and 
+    /* Creates all room objects, adds them to board object, and
        also creates the room neighbors relationships for each
        room. Hard coded, not read through XMLReader */
     private static void setupRooms(Board board){
@@ -249,7 +253,7 @@ public class Deadwood{
 
     /* Calls XmlReader to add scenes to Board unused_scenes arraylist to be used
        when hydrating sets*/
-    private static void setupScenes(String[] args, Board board){      	
+    private static void setupScenes(String[] args, Board board){
 	ParseCard parsableCard = new ParseCard(board);
     }
 }
