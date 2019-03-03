@@ -87,6 +87,16 @@ public class ParseBoard {
     String takes = take.getAttribute("number");
     return takes;
   }
+
+  //gets the area for each take
+  public static ArrayList<Integer> getTakesArea(Element take){
+    ArrayList<Integer> areas = new ArrayList<Integer>();
+    areas.add(Integer.parseInt(take.getAttribute("x")));
+    areas.add(Integer.parseInt(take.getAttribute("y")));
+    areas.add(Integer.parseInt(take.getAttribute("h")));
+    areas.add(Integer.parseInt(take.getAttribute("w")));
+    return areas;
+  }
   /*Exact same as the createRole method from ParseCard
   */
   public static Role createRole(Element part) {
@@ -115,14 +125,16 @@ public class ParseBoard {
 
   /* creates the sets, Very similar to my methods in ParseCard, I find the variables I need for my set, the name which is easy to get, the shots or "takes" which I have to use a helper method for,
   the parts, which is done using the createRole method from ParseCard, and lastly the neighbors, I choose to just store them as an ArrayList of Strings that just contains their names
-  for the time being, once     this.sets=this.rooms;I have all that I just construct the set and return it to the constructor where it is added to the boards ArrayList of rooms.
+  for the time being, once this.sets=this.rooms; I have all that I just construct the set and return it to the constructor where it is added to the boards ArrayList of rooms.
   */
   public static Room createRoom(Element set) {
     String name = set.getAttribute("name");
     ArrayList<String> takesHelper = new ArrayList<String>();
+    ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
     for_each(set.getElementsByTagName("take"),
               (Element take) -> {
                 takesHelper.add(getTakes(take));
+                takesArea.add(getTakesArea(take));
               });
     int takes = Integer.parseInt(takesHelper.get(0));
     ArrayList<Role> list = new ArrayList<Role>();
@@ -144,7 +156,7 @@ public class ParseBoard {
                areaList.add(Integer.parseInt(area.getAttribute("w")));
              });
     System.out.println(Arrays.toString(neighbors.toArray()));
-    Room realSet = new Room(name, takes, list, neighbors, areaList);
+    Room realSet = new Room(name, takes, takesArea, list, neighbors, areaList);
     return realSet;
   }
 
@@ -160,7 +172,7 @@ public class ParseBoard {
     return realTrailer;
   }
 
-  /*creates the casting office, its the same as the method to create the trailer because I decided to hardcode the upgrade prices
+  /*creates the casting office,same as the trailer except it also calls getUpgrades to get all the upgrades
   */
   public static Room createOffice(Element office){
     ArrayList<String> neighbors = new ArrayList<String>();
@@ -176,6 +188,9 @@ public class ParseBoard {
     Room realOffice = new Room("Casting Office", neighbors, upgrades);
     return realOffice;
   }
+
+  //creates all the upgrades for the office, at this point I don't think much explaining is necessary, this method functions very similarily to the ones above.
+  //The only unique thing here is that we have upgrade objects but thats really not important.
   public static Upgrade getUpgrades(Element upgrade){
     int level = Integer.parseInt(upgrade.getAttribute("level"));
     String currency = upgrade.getAttribute("currency");

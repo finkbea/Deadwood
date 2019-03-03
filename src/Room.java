@@ -8,16 +8,18 @@ public class Room{
     private ArrayList<Role> roles = new ArrayList<Role>();
     private ArrayList<Integer> area = new ArrayList<Integer>();
     private ArrayList<Upgrade> officeUpgrades = new ArrayList<Upgrade>();
+    private ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
     private Scene _scene;
     public String _name;
     public int shotCounters;
 
-    Room(String name, int shots, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a){
+    Room(String name, int shots, ArrayList<ArrayList> takesArea, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a){
 	_name = name;
 	shotCounters = shots;
 	this.roles=r;
 	this.neighborHelper=h;
 	this.area=a;
+  this.takesArea=takesArea;
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o){
@@ -34,7 +36,7 @@ public class Room{
     public ArrayList<String> getNeighborHelper(){
 	return neighborHelper;
     }
-    
+
     public void addRole(int rank, ArrayList<Integer> r, String name, String line){
 	Role role = new Role(rank, r, name, line);
 	roles.add(role);
