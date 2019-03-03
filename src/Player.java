@@ -1,6 +1,12 @@
-/* Each Player has its own player class. Keeps track of current role, current room, currency, 
+import java.util.LinkedList;
+import java.util.List;
+/* Each Player has its own player class. Keeps track of current role, current room, currency,
    and rank. */
 public class Player{
+
+  public interface Listener {
+    public void changeUpgrade (Player p);
+  }
 
     private int pid;
     private int dollars;
@@ -12,6 +18,7 @@ public class Player{
     private int roleType; // 0 for room(side role), and 1 for scene(main role)
     private boolean justMoved;
     private boolean actionUsed;
+    private List<Listener> listeners;
 
     Player(int p_id){
 	pid = p_id;
@@ -20,25 +27,25 @@ public class Player{
 	rank = 1;
 	rehearseTokens = 0;
 	justMoved = false;
-	actionUsed = false;       
+	actionUsed = false;
     }
 
     public boolean getJustMoved(){
 	return justMoved;
     }
-    
+
     public boolean getActionUsed(){
 	return actionUsed;
     }
-    
+
     public void resetAction(){
 	actionUsed = false;
     }
-    
+
     public void resetMove(){
 	justMoved = false;
     }
-    
+
     public void useAction(){
 	actionUsed = true;
     }
@@ -46,7 +53,7 @@ public class Player{
     public void move(){
 	justMoved = true;
     }
-    
+
     // Adds currency to player fields
     public void addCurrency(int money_type, int amount){
 	if(money_type == 0){
@@ -56,7 +63,7 @@ public class Player{
 	    credits += amount;
 	}
     }
-    
+
     public int getPid(){
 	return pid;
     }
@@ -77,7 +84,7 @@ public class Player{
     public void updateRoom(Room room){
 	_room = room;
     }
-    
+
     public Room getCurrentRoom(){
 	return _room;
     }
@@ -97,7 +104,7 @@ public class Player{
     // Used only when upgrade is called
     public void updateRankAndMoney(int new_rank, int money_type){
 	rank = new_rank;
-	
+
 	if(new_rank == 2 && money_type == 0){
 	    dollars = dollars - 4;
 	}
@@ -109,7 +116,7 @@ public class Player{
 	}
 	else if(new_rank == 3 && money_type == 1){
 	    credits = credits - 10;
-	}	
+	}
 	else if(new_rank == 4 && money_type == 0){
 	    dollars = dollars - 18;
 	}
@@ -137,7 +144,7 @@ public class Player{
     public void setRoleType(int type){
 	roleType = type;
     }
-    
+
     public Role getRole(){
 	return _role;
     }
@@ -151,5 +158,5 @@ public class Player{
     public int getRoleType(){
 	return roleType;
     }
-    
+
 }

@@ -12,7 +12,7 @@ public class Resources{
 	sceneHolder = new ImageIcon[40];
 	for(int i = 1; i <= 40; i++){
 	    String fn = String.format("0%d.png", i);
-	    try(InputStream r = cls.getResiyrceAsStrem(fn)){
+	    try (InputStream r = cls.getResourceAsStream(fn)){
 		sceneHolder[i] = new ImageIcon (ImageIO.read(r));
 	    }
 	    catch (IOException e){
