@@ -18,9 +18,10 @@ public class PlayerView extends JPanel implements Player.Listener{
 
   p1 = new JLabel();
   add(p1);
-  p1.setBounds(700, 300, 40, 40);
+  p1.setBounds(0, 0, 40, 40);
   setVisible(true);
-setFocusable(true);
+ setFocusable(true);
+ setBackground(Color.red);
   }
 
   public void changeUpgrade(Player p){

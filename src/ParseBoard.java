@@ -67,7 +67,7 @@ public class ParseBoard {
 
   //constructor, takes in the board and parses through the board.xml document to add rooms
   public ParseBoard(Board board) {
-    Element doc = parse_doc("board.xml");
+    Element doc = parse_doc("resources/board.xml");
     for_each(doc.getElementsByTagName("set"),
              (Element set) -> board.addRoom(createRoom(set)));
     for_each(doc.getElementsByTagName("office"),

@@ -64,7 +64,7 @@ public class ParseCard {
 
   //the constructor, it takes in a parameter board, we parse through each card and create the scenes which are added to board's ArrayList of scenes
    public ParseCard(Board board) {
-     Element doc = parse_doc("cards.xml");
+     Element doc = parse_doc("resources/cards.xml");
      for_each(doc.getElementsByTagName("card"),
               (Element card) -> board.addScene(createScene(card)));
    }

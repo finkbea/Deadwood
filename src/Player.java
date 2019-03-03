@@ -101,7 +101,9 @@ public class Player{
 	rehearseTokens = 0;
     }
 
-    // Used only when upgrade is called
+    /*
+    UNNECESSARY, VALUES ARE STORED IN OFFICE
+    */
     public void updateRankAndMoney(int new_rank, int money_type){
 	rank = new_rank;
 

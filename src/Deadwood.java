@@ -27,17 +27,16 @@ public class Deadwood{
 	createShotCountersPanels(mainFrame, board);
 	createRolePanels(mainFrame, board);
   mainFrame.getContentPane().add(pView);
+  pView.changeUpgrade(board.getPlayer(2));
 	JPanel boardpanel = makeBoardPanel();
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
 
-  //        pView.changeUpgrade(board.getPlayer(1));
-
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
-
   pView.requestFocus();
+
     }
 
 
@@ -122,6 +121,7 @@ public class Deadwood{
 
 	JPanel shotCounter14 = new JPanel();
 	shotCounter14.setBounds(1004, 23, 47, 47);
+  shotCounter14.setBackground(Color.red);
 	mainFrame.add(shotCounter14);
 
 	JPanel shotCounter15 = new JPanel();
@@ -160,7 +160,7 @@ public class Deadwood{
     // Makes the panel that displays the Deadwood game background
     private static JPanel makeBoardPanel() throws IOException{
 	JPanel boardpanel = new JPanel();
-	BufferedImage image = ImageIO.read(new File("board.jpg"));
+	BufferedImage image = ImageIO.read(new File("resources/board.jpg"));
 	JLabel label = new JLabel(new ImageIcon(image));
 	boardpanel.add(label);
 	boardpanel.setBounds(200, 0, 1200, 900);

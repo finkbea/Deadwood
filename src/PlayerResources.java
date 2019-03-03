@@ -14,16 +14,14 @@ public class PlayerResources{
   static char[] color = new char[]{'b', 'o', 'g', 'r', 'y', 'v', 'p', 'c'};
 
   public PlayerResources(){
-    big = new ImageIcon[6];
+    big = new ImageIcon[48];
     final Class cls = PlayerResources.class;
     //player one = blue, p2 = yellow and so on
-    int j =0;
-    int count =0;
-    for (j =0; j<8; j++){
+    for (int j =0; j<8; j++){
       for (int i =0; i < 6; i++){
-        String fn = String.format("%c%d.png", color[j], i);
+        String fn = String.format("resources/dice/%c%d.png", color[j], i+1);
         try (InputStream r = cls.getResourceAsStream(fn)) {
-          big[count+i] = new ImageIcon (ImageIO.read(r));
+          big[(6*j)+i] = new ImageIcon (ImageIO.read(r));
         }
         catch (IOException e) {
           System.err.println("fn=\"" + fn + "\"");
@@ -31,7 +29,6 @@ public class PlayerResources{
           System.exit(1);
         }
       }
-      count+=6;
     }
   }
 
