@@ -89,12 +89,12 @@ public class ParseBoard {
   }
 
   //gets the area for each take
-  public static ArrayList<Integer> getTakesArea(Element take){
+  public static ArrayList<Integer> getTakesArea(Element area){
     ArrayList<Integer> areas = new ArrayList<Integer>();
-    areas.add(Integer.parseInt(take.getAttribute("x")));
-    areas.add(Integer.parseInt(take.getAttribute("y")));
-    areas.add(Integer.parseInt(take.getAttribute("h")));
-    areas.add(Integer.parseInt(take.getAttribute("w")));
+    areas.add(Integer.parseInt(area.getAttribute("x")));
+    areas.add(Integer.parseInt(area.getAttribute("y")));
+    areas.add(Integer.parseInt(area.getAttribute("h")));
+    areas.add(Integer.parseInt(area.getAttribute("w")));
     return areas;
   }
   /*Exact same as the createRole method from ParseCard
@@ -134,7 +134,10 @@ public class ParseBoard {
     for_each(set.getElementsByTagName("take"),
               (Element take) -> {
                 takesHelper.add(getTakes(take));
-                takesArea.add(getTakesArea(take));
+                for_each(take.getElementsByTagName("area"),
+                          (Element area) -> {
+                          takesArea.add(getTakesArea(area));
+                        });
               });
     int takes = Integer.parseInt(takesHelper.get(0));
     ArrayList<Role> list = new ArrayList<Role>();
