@@ -12,14 +12,16 @@ public class Scene{
     private String line;
     private int number;
     private String image;
-
+    private int num_roles;
+    
     Scene(String name, String l, int n, String i, ArrayList<Role> roles, int budget){
 	_name = name;
 	_roles = roles;
 	_budget = budget;
-  this.line=l;
-  this.number =n;
-  this.image=i;
+	this.line=l;
+	this.number =n;
+	this.image=i;
+	num_roles = roles.size();
     }
 
     public String getName(){
@@ -36,5 +38,9 @@ public class Scene{
 
     public int getBudget(){
 	return _budget;
+    }
+
+    public int getNumRoles(){
+	return num_roles;
     }
 }

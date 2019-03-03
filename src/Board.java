@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
-/* The Board object is a singleton and it holds all the players, rooms, used/unused scenes,
+/* The Board object holds all the players, rooms, used/unused scenes,
    and number of players. It does not keep track of which player is in each room (Player object
    does this). After the game is setup, this object is passed to GameKeeper.java in order to
    properly run the game. */
@@ -25,7 +25,6 @@ public class Board{
 
     public void addRoom(Room room){
 	room_list.add(room);
-	System.out.println(room.getName());
     }
 
     public void addNeighbors(){

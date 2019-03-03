@@ -37,4 +37,8 @@ public class Role{
     public void workRole(){
 	being_worked = 1;
     }
+
+    public ArrayList<Integer> getArea(){
+	return area;
+    }
 }

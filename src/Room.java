@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Room{
 
     private ArrayList<Room> neighbors = new ArrayList<Room>();
-    private ArrayList<String> neighborHelper = new ArrayList<String>();
+    private ArrayList<String> neighborHelper = new ArrayList<String>(); //neighbors as strings
     private ArrayList<Role> roles = new ArrayList<Role>();
     private ArrayList<Integer> area = new ArrayList<Integer>();
     private ArrayList<Upgrade> officeUpgrades = new ArrayList<Upgrade>();
@@ -19,7 +19,14 @@ public class Room{
 	this.roles=r;
 	this.neighborHelper=h;
 	this.area=a;
-  this.takesArea=takesArea;
+	this.takesArea=takesArea;
+	for(int i = 0; i < takesArea.size(); i++){
+	    for(int j = 0; j < takesArea.get(i).size(); j++){
+		System.out.println(takesArea.get(i).get(j));
+	    }
+	    System.out.println();
+	}
+	
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o){
@@ -33,6 +40,11 @@ public class Room{
       this.neighborHelper=h;
     }
 
+    public ArrayList<ArrayList> getTakesArea(){
+	return takesArea;
+    }
+    
+    // Returns the Strings of neighboring rooms
     public ArrayList<String> getNeighborHelper(){
 	return neighborHelper;
     }
@@ -93,5 +105,9 @@ public class Room{
 
     public void wrapScene(){
 	_scene = null;
+    }
+
+    public ArrayList<Integer> getArea(){
+	return area;
     }
 }
