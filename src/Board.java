@@ -7,20 +7,33 @@ import java.util.Arrays;
    properly run the game. */
 public class Board{
 
-    private int num_players;    
+    private int num_players;
     private ArrayList<Player> player_list = new ArrayList<Player>();
     private ArrayList<Room> room_list = new ArrayList<Room>();
     private ArrayList<Scene> used_scenes = new ArrayList<Scene>();
     private ArrayList<Scene> unused_scenes = new ArrayList<Scene>();
     private int numWrappedScenes;
-    
+    private Player currentPlayer;
+    private int currentPlayerID;
+
+
     Board(int numPlayers){
 	num_players = numPlayers;
 	numWrappedScenes = 0;
     }
-    
+    public void setCurrentPlayerID(int i){
+      /*for (int j=0; j<player_list.size(); j++){
+        if (player_list.get(j).getPid()==i){
+          currentPlayer=player_list.get(j);
+        }
+      }*/
+      this.currentPlayerID=i;
+    }
+    public int getCurrentPlayerID(){
+      return this.currentPlayerID;
+    }
     public void addPlayer(Player player){
-	player_list.add(player);	
+	player_list.add(player);
     }
 
     public void addRoom(Room room){
@@ -42,7 +55,7 @@ public class Board{
 	    j++;
 	}
     }
-    
+
     // 1. get scenes from unused_scenes and hydrate the sets with them
     // 2. move used scenes to used_scenes array by calling updateScenes
     public void hydrateSets(){
@@ -70,7 +83,7 @@ public class Board{
 
     // pid number is 1 <= pid <= total_num_players
     public Player getPlayer(int pid){
-	Player temp = player_list.get(0); 
+	Player temp = player_list.get(0);
 	int i = 0;
 	while(i < player_list.size()){
 	    if(player_list.get(i).getPid() == pid){

@@ -24,6 +24,10 @@ public class PlayerView extends JPanel implements Player.Listener{
   setFocusable(true);
   }
 
+  private synchronized void playerMoved(){
+
+  }
+
   public void changeUpgrade(Player p){
     PlayerResources r = PlayerResources.getInstance();
     p1.setIcon(r.getIcon(p.getPid(), p.getRank()));

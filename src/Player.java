@@ -19,6 +19,7 @@ public class Player{
     private boolean justMoved;
     private boolean actionUsed;
     private List<Listener> listeners;
+    private String color;
 
     Player(int p_id){
 	pid = p_id;
@@ -28,8 +29,36 @@ public class Player{
 	rehearseTokens = 0;
 	justMoved = false;
 	actionUsed = false;
+  switch (pid){
+    case 1:
+      color="blue";
+      break;
+    case 2:
+      color="orange";
+      break;
+    case 3:
+      color="green";
+      break;
+    case 4:
+      color="red";
+      break;
+    case 5:
+      color="yellow";
+      break;
+    case 6:
+      color="violet";
+      break;
+    case 7:
+      color="pink";
+      break;
+    case 8:
+      color="cyan";
+      break;
+  }
     }
-
+    public String getColor(){
+      return this.color;
+    }
     public boolean getJustMoved(){
 	return justMoved;
     }

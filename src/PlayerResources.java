@@ -44,13 +44,6 @@ public class PlayerResources{
 
   public ImageIcon getIcon(int id, int rank){
     int x =rank + ((id-1)*6)-1;
-    /*int count =0;
-    for (int j=0; j<8; j++){
-      if (c==color[j]){
-        x+=count;
-      }
-      count+=6;
-    }*/
     return big[x];
   }
 

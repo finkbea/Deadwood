@@ -26,10 +26,10 @@ public class Deadwood{
 	createSceneCardPanels(mainFrame, board);
 	createShotCountersPanels(mainFrame, board);
 	createRolePanels(mainFrame, board);
-	createSidePanel(mainFrame);
+	createSidePanel(mainFrame, board);
 	createBottomPanel(mainFrame);
 	createBottomLeftPanel(mainFrame);
-	
+
 	mainFrame.add(pView);
 	pView.changeUpgrade(board.getPlayer(1));
 	pView.changeUpgrade(board.getPlayer(2));
@@ -40,17 +40,29 @@ public class Deadwood{
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
 
-	
+
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
 	pView.requestFocus();
 
     }
 
-    private static void createSidePanel(JFrame mainFrame) throws IOException{
+    private static void createSidePanel(JFrame mainFrame, Board board) throws IOException{
 	JPanel sidePanel = new JPanel();
 	sidePanel.setBounds(0, 0, 200, 900);
-	sidePanel.setBackground(Color.red);
+  Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
+	sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
+  JLabel label = new JLabel("<html>Stats Page<br>yes</br></html>"+"\n"+"yes");
+  JLabel playerStats;
+  for (int i =0; i<board.getNumPlayers(); i++){
+    String s ="<html><br>Player: "+board.getPlayer(i+1).getPid()+"</br></html>";
+    playerStats = new JLabel(s);
+    //System.out.println(board.getPlayer(i+1).getPid());
+    sidePanel.add(playerStats);
+  }
+  JLabel label2 = new JLabel("Stats Page");
+  sidePanel.add(label);
+  sidePanel.add(label2);
 	mainFrame.add(sidePanel);
     }
 
@@ -67,7 +79,7 @@ public class Deadwood{
 	bottomRightPanel.setBackground(Color.green);
 	mainFrame.add(bottomRightPanel);
     }
-    
+
     // Creates all role panels on the rooms
     private static void createRolePanels(JFrame mainFrame, Board board) throws IOException{
 	ArrayList<Room> room_list = board.getRoomList();
