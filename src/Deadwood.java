@@ -40,6 +40,7 @@ public class Deadwood{
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
 
+	
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
 	pView.requestFocus();
