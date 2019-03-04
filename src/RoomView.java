@@ -17,7 +17,7 @@ public class RoomView extends JPanel{
     private int occupants;
     private List<Listener> listeners;
     
-    RoomView(){
+    RoomView(){	
 	occupants = 0;
 	listeners = new LinkedList<Listener>();
     }

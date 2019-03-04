@@ -26,10 +26,13 @@ public class Deadwood{
 	createSceneCardPanels(mainFrame, board);
 	createShotCountersPanels(mainFrame, board);
 	createRolePanels(mainFrame, board);
-
+	createSidePanel(mainFrame);
+	createBottomPanel(mainFrame);
+	createBottomLeftPanel(mainFrame);
+	
 	mainFrame.add(pView);
 	pView.changeUpgrade(board.getPlayer(1));
-  pView.changeUpgrade(board.getPlayer(2));
+	pView.changeUpgrade(board.getPlayer(2));
 
 	JPanel boardpanel = makeBoardPanel();
 
@@ -43,8 +46,27 @@ public class Deadwood{
 
     }
 
+    private static void createSidePanel(JFrame mainFrame) throws IOException{
+	JPanel sidePanel = new JPanel();
+	sidePanel.setBounds(0, 0, 200, 900);
+	sidePanel.setBackground(Color.red);
+	mainFrame.add(sidePanel);
+    }
 
+    private static void createBottomPanel(JFrame mainFrame) throws IOException{
+	JPanel bottomPanel = new JPanel();
+	bottomPanel.setBounds(200, 900, 1200, 150);
+	bottomPanel.setBackground(Color.blue);
+	mainFrame.add(bottomPanel);
+    }
 
+    private static void createBottomLeftPanel(JFrame mainFrame) throws IOException{
+	JPanel bottomRightPanel = new JPanel();
+	bottomRightPanel.setBounds(0, 900, 200, 150);
+	bottomRightPanel.setBackground(Color.green);
+	mainFrame.add(bottomRightPanel);
+    }
+    
     // Creates all role panels on the rooms
     private static void createRolePanels(JFrame mainFrame, Board board) throws IOException{
 	ArrayList<Room> room_list = board.getRoomList();
