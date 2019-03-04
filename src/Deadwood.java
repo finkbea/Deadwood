@@ -29,6 +29,7 @@ public class Deadwood{
 
 	mainFrame.add(pView);
 	pView.changeUpgrade(board.getPlayer(1));
+  pView.changeUpgrade(board.getPlayer(2));
 
 	JPanel boardpanel = makeBoardPanel();
 
@@ -64,12 +65,12 @@ public class Deadwood{
 		j++;
 	    }
 	    i++;
-	} 
+	}
     }
 
     // Creates all the shot counter location panels
-    private static void createShotCountersPanels(JFrame mainFrame, Board board) throws IOException{	
-	
+    private static void createShotCountersPanels(JFrame mainFrame, Board board) throws IOException{
+
 	JPanel shotCounter1 = new JPanel();
 	shotCounter1.setBounds(236, 11, 47, 47);
 	mainFrame.add(shotCounter1);

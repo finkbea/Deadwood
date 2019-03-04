@@ -11,6 +11,16 @@ public class PlayerResources{
 
   private ImageIcon[] big;
   static PlayerResources instance;
+  /*Player Colors
+  p1=blue
+  p2=orange
+  p3=green
+  p4=red
+  p5=yellow
+  p6=violet
+  p7=pink
+  p8=cyan
+  */
   static char[] color = new char[]{'b', 'o', 'g', 'r', 'y', 'v', 'p', 'c'};
 
   public PlayerResources(){
@@ -33,7 +43,7 @@ public class PlayerResources{
   }
 
   public ImageIcon getIcon(int id, int rank){
-    int x =rank + ((id-1)*6);
+    int x =rank + ((id-1)*6)-1;
     /*int count =0;
     for (int j=0; j<8; j++){
       if (c==color[j]){
