@@ -29,7 +29,8 @@ public class Deadwood{
 	createSidePanel(mainFrame, board);
 	createBottomPanel(mainFrame);
 	createBottomLeftPanel(mainFrame);
-
+	CreateBlankAreaPanels.main(mainFrame);
+	
 	mainFrame.add(pView);
 	pView.changeUpgrade(board.getPlayer(1));
 	pView.changeUpgrade(board.getPlayer(2));
@@ -40,29 +41,27 @@ public class Deadwood{
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
 
-
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
 	pView.requestFocus();
-
     }
-
+    
     private static void createSidePanel(JFrame mainFrame, Board board) throws IOException{
 	JPanel sidePanel = new JPanel();
 	sidePanel.setBounds(0, 0, 200, 900);
-  Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
+	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
 	sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
-  JLabel label = new JLabel("<html>Stats Page<br>yes</br></html>"+"\n"+"yes");
-  JLabel playerStats;
-  for (int i =0; i<board.getNumPlayers(); i++){
-    String s ="<html><br>Player: "+board.getPlayer(i+1).getPid()+"</br></html>";
-    playerStats = new JLabel(s);
-    //System.out.println(board.getPlayer(i+1).getPid());
-    sidePanel.add(playerStats);
-  }
-  JLabel label2 = new JLabel("Stats Page");
-  sidePanel.add(label);
-  sidePanel.add(label2);
+	JLabel label = new JLabel("<html>Stats Page<br>yes</br></html>"+"\n"+"yes");
+	JLabel playerStats;
+	for (int i =0; i<board.getNumPlayers(); i++){
+	    String s ="<html><br>Player: "+board.getPlayer(i+1).getPid()+"</br></html>";
+	    playerStats = new JLabel(s);
+	    //System.out.println(board.getPlayer(i+1).getPid());
+	    sidePanel.add(playerStats);
+	}
+	JLabel label2 = new JLabel("Stats Page");
+	sidePanel.add(label);
+	sidePanel.add(label2);
 	mainFrame.add(sidePanel);
     }
 
@@ -160,7 +159,6 @@ public class Deadwood{
 
 	JPanel shotCounter14 = new JPanel();
 	shotCounter14.setBounds(1004, 23, 47, 47);
-  shotCounter14.setBackground(Color.red);
 	mainFrame.add(shotCounter14);
 
 	JPanel shotCounter15 = new JPanel();
