@@ -14,22 +14,21 @@ public class Deadwood{
     private RoomView rView;
     private PlayerView pView;
 
-
     private static class MyMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
-	    System.out.println("clicked");
+	    System.out.println("clicked bottom panel");
 	}
 	public void mouseExited(MouseEvent event) {
-	    System.out.println("exited");
+	    System.out.println("exited bottom panel");
 	}
 	public void mouseEntered(MouseEvent event) {
-	    System.out.println("entered");
+	    System.out.println("entered bottom panel");
 	}
 	public void mousePressed(MouseEvent event) {
-	    System.out.println("pressed");
+	    System.out.println("pressed bottom panel");
 	} 
 	public void mouseReleased(MouseEvent event) {
-	    System.out.println("released");
+	    System.out.println("released bottom panel");
 	} 
     }
     
