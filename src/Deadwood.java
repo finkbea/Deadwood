@@ -14,6 +14,25 @@ public class Deadwood{
     private RoomView rView;
     private PlayerView pView;
 
+
+    private static class MyMouseListener implements MouseListener{
+	public void mouseClicked(MouseEvent event){
+	    System.out.println("clicked");
+	}
+	public void mouseExited(MouseEvent event) {
+	    System.out.println("exited");
+	}
+	public void mouseEntered(MouseEvent event) {
+	    System.out.println("entered");
+	}
+	public void mousePressed(MouseEvent event) {
+	    System.out.println("pressed");
+	} 
+	public void mouseReleased(MouseEvent event) {
+	    System.out.println("released");
+	} 
+    }
+    
     private Deadwood(Board board) throws IOException{
 	//rView= new RoomView();
 	pView = new PlayerView();
@@ -69,9 +88,11 @@ public class Deadwood{
 	JPanel bottomPanel = new JPanel();
 	bottomPanel.setBounds(200, 900, 1200, 150);
 	bottomPanel.setBackground(Color.blue);
+	bottomPanel.addMouseListener(new MyMouseListener());
 	mainFrame.add(bottomPanel);
     }
 
+    
     private static void createBottomLeftPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomRightPanel = new JPanel();
 	bottomRightPanel.setBounds(0, 900, 200, 150);
