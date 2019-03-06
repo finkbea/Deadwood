@@ -6,6 +6,7 @@ public class Player{
 
   public interface Listener {
     public void playerMoved(Player p);
+    public void roleTaken(Player p);
     public void changeUpgrade (Player p);
   }
 
@@ -21,6 +22,7 @@ public class Player{
     private boolean actionUsed;
     private List<Listener> listeners;
     private String color;
+    private int score=dollars+credits+(5*rank);
 
     Player(int p_id){
       listeners = new LinkedList<Listener>();
@@ -72,7 +74,16 @@ public class Player{
         l.playerMoved(this);
       }
     }
-
+    private synchronized void sendChange3(){
+      for (Listener l : listeners){
+        l.roleTaken(this);
+      }
+    }
+    //returns the players score
+    public int getScore(){
+      return this.score;
+    }
+    //returns the players color
     public String getColor(){
       return this.color;
     }
@@ -188,6 +199,7 @@ public class Player{
 
     public void setRole(Role role){
 	_role = role;
+  sendChange3();
     }
 
     public void setRoleType(int type){

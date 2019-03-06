@@ -15,7 +15,7 @@ public class PlayerView extends JPanel implements Player.Listener{
   super(null);
 
   setSize(40, 40);
-  setDoubleBuffered(true);
+  //setDoubleBuffered(true);
 
   p1 = new JLabel();
   add(p1);
@@ -26,6 +26,9 @@ public class PlayerView extends JPanel implements Player.Listener{
 
   public synchronized void playerMoved(Player p){
     p1.setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
+  }
+  public synchronized void roleTaken(Player p){
+    p1.setBounds(p.getRole().getArea().get(0), p.getRole().getArea().get(1), 40, 40);
   }
 
   public synchronized void changeUpgrade(Player p){

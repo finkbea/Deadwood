@@ -48,8 +48,10 @@ public class Deadwood{
 	createBottomPanel(mainFrame);
 	createBottomLeftPanel(mainFrame);
 	CreateBlankAreaPanels.main(mainFrame);
-	
+
 	mainFrame.add(pView);
+  pView.changeUpgrade(board.getPlayer(1));
+
 
 	JPanel boardpanel = makeBoardPanel();
 
@@ -62,22 +64,49 @@ public class Deadwood{
 	pView.requestFocus();
     }
 
+    //goint to rewrite the second part, each line will be a Jlabel
     private static void createSidePanel(JFrame mainFrame, Board board) throws IOException{
 	JPanel sidePanel = new JPanel();
+  sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
 	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
 	sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
-	JLabel label = new JLabel("<html>Stats Page<br>yes</br></html>"+"\n"+"yes");
-	JLabel playerStats;
-	for (int i =0; i<board.getNumPlayers(); i++){
-	    String s ="<html><br>Player: "+board.getPlayer(i+1).getPid()+"</br></html>";
-	    playerStats = new JLabel(s);
+
+  JLabel statPanel = new JLabel("Stat Panel:");
+  statPanel.setBounds(20,20,160,40);
+  statPanel.setForeground(Color.white);
+  sidePanel.add(statPanel);
+	//JLabel playerStats;
+	for (int i =1; i<board.getNumPlayers()+1; i++){
+	    JLabel name = new JLabel("Player: "+board.getPlayer(i).getPid()+"");
+      name.setBounds(20,-40+(100*i),160,20);
+      name.setForeground(backGroundColor[i]);
+
+      JLabel score = new JLabel("Score: "+board.getPlayer(i).getScore());
+      score.setBounds(20,-20+(100*i),160,20);
+      score.setForeground(backGroundColor[i]);
+
+      JLabel dollars = new JLabel("Dollars: "+board.getPlayer(i).getDollars());
+      dollars.setBounds(20,0+(100*i),160,20);
+      dollars.setForeground(backGroundColor[i]);
+
+      JLabel credits = new JLabel("Credits: "+board.getPlayer(i).getCredits());
+      credits.setBounds(20,20+(100*i),160,20);
+      credits.setForeground(backGroundColor[i]);
+
+      JLabel rehearse = new JLabel("Times Rehearsed: "+board.getPlayer(i).getRehearseTokens());
+      rehearse.setBounds(20,40+(100*i),160,20);
+      rehearse.setForeground(backGroundColor[i]);
 	    //System.out.println(board.getPlayer(i+1).getPid());
-	    sidePanel.add(playerStats);
+	    sidePanel.add(name);
+      sidePanel.add(score);
+      sidePanel.add(dollars);
+      sidePanel.add(credits);
+      sidePanel.add(rehearse);
 	}
-	JLabel label2 = new JLabel("Stats Page");
-	sidePanel.add(label);
-	sidePanel.add(label2);
+	//JLabel label2 = new JLabel("Stats Page");
+	//sidePanel.add(label);
+	//sidePanel.add(label2);
 	mainFrame.add(sidePanel);
     }
 
