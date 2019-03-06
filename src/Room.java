@@ -9,41 +9,49 @@ public class Room{
     private ArrayList<Integer> area = new ArrayList<Integer>();
     private ArrayList<Upgrade> officeUpgrades = new ArrayList<Upgrade>();
     private ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
+    private ArrayList<Integer> blankSpace = new ArrayList<Integer>();
     private Scene _scene;
     public String _name;
     public int shotCounters;
 
-    Room(String name, int shots, ArrayList<ArrayList> takesArea, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a){
+    Room(String name, int shots, ArrayList<ArrayList> takesArea, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a, ArrayList<Integer> b){
 	_name = name;
 	shotCounters = shots;
 	this.roles=r;
 	this.neighborHelper=h;
 	this.area=a;
 	this.takesArea=takesArea;
+  this.blankSpace=b;
 	for(int i = 0; i < takesArea.size(); i++){
 	    for(int j = 0; j < takesArea.get(i).size(); j++){
 		System.out.println(takesArea.get(i).get(j));
 	    }
 	    System.out.println();
 	}
-	
+
     }
     //constructor for the office
-    Room(String name, ArrayList<String> h, ArrayList<Upgrade> o){
+    Room(String name, ArrayList<String> h, ArrayList<Upgrade> o,  ArrayList<Integer> b){
       this._name="Casting Office";
       this.neighborHelper=h;
       this.officeUpgrades=o;
+      this.blankSpace=b;
     }
     //constructor for the trailer
-    Room(String name, ArrayList<String> h){
+    Room(String name, ArrayList<String> h,  ArrayList<Integer> b){
       this._name="Trailers";
       this.neighborHelper=h;
+      this.blankSpace=b;
+    }
+
+    public ArrayList<Integer> getBlankSpace(){
+      return this.blankSpace;
     }
 
     public ArrayList<ArrayList> getTakesArea(){
 	return takesArea;
     }
-    
+
     // Returns the Strings of neighboring rooms
     public ArrayList<String> getNeighborHelper(){
 	return neighborHelper;

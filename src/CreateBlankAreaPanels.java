@@ -13,7 +13,7 @@ public class CreateBlankAreaPanels{
 
     // creates the spot for players to stand on when they are in a room but not in a role
     public static void main(JFrame mainFrame) throws IOException{
-
+/*
 	JPanel t_s1 = new JPanel();
 	t_s1.setBounds(210, 225, 40, 40);
 	t_s1.setBackground(Color.red);
@@ -21,7 +21,7 @@ public class CreateBlankAreaPanels{
 	JPanel t_s2 = new JPanel();
 	t_s2.setBounds(215, 225, 40, 40);
 	t_s2.setBackground(Color.blue);
-	mainFrame.add(t_s2);	
+	mainFrame.add(t_s2);
 	JPanel t_s3 = new JPanel();
 	t_s3.setBounds(220, 225, 40, 40);
 	t_s3.setBackground(Color.green);
@@ -54,7 +54,7 @@ public class CreateBlankAreaPanels{
 	JPanel j2 = new JPanel();
 	j2.setBounds(485, 190, 40, 40);
 	j2.setBackground(Color.blue);
-	mainFrame.add(j2);	
+	mainFrame.add(j2);
 	JPanel j3 = new JPanel();
 	j3.setBounds(490, 190, 40, 40);
 	j3.setBackground(Color.green);
@@ -78,7 +78,7 @@ public class CreateBlankAreaPanels{
 	JPanel j8 = new JPanel();
 	j8.setBounds(515, 190, 40, 40);
 	j8.setBackground(Color.magenta);
-	mainFrame.add(j8);   
+	mainFrame.add(j8);
 
 	JPanel ms1 = new JPanel();
 	ms1.setBounds(1260, 192, 40, 40);
@@ -87,7 +87,7 @@ public class CreateBlankAreaPanels{
 	JPanel ms2 = new JPanel();
 	ms2.setBounds(1265, 192, 40, 40);
 	ms2.setBackground(Color.blue);
-	mainFrame.add(ms2);	
+	mainFrame.add(ms2);
 	JPanel ms3 = new JPanel();
 	ms3.setBounds(1270, 192, 40, 40);
 	ms3.setBackground(Color.green);
@@ -111,7 +111,7 @@ public class CreateBlankAreaPanels{
 	JPanel ms8 = new JPanel();
 	ms8.setBounds(1295, 192, 40, 40);
 	ms8.setBackground(Color.magenta);
-	mainFrame.add(ms8); 
+	mainFrame.add(ms8);
 
 	JPanel co1 = new JPanel();
 	co1.setBounds(210, 540, 40, 40);
@@ -120,7 +120,7 @@ public class CreateBlankAreaPanels{
 	JPanel co2 = new JPanel();
 	co2.setBounds(210, 545, 40, 40);
 	co2.setBackground(Color.blue);
-	mainFrame.add(co2);	
+	mainFrame.add(co2);
 	JPanel co3 = new JPanel();
 	co3.setBounds(210, 550, 40, 40);
 	co3.setBackground(Color.green);
@@ -145,7 +145,7 @@ public class CreateBlankAreaPanels{
 	co8.setBounds(210, 575, 40, 40);
 	co8.setBackground(Color.magenta);
 	mainFrame.add(co8);
-	
+
 	JPanel t1 = new JPanel();
 	t1.setBounds(1260, 242, 40, 40);
 	t1.setBackground(Color.red);
@@ -153,7 +153,7 @@ public class CreateBlankAreaPanels{
 	JPanel t2 = new JPanel();
 	t2.setBounds(1265, 242, 40, 40);
 	t2.setBackground(Color.blue);
-	mainFrame.add(t2);	
+	mainFrame.add(t2);
 	JPanel t3 = new JPanel();
 	t3.setBounds(1270, 242, 40, 40);
 	t3.setBackground(Color.green);
@@ -186,7 +186,7 @@ public class CreateBlankAreaPanels{
 	JPanel h2 = new JPanel();
 	h2.setBounds(1215, 465, 40, 40);
 	h2.setBackground(Color.blue);
-	mainFrame.add(h2);	
+	mainFrame.add(h2);
 	JPanel h3 = new JPanel();
 	h3.setBounds(1220, 465, 40, 40);
 	h3.setBackground(Color.green);
@@ -219,7 +219,7 @@ public class CreateBlankAreaPanels{
 	JPanel b2 = new JPanel();
 	b2.setBounds(1040, 470, 40, 40);
 	b2.setBackground(Color.blue);
-	mainFrame.add(b2);	
+	mainFrame.add(b2);
 	JPanel b3 = new JPanel();
 	b3.setBounds(1040, 475, 40, 40);
 	b3.setBackground(Color.green);
@@ -252,7 +252,7 @@ public class CreateBlankAreaPanels{
 	JPanel ch2 = new JPanel();
 	ch2.setBounds(945, 685, 40, 40);
 	ch2.setBackground(Color.blue);
-	mainFrame.add(ch2);	
+	mainFrame.add(ch2);
 	JPanel ch3 = new JPanel();
 	ch3.setBounds(950, 685, 40, 40);
 	ch3.setBackground(Color.green);
@@ -277,7 +277,7 @@ public class CreateBlankAreaPanels{
 	ch8.setBounds(975, 685, 40, 40);
 	ch8.setBackground(Color.magenta);
 	mainFrame.add(ch8);
-	
+
 	JPanel s1 = new JPanel();
 	s1.setBounds(940, 225, 40, 40);
 	s1.setBackground(Color.red);
@@ -285,7 +285,7 @@ public class CreateBlankAreaPanels{
 	JPanel s2 = new JPanel();
 	s2.setBounds(945, 225, 40, 40);
 	s2.setBackground(Color.blue);
-	mainFrame.add(s2);	
+	mainFrame.add(s2);
 	JPanel s3 = new JPanel();
 	s3.setBounds(950, 225, 40, 40);
 	s3.setBackground(Color.green);
@@ -310,7 +310,7 @@ public class CreateBlankAreaPanels{
 	s8.setBounds(975, 225, 40, 40);
 	s8.setBackground(Color.magenta);
 	mainFrame.add(s8);
-	
+
 	JPanel gs1 = new JPanel();
 	gs1.setBounds(490, 410, 40, 40);
 	gs1.setBackground(Color.red);
@@ -318,7 +318,7 @@ public class CreateBlankAreaPanels{
 	JPanel gs2 = new JPanel();
 	gs2.setBounds(495, 410, 40, 40);
 	gs2.setBackground(Color.blue);
-	mainFrame.add(gs2);	
+	mainFrame.add(gs2);
 	JPanel gs3 = new JPanel();
 	gs3.setBounds(500, 410, 40, 40);
 	gs3.setBackground(Color.green);
@@ -351,7 +351,7 @@ public class CreateBlankAreaPanels{
 	JPanel ranch2 = new JPanel();
 	ranch2.setBounds(475, 660, 40, 40);
 	ranch2.setBackground(Color.blue);
-	mainFrame.add(ranch2);	
+	mainFrame.add(ranch2);
 	JPanel ranch3 = new JPanel();
 	ranch3.setBounds(480, 660, 40, 40);
 	ranch3.setBackground(Color.green);
@@ -384,7 +384,7 @@ public class CreateBlankAreaPanels{
 	JPanel sec_hid2 = new JPanel();
 	sec_hid2.setBounds(475, 850, 40, 40);
 	sec_hid2.setBackground(Color.blue);
-	mainFrame.add(sec_hid2);	
+	mainFrame.add(sec_hid2);
 	JPanel sec_hid3 = new JPanel();
 	sec_hid3.setBounds(480, 850, 40, 40);
 	sec_hid3.setBackground(Color.green);
@@ -409,6 +409,6 @@ public class CreateBlankAreaPanels{
 	sec_hid8.setBounds(505, 850, 40, 40);
 	sec_hid8.setBackground(Color.magenta);
 	mainFrame.add(sec_hid8);
-    }    
-
+  */
+    }
 }

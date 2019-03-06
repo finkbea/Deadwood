@@ -5,6 +5,7 @@ import java.util.List;
 public class Player{
 
   public interface Listener {
+    public void playerMoved(Player p);
     public void changeUpgrade (Player p);
   }
 
@@ -22,6 +23,7 @@ public class Player{
     private String color;
 
     Player(int p_id){
+      listeners = new LinkedList<Listener>();
 	pid = p_id;
 	dollars = 0;
 	credits = 0;
@@ -56,6 +58,21 @@ public class Player{
       break;
   }
     }
+
+    public synchronized void addListener(Listener l){
+      listeners.add(l);
+    }
+    private synchronized void sendChange(){
+      for (Listener l : listeners){
+        l.changeUpgrade(this);
+      }
+    }
+    private synchronized void sendChange2(){
+      for (Listener l : listeners){
+        l.playerMoved(this);
+      }
+    }
+
     public String getColor(){
       return this.color;
     }
@@ -81,6 +98,7 @@ public class Player{
 
     public void move(){
 	justMoved = true;
+  sendChange2();
     }
 
     // Adds currency to player fields

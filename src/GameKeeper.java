@@ -431,6 +431,7 @@ public class GameKeeper{
 	if(current_room.isNeighbor(desired_room) == 1){
 	    temp.updateRoom(desired_room);
 	    temp.move();
+      //PlayerView.playerMoved(board.getCurrentPlayer());
 	}
 	else{
 	    System.out.println("Room is not neighboring room. Try something else.");

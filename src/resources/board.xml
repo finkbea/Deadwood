@@ -7,6 +7,7 @@
       <neighbor name="office" />
     </neighbors>
     <area x="21" y="69" h="115" w="205" />
+    <blankSpace x="210" y = "225" h ="40" w = "40" />
     <takes>
       <take number="3"><area x="36" y="11" h="47" w="47" /></take>
       <take number="2"><area x="89" y="11" h="47" w="47" /></take>
@@ -38,6 +39,7 @@
       <neighbor name="office" />
     </neighbors>
     <area x="27" y="732" h="115" w="205" />
+    <blankSpace x="470" y = "850" h ="40" w = "40" />
     <takes>
       <take number="3"><area x="224" y="764" h="47" w="47" /></take>
       <take number="2"><area x="299" y="764" h="47" w="47" /></take>
@@ -69,6 +71,7 @@
       <neighbor name="Hotel" />
     </neighbors>
     <area x="623" y="734" h="115" w="205" />
+    <blankSpace x="940" y = "685" h ="40" w = "40" />
     <takes>
       <take number="2"><area x="623" y="675" h="47" w="47" /></take>
       <take number="1"><area x="682" y="675" h="47" w="47" /></take>
@@ -91,6 +94,7 @@
       <neighbor name="Church" />
     </neighbors>
     <area x="969" y="740" h="115" w="205" />
+    <blankSpace x="1210" y = "465" h ="40" w = "40" />
     <takes>
       <take number="3"><area x="1005" y="683" h="47" w="47" /></take>
       <take number="2"><area x="1058" y="683" h="47" w="47" /></take>
@@ -122,6 +126,7 @@
       <neighbor name="Saloon" />
     </neighbors>
     <area x="969" y="28" h="115" w="205" />
+    <blankSpace x="1260" y = "192" h ="40" w = "40" />
     <takes>
       <take number="3"><area x="912" y="23" h="47" w="47" /></take>
       <take number="2"><area x="858" y="23" h="47" w="47" /></take>
@@ -153,6 +158,7 @@
       <neighbor name="Train Station" />
     </neighbors>
     <area x="281" y="27" h="115" w="205" />
+    <blankSpace x="480" y = "190" h ="40" w = "40" />
     <takes>
       <take number="1"><area x="442" y="156" h="47" w="47" /></take>
     </takes>
@@ -175,6 +181,7 @@
       <neighbor name="Saloon" />
     </neighbors>
     <area x="370" y="282" h="115" w="205" />
+    <blankSpace x="490" y = "410" h ="40" w = "40" />
     <takes>
       <take number="2"><area x="313" y="277" h="47" w="47" /></take>
       <take number="1"><area x="313" y="330" h="47" w="47" /></take>
@@ -198,6 +205,7 @@
       <neighbor name="Bank" />
     </neighbors>
     <area x="252" y="478" h="115" w="205" />
+    <blankSpace x="470" y = "660" h ="40" w = "40" />
     <takes>
       <take number="2"><area x="472" y="473" h="47" w="47" /></take>
       <take number="1"><area x="525" y="473" h="47" w="47" /></take>
@@ -225,6 +233,7 @@
       <neighbor name="Hotel" />
     </neighbors>
     <area x="623" y="475" h="115" w="205" />
+    <blankSpace x="1040" y = "465" h ="40" w = "40" />
     <takes>
       <take number="1"><area x="840" y="549" h="47" w="47" /></take>
     </takes>
@@ -247,6 +256,7 @@
       <neighbor name="trailer" />
     </neighbors>
     <area x="632" y="280" h="115" w="205" />
+    <blankSpace x="940" y = "225" h ="40" w = "40" />
     <takes>
       <take number="2"><area x="626" y="216" h="47" w="47" /></take>
       <take number="1"><area x="679" y="216" h="47" w="47" /></take>
@@ -269,6 +279,7 @@
       <neighbor name="Hotel" />
     </neighbors>
     <area x="991" y="248" h="194" w="201" />
+    <blankSpace x="1260" y = "242" h ="40" w = "40" />
   </trailer>
   <office>
     <neighbors>
@@ -277,6 +288,7 @@
       <neighbor name="Secret Hideout" />
     </neighbors>
     <area x="9" y="459" h="208" w="209" />
+    <blankSpace x="210" y = "540" h ="40" w = "40" />
     <upgrades>
       <upgrade level="2" currency="dollar" amt="4" >
         <area x="98" y="542" h="19" w="19" />
@@ -311,6 +323,3 @@
     </upgrades>
   </office>
 </board>
-
-
-

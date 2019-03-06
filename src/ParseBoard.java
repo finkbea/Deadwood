@@ -143,7 +143,8 @@ public class ParseBoard {
     ArrayList<Role> list = new ArrayList<Role>();
     for_each(set.getElementsByTagName("part"),
              (Element part) -> {
-               list.add(createRole(part));
+               list.add(createRole(part));;
+
              });
     ArrayList<String> neighbors = new ArrayList<String>();
     for_each(set.getElementsByTagName("neighbor"),
@@ -158,8 +159,16 @@ public class ParseBoard {
                areaList.add(Integer.parseInt(area.getAttribute("h")));
                areaList.add(Integer.parseInt(area.getAttribute("w")));
              });
+    ArrayList<Integer> space = new ArrayList<Integer>();
+    for_each(set.getElementsByTagName("blankSpace"),
+             (Element blankSpace) -> {
+               space.add(Integer.parseInt(blankSpace.getAttribute("x")));
+               space.add(Integer.parseInt(blankSpace.getAttribute("y")));
+               space.add(Integer.parseInt(blankSpace.getAttribute("h")));
+               space.add(Integer.parseInt(blankSpace.getAttribute("w")));
+             });
     System.out.println(Arrays.toString(neighbors.toArray()));
-    Room realSet = new Room(name, takes, takesArea, list, neighbors, areaList);
+    Room realSet = new Room(name, takes, takesArea, list, neighbors, areaList, space);
     return realSet;
   }
 
@@ -170,8 +179,16 @@ public class ParseBoard {
              (Element neighbor) -> {
                 neighbors.add(getNeighbors(neighbor));
               });
-    System.out.println("trailers neighbors:"+Arrays.toString(neighbors.toArray()));
-    Room realTrailer = new Room("Trailers", neighbors);
+    ArrayList<Integer> space = new ArrayList<Integer>();
+    for_each(trailer.getElementsByTagName("blankSpace"),
+              (Element blankSpace) -> {
+                space.add(Integer.parseInt(blankSpace.getAttribute("x")));
+                space.add(Integer.parseInt(blankSpace.getAttribute("y")));
+                space.add(Integer.parseInt(blankSpace.getAttribute("h")));
+                space.add(Integer.parseInt(blankSpace.getAttribute("w")));
+              });
+    //System.out.println("trailers neighbors:"+Arrays.toString(neighbors.toArray()));
+    Room realTrailer = new Room("Trailers", neighbors, space);
     return realTrailer;
   }
 
@@ -188,7 +205,15 @@ public class ParseBoard {
              (Element upgrade) -> {
                upgrades.add(getUpgrades(upgrade));
              });
-    Room realOffice = new Room("Casting Office", neighbors, upgrades);
+    ArrayList<Integer> space = new ArrayList<Integer>();
+    for_each(office.getElementsByTagName("blankSpace"),
+             (Element blankSpace) -> {
+               space.add(Integer.parseInt(blankSpace.getAttribute("x")));
+               space.add(Integer.parseInt(blankSpace.getAttribute("y")));
+               space.add(Integer.parseInt(blankSpace.getAttribute("h")));
+               space.add(Integer.parseInt(blankSpace.getAttribute("w")));
+             });
+    Room realOffice = new Room("Casting Office", neighbors, upgrades, space);
     return realOffice;
   }
 

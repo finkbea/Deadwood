@@ -19,16 +19,16 @@ public class PlayerView extends JPanel implements Player.Listener{
 
   p1 = new JLabel();
   add(p1);
-  p1.setBounds(0, 0, 40, 40);
+  p1.setBounds(1260, 242, 40, 40);
   setVisible(true);
   setFocusable(true);
   }
 
-  private synchronized void playerMoved(){
-
+  public synchronized void playerMoved(Player p){
+    p1.setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
   }
 
-  public void changeUpgrade(Player p){
+  public synchronized void changeUpgrade(Player p){
     PlayerResources r = PlayerResources.getInstance();
     p1.setIcon(r.getIcon(p.getPid(), p.getRank()));
   }

@@ -22,12 +22,10 @@ public class Board{
 	numWrappedScenes = 0;
     }
     public void setCurrentPlayerID(int i){
-      /*for (int j=0; j<player_list.size(); j++){
-        if (player_list.get(j).getPid()==i){
-          currentPlayer=player_list.get(j);
-        }
-      }*/
       this.currentPlayerID=i;
+    }
+    public Player getCurrentPlayer(){
+      return currentPlayer;
     }
     public int getCurrentPlayerID(){
       return this.currentPlayerID;

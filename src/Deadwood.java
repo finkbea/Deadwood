@@ -26,12 +26,12 @@ public class Deadwood{
 	}
 	public void mousePressed(MouseEvent event) {
 	    System.out.println("pressed bottom panel");
-	} 
+	}
 	public void mouseReleased(MouseEvent event) {
 	    System.out.println("released bottom panel");
-	} 
+	}
     }
-    
+
     private Deadwood(Board board) throws IOException{
 	//rView= new RoomView();
 	pView = new PlayerView();
@@ -50,8 +50,6 @@ public class Deadwood{
 	CreateBlankAreaPanels.main(mainFrame);
 	
 	mainFrame.add(pView);
-	pView.changeUpgrade(board.getPlayer(1));
-	pView.changeUpgrade(board.getPlayer(2));
 
 	JPanel boardpanel = makeBoardPanel();
 
@@ -63,7 +61,7 @@ public class Deadwood{
 	mainFrame.setResizable(false);
 	pView.requestFocus();
     }
-    
+
     private static void createSidePanel(JFrame mainFrame, Board board) throws IOException{
 	JPanel sidePanel = new JPanel();
 	sidePanel.setBounds(0, 0, 200, 900);
@@ -91,7 +89,7 @@ public class Deadwood{
 	mainFrame.add(bottomPanel);
     }
 
-    
+
     private static void createBottomLeftPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomRightPanel = new JPanel();
 	bottomRightPanel.setBounds(0, 900, 200, 150);
