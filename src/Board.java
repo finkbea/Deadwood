@@ -44,8 +44,7 @@ public class Board{
 	while(j < room_list.size()){
 	    room  = room_list.get(j);
 	    int i = 0;
-	    while(i < room.getNeighborHelper().size()){
-		System.out.println(room.getName()+": "+getRoom(room.getNeighborHelper().get(i)).getName());
+	    while(i < room.getNeighborHelper().size()){	
 		room.addNeighbor(getRoom(room.getNeighborHelper().get(i)));
 		i++;
 	    }

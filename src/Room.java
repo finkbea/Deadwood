@@ -21,14 +21,7 @@ public class Room{
 	this.neighborHelper=h;
 	this.area=a;
 	this.takesArea=takesArea;
-  this.blankSpace=b;
-	for(int i = 0; i < takesArea.size(); i++){
-	    for(int j = 0; j < takesArea.get(i).size(); j++){
-		System.out.println(takesArea.get(i).get(j));
-	    }
-	    System.out.println();
-	}
-
+	this.blankSpace=b;	
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o,  ArrayList<Integer> b){

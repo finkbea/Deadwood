@@ -167,7 +167,6 @@ public class ParseBoard {
                space.add(Integer.parseInt(blankSpace.getAttribute("h")));
                space.add(Integer.parseInt(blankSpace.getAttribute("w")));
              });
-    System.out.println(Arrays.toString(neighbors.toArray()));
     Room realSet = new Room(name, takes, takesArea, list, neighbors, areaList, space);
     return realSet;
   }
