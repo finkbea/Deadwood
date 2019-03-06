@@ -68,7 +68,8 @@ public class Player{
     }
 
     public synchronized void addListener(Listener l){
-      listeners.add(l);
+      listeners.add(l);      
+      System.out.println("adding listener");
     }
     private synchronized void sendChange(){
       for (Listener l : listeners){
@@ -78,17 +79,21 @@ public class Player{
     private synchronized void sendChange2(){
       for (Listener l : listeners){
         l.playerMoved(this);
+	System.out.println("l");
       }
+      System.out.println("asd");
     }
     private synchronized void sendChange3(){
       for (Listener l : listeners){
         l.roleTaken(this);
       }
     }
+
     //returns the players score
     public int getScore(){
       return this.score;
     }
+
     //returns the players color
     public String getColor(){
       return this.color;
@@ -115,7 +120,7 @@ public class Player{
 
     public void move(){
 	justMoved = true;
-  sendChange2();
+	sendChange2();
     }
 
     // Adds currency to player fields

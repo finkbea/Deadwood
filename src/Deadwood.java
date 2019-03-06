@@ -54,7 +54,7 @@ public class Deadwood{
 	createBottomLeftPanel(mainFrame);
 	CreateBlankAreaPanels.main(mainFrame);
 
-	pView.changeUpgrade(board.getPlayer(2));
+	pView.changeUpgrade(board.getPlayer(1));
 
 	JPanel boardpanel = makeBoardPanel();
 	boardpanel.add(pView, 0);

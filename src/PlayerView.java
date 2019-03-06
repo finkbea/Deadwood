@@ -19,7 +19,7 @@ public class PlayerView extends JPanel implements Player.Listener{
 	    p1 = new JLabel();//new ImageIcon(image));
 	    add(p1, 0);
 	    p1.setBounds(0, 0, 40, 40);
-	    setBounds(1100, 400, 40, 40);
+	    setBounds(1060, 242, 40, 40);
 	    setVisible(true);
 	}
 	catch(Exception e){
@@ -29,10 +29,11 @@ public class PlayerView extends JPanel implements Player.Listener{
     }
 
     public synchronized void playerMoved(Player p){
-	p1.setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
+	setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
+	System.out.println("MOVING PLAYER DICE");
     }
     public synchronized void roleTaken(Player p){
-	p1.setBounds(p.getRole().getArea().get(0), p.getRole().getArea().get(1), 40, 40);
+	setBounds(p.getRole().getArea().get(0), p.getRole().getArea().get(1), 40, 40);
     }
 
     public synchronized void changeUpgrade(Player p){
