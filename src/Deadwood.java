@@ -16,7 +16,7 @@ public class Deadwood{
     private PlayerView pView;
     private Executor executor;
     
-    private static class MyMouseListener implements MouseListener{
+    private class MyMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
 	    System.out.println("clicked bottom panel");
 	}
@@ -68,7 +68,7 @@ public class Deadwood{
     }
 
     //goint to rewrite the second part, each line will be a Jlabel
-    private static void createSidePanel(JFrame mainFrame, Board board) throws IOException {
+    private void createSidePanel(JFrame mainFrame, Board board) throws IOException {
 	JPanel sidePanel = new JPanel();
   sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
@@ -118,7 +118,7 @@ public class Deadwood{
 	mainFrame.add(sidePanel);
     }
 
-    private static void createBottomPanel(JFrame mainFrame) throws IOException{
+    private void createBottomPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomPanel = new JPanel();
 	bottomPanel.setBounds(200, 900, 1200, 150);
 	bottomPanel.setBackground(Color.blue);
@@ -127,7 +127,7 @@ public class Deadwood{
     }
 
 
-    private static void createBottomLeftPanel(JFrame mainFrame) throws IOException{
+    private void createBottomLeftPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomRightPanel = new JPanel();
 	bottomRightPanel.setBounds(0, 900, 200, 150);
 	bottomRightPanel.setBackground(Color.green);
@@ -135,7 +135,7 @@ public class Deadwood{
     }
 
     // Creates all role panels on the rooms
-    private static void createRolePanels(JFrame mainFrame, Board board) throws IOException{
+    private void createRolePanels(JFrame mainFrame, Board board) throws IOException{
 	ArrayList<Room> room_list = board.getRoomList();
 	ArrayList<Role> roles;
 	int x;
@@ -158,7 +158,7 @@ public class Deadwood{
     }
 
     // Makes the panel that displays the Deadwood game background
-    private static JPanel makeBoardPanel() throws IOException{
+    private JPanel makeBoardPanel() throws IOException{
 	JPanel boardpanel = new JPanel(null);
 	BufferedImage image = ImageIO.read(new File("resources/board.jpg"));
 	JLabel label = new JLabel(new ImageIcon(image));
@@ -170,7 +170,7 @@ public class Deadwood{
     }
 
     // Creates the x,y corrdinated panels for each scene and adds them to mainFrame
-    private static void createSceneCardPanels(JFrame mainFrame, Board board) throws IOException{
+    private void createSceneCardPanels(JFrame mainFrame, Board board) throws IOException{
 	ArrayList<Room> room_list = board.getRoomList();
 	int x;
 	int y;
@@ -191,7 +191,7 @@ public class Deadwood{
     }
 
     // Adds the scene role panels to each scene
-    private static void createSceneRolePanels(Room room, JPanel room_panel){
+    private void createSceneRolePanels(Room room, JPanel room_panel){
 	JPanel sceneRole;
 	int x;
 	int y;
