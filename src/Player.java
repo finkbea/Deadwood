@@ -9,6 +9,12 @@ public class Player{
     public void roleTaken(Player p);
     public void changeUpgrade (Player p);
   }
+  public interface SidePanelListener{
+    public void gotDollars(Player p);
+    public void gotCredits(Player p);
+    public void gotRehearse(Player p);
+    public void updateScore(Player p);
+  }
 
     private int pid;
     private int dollars;

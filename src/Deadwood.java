@@ -65,7 +65,7 @@ public class Deadwood{
     }
 
     //goint to rewrite the second part, each line will be a Jlabel
-    private static void createSidePanel(JFrame mainFrame, Board board) throws IOException{
+    private static void createSidePanel(JFrame mainFrame, Board board) throws IOException {
 	JPanel sidePanel = new JPanel();
   sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
@@ -73,33 +73,38 @@ public class Deadwood{
 	sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
 
   JLabel statPanel = new JLabel("Stat Panel:");
-  statPanel.setBounds(20,20,160,40);
+  statPanel.setBounds(20,0,160,30);
   statPanel.setForeground(Color.white);
   sidePanel.add(statPanel);
 	//JLabel playerStats;
 	for (int i =1; i<board.getNumPlayers()+1; i++){
 	    JLabel name = new JLabel("Player: "+board.getPlayer(i).getPid()+"");
-      name.setBounds(20,-40+(100*i),160,20);
+      name.setBounds(20,-70+(100*i),160,15);
       name.setForeground(backGroundColor[i]);
 
       JLabel score = new JLabel("Score: "+board.getPlayer(i).getScore());
-      score.setBounds(20,-20+(100*i),160,20);
+      score.setBounds(20,-55+(100*i),160,15);
       score.setForeground(backGroundColor[i]);
 
+      JLabel rank = new JLabel("Rank: "+board.getPlayer(i).getRank()+"");
+      rank.setBounds(20,-40+(100*i),160,15);
+      rank.setForeground(backGroundColor[i]);
+
       JLabel dollars = new JLabel("Dollars: "+board.getPlayer(i).getDollars());
-      dollars.setBounds(20,0+(100*i),160,20);
+      dollars.setBounds(20,-25+(100*i),160,15);
       dollars.setForeground(backGroundColor[i]);
 
       JLabel credits = new JLabel("Credits: "+board.getPlayer(i).getCredits());
-      credits.setBounds(20,20+(100*i),160,20);
+      credits.setBounds(20,-10+(100*i),160,15);
       credits.setForeground(backGroundColor[i]);
 
       JLabel rehearse = new JLabel("Times Rehearsed: "+board.getPlayer(i).getRehearseTokens());
-      rehearse.setBounds(20,40+(100*i),160,20);
+      rehearse.setBounds(20,5+(100*i),160,15);
       rehearse.setForeground(backGroundColor[i]);
 	    //System.out.println(board.getPlayer(i+1).getPid());
 	    sidePanel.add(name);
       sidePanel.add(score);
+      sidePanel.add(rank);
       sidePanel.add(dollars);
       sidePanel.add(credits);
       sidePanel.add(rehearse);
