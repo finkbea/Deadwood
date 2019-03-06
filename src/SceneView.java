@@ -34,7 +34,4 @@ public class SceneView extends JPanel{
 	setFocusable(true);
     }
 
-    public JLabel getScene(int i){
-	
-    }
 }

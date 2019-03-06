@@ -7,13 +7,15 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import java.util.*;
 import java.awt.BorderLayout;
+import java.util.concurrent.*;
 
 public class Deadwood{
 
     private JFrame mainFrame;
     private RoomView rView;
     private PlayerView pView;
-
+    private Executor executor;
+    
     private static class MyMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
 	    System.out.println("clicked bottom panel");
@@ -22,7 +24,8 @@ public class Deadwood{
 	    System.out.println("exited bottom panel");
 	}
 	public void mouseEntered(MouseEvent event) {
-	    System.out.println("entered bottom panel");
+	    //	    executor.execute(() -> 
+	    //			     System.out.println("entered bottom panel"));
 	}
 	public void mousePressed(MouseEvent event) {
 	    System.out.println("pressed bottom panel");
@@ -34,6 +37,7 @@ public class Deadwood{
 
     private Deadwood(Board board) throws IOException{
 	//rView= new RoomView();
+	executor = Executors.newSingleThreadExecutor();
 	pView = new PlayerView();
 
 	mainFrame = new JFrame();
@@ -49,12 +53,11 @@ public class Deadwood{
 	createBottomLeftPanel(mainFrame);
 	CreateBlankAreaPanels.main(mainFrame);
 
-	mainFrame.add(pView);
-  pView.changeUpgrade(board.getPlayer(1));
-
+	pView.changeUpgrade(board.getPlayer(2));
 
 	JPanel boardpanel = makeBoardPanel();
-
+	boardpanel.add(pView, 0);
+	
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
@@ -156,9 +159,10 @@ public class Deadwood{
 
     // Makes the panel that displays the Deadwood game background
     private static JPanel makeBoardPanel() throws IOException{
-	JPanel boardpanel = new JPanel();
+	JPanel boardpanel = new JPanel(null);
 	BufferedImage image = ImageIO.read(new File("resources/board.jpg"));
 	JLabel label = new JLabel(new ImageIcon(image));
+	label.setBounds(0, 0, 1200, 900);
 	boardpanel.add(label);
 	boardpanel.setBounds(200, 0, 1200, 900);
 
