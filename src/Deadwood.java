@@ -24,8 +24,8 @@ public class Deadwood{
 	    System.out.println("exited bottom panel");
 	}
 	public void mouseEntered(MouseEvent event) {
-	    //	    executor.execute(() -> 
-	    //			     System.out.println("entered bottom panel"));
+	    executor.execute(() -> 
+			     System.out.println("entered bottom panel"));
 	}
 	public void mousePressed(MouseEvent event) {
 	    System.out.println("pressed bottom panel");
@@ -35,6 +35,7 @@ public class Deadwood{
 	}
     }
 
+    // Creates the whole board with all necessary panels
     private Deadwood(Board board) throws IOException{
 	//rView= new RoomView();
 	executor = Executors.newSingleThreadExecutor();
@@ -118,6 +119,7 @@ public class Deadwood{
 	mainFrame.add(sidePanel);
     }
 
+    // Creates bottom panel
     private void createBottomPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomPanel = new JPanel();
 	bottomPanel.setBounds(200, 900, 1200, 150);
@@ -126,7 +128,7 @@ public class Deadwood{
 	mainFrame.add(bottomPanel);
     }
 
-
+    // Creates bottom left corner panel
     private void createBottomLeftPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomRightPanel = new JPanel();
 	bottomRightPanel.setBounds(0, 900, 200, 150);
