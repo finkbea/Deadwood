@@ -13,6 +13,7 @@ public class PlayerView extends JPanel implements Player.Listener{
 
     public PlayerView(){
 	super(null);
+  setLayout(null);
 
 	try{
 	    //BufferedImage image = ImageIO.read(new File("resources/dice/b1.png"));
@@ -28,15 +29,22 @@ public class PlayerView extends JPanel implements Player.Listener{
 	}
     }
 
-    public synchronized void playerMoved(Player p){
-	setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
-	System.out.println("MOVING PLAYER DICE");
+    public void playerMoved(Player p){
+	/*p1.setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
+  setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);*/
+
+/*
+  setBounds(1210, 465, 40, 40);
+    p1.setBounds(1000, 240, 40, 40);
+  changeUpgrade(p);
+	System.out.println("MOVING PLAYER DICE");*/
     }
-    public synchronized void roleTaken(Player p){
+
+    public void roleTaken(Player p){
 	setBounds(p.getRole().getArea().get(0), p.getRole().getArea().get(1), 40, 40);
     }
 
-    public synchronized void changeUpgrade(Player p){
+    public void changeUpgrade(Player p){
 	PlayerResources r = PlayerResources.getInstance();
 	p1.setIcon(r.getIcon(p.getPid(), p.getRank()));
     }

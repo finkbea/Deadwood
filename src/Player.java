@@ -10,8 +10,6 @@ public class Player{
     public void changeUpgrade (Player p);
   }
   public interface SidePanelListener{
-    public void gotDollars(Player p);
-    public void gotCredits(Player p);
     public void gotRehearse(Player p);
     public void updateScore(Player p);
   }
@@ -68,22 +66,19 @@ public class Player{
     }
 
     public synchronized void addListener(Listener l){
-      listeners.add(l);      
-      System.out.println("adding listener");
+      listeners.add(l);
     }
-    private synchronized void sendChange(){
+    private synchronized void sendChangeUpgrade(){
       for (Listener l : listeners){
         l.changeUpgrade(this);
       }
     }
-    private synchronized void sendChange2(){
+    private synchronized void sendChangeMove(){
       for (Listener l : listeners){
         l.playerMoved(this);
-	System.out.println("l");
       }
-      System.out.println("asd");
     }
-    private synchronized void sendChange3(){
+    private synchronized void sendChangeRole(){
       for (Listener l : listeners){
         l.roleTaken(this);
       }
@@ -120,7 +115,7 @@ public class Player{
 
     public void move(){
 	justMoved = true;
-	sendChange2();
+	sendChangeMove();
     }
 
     // Adds currency to player fields
@@ -210,7 +205,7 @@ public class Player{
 
     public void setRole(Role role){
 	_role = role;
-  sendChange3();
+  sendChangeRole();
     }
 
     public void setRoleType(int type){

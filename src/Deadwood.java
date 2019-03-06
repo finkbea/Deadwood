@@ -15,7 +15,7 @@ public class Deadwood{
     private RoomView rView;
     private PlayerView pView;
     private Executor executor;
-    
+
     private class MyMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
 	    System.out.println("clicked bottom panel");
@@ -24,7 +24,7 @@ public class Deadwood{
 	    System.out.println("exited bottom panel");
 	}
 	public void mouseEntered(MouseEvent event) {
-	    executor.execute(() -> 
+	    executor.execute(() ->
 			     System.out.println("entered bottom panel"));
 	}
 	public void mousePressed(MouseEvent event) {
@@ -40,6 +40,9 @@ public class Deadwood{
 	//rView= new RoomView();
 	executor = Executors.newSingleThreadExecutor();
 	pView = new PlayerView();
+  for (int i =0; i <board.getPlayerListSize(); i++){
+    board.getPlayer(i).addListener(pView);
+  }
 
 	mainFrame = new JFrame();
 	mainFrame.setTitle("Deadwood");
@@ -58,7 +61,7 @@ public class Deadwood{
 
 	JPanel boardpanel = makeBoardPanel();
 	boardpanel.add(pView, 0);
-	
+
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
@@ -105,7 +108,6 @@ public class Deadwood{
       JLabel rehearse = new JLabel("Times Rehearsed: "+board.getPlayer(i).getRehearseTokens());
       rehearse.setBounds(20,5+(100*i),160,15);
       rehearse.setForeground(backGroundColor[i]);
-	    //System.out.println(board.getPlayer(i+1).getPid());
 	    sidePanel.add(name);
       sidePanel.add(score);
       sidePanel.add(rank);
@@ -113,9 +115,6 @@ public class Deadwood{
       sidePanel.add(credits);
       sidePanel.add(rehearse);
 	}
-	//JLabel label2 = new JLabel("Stats Page");
-	//sidePanel.add(label);
-	//sidePanel.add(label2);
 	mainFrame.add(sidePanel);
     }
 
