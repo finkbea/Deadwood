@@ -20,22 +20,19 @@ public class Deadwood{
     private static Executor UI_Executor;
     private static Executor Game_Executor;
 
-    private class MyMouseListener implements MouseListener{
+    // JUST A TEST, GET RID OF THIS LATER....
+    private class ButtonMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
-	    System.out.println("clicked bottom panel");
+	    System.out.println("clicked bUTTON");
 	}
 	public void mouseExited(MouseEvent event) {
-	    System.out.println("exited bottom panel");
 	}
 	public void mouseEntered(MouseEvent event) {
-	    UI_Executor.execute(() ->
-				System.out.println("entered bottom panel"));
 	}
 	public void mousePressed(MouseEvent event) {
-	    System.out.println("pressed bottom panel");
+	    System.out.println("pressed BUTTON");
 	}
 	public void mouseReleased(MouseEvent event) {
-	    System.out.println("released bottom panel");
 	}
     }
 
@@ -104,7 +101,7 @@ public class Deadwood{
 	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
 	//sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
 	sidePanel.setBackground(Color.decode("#0F2043"));
-	
+	 
 	JLabel statPanel = new JLabel("Stat Panel:");
 	statPanel.setBounds(20,0,160,30);
 	statPanel.setForeground(Color.white);
@@ -149,7 +146,28 @@ public class Deadwood{
 	JPanel bottomPanel = new JPanel();
 	bottomPanel.setBounds(200, 900, 1200, 200);
 	bottomPanel.setBackground(Color.decode("#D5A458"));
-	bottomPanel.addMouseListener(new MyMouseListener());
+	bottomPanel.setLayout(null);
+	
+	JButton b = new JButton();
+	b.setBounds(535, 60, 60, 60);
+	b.setVisible(true);
+	bottomPanel.add(b);
+	b.setLayout(null);
+	JLabel act = new JLabel("Act");
+	act.setBounds(20, 22, 150, 15);
+	b.add(act);
+	b.addMouseListener(new ButtonMouseListener());
+
+	JButton b2 = new JButton();
+	b2.setBounds(605, 60, 75, 60);
+	b2.setVisible(true);
+	bottomPanel.add(b2);
+	b2.setLayout(null);
+	JLabel rehearse = new JLabel("Rehearse");
+	rehearse.setBounds(5, 23, 100, 10);
+	b2.add(rehearse);
+	b2.addMouseListener(new ButtonMouseListener());
+	
 	mainFrame.add(bottomPanel);
     }
 

@@ -7,9 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import java.util.*; 
 
-public class SceneView extends JPanel{
+public class SceneView extends JPanel {
 
-    private JLabel scene1;
+    private JLabel scene;
 
     SceneView(){
 	super(null);
