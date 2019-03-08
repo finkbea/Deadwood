@@ -6,38 +6,35 @@ import javax.imageio.*;
 import java.io.*;
 import java.awt.image.*;
 import java.awt.Color;
+import java.util.concurrent.*;
+import java.util.ArrayList;
 
 public class PlayerView extends JPanel implements Player.Listener{
 
     private JLabel p1;
 
-    public PlayerView(){
+    public PlayerView(PlayerResources r, int playerNum){	
 	super(null);
-  setLayout(null);
-
-	try{
-	    //BufferedImage image = ImageIO.read(new File("resources/dice/b1.png"));
-	    p1 = new JLabel();//new ImageIcon(image));
-	    add(p1, 0);
-	    p1.setBounds(0, 0, 40, 40);
-	    setBounds(1060, 242, 40, 40);
-	    setVisible(true);
-	}
-	catch(Exception e){
-	    e.printStackTrace();
-	    System.exit(1);
-	}
+	setLayout(null);
+	
+	p1 = new JLabel();
+	add(p1, 0);
+	p1.setBounds(0, 0, 40, 40);
+	setBounds(1060, 242, 40, 40);
+	p1.setIcon(r.getIcon(playerNum, 1));
+	p1.setVisible(true);				
     }
 
     public void playerMoved(Player p){
-	/*p1.setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
-  setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);*/
-
-/*
-  setBounds(1210, 465, 40, 40);
-    p1.setBounds(1000, 240, 40, 40);
-  changeUpgrade(p);
-	System.out.println("MOVING PLAYER DICE");*/
+	//p1.setBounds(p.getCurrentRoom().getBlankSpace().get(0), p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
+	//p2.setBounds(500, 500,40,40);
+	setBounds(p.getCurrentRoom().getBlankSpace().get(0) - 200, p.getCurrentRoom().getBlankSpace().get(1), 40, 40);
+	
+	//setLocation(1000, 600);
+	//setBounds(1210, 465, 40, 40);
+	//p1.setBounds(1000, 240, 40, 40);
+	//changeUpgrade(p);
+	System.out.println("MOVING PLAYER DICE");
     }
 
     public void roleTaken(Player p){

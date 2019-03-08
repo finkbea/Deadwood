@@ -12,9 +12,11 @@ import java.util.concurrent.*;
 public class Deadwood{
 
     private JFrame mainFrame;
+    private PlayerResources r;
     private RoomView rView;
-    private PlayerView pView;
-    private Executor executor;
+    private ArrayList<PlayerView> playerViewList;
+    private static Executor UI_Executor;
+    private static Executor Game_Executor;
 
     private class MyMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
@@ -24,7 +26,7 @@ public class Deadwood{
 	    System.out.println("exited bottom panel");
 	}
 	public void mouseEntered(MouseEvent event) {
-	    executor.execute(() ->
+	    UI_Executor.execute(() ->
 			     System.out.println("entered bottom panel"));
 	}
 	public void mousePressed(MouseEvent event) {
@@ -36,13 +38,8 @@ public class Deadwood{
     }
 
     // Creates the whole board with all necessary panels
-    private Deadwood(Board board) throws IOException{
-	//rView= new RoomView();
-	executor = Executors.newSingleThreadExecutor();
-	pView = new PlayerView();
-  for (int i =0; i <board.getPlayerListSize(); i++){
-    board.getPlayer(i).addListener(pView);
-  }
+    private Deadwood(Board board) throws IOException{	
+	setupPlayerViews(board, board.getNumPlayers());	
 
 	mainFrame = new JFrame();
 	mainFrame.setTitle("Deadwood");
@@ -57,24 +54,45 @@ public class Deadwood{
 	createBottomLeftPanel(mainFrame);
 	CreateBlankAreaPanels.main(mainFrame);
 
-	pView.changeUpgrade(board.getPlayer(1));
-
 	JPanel boardpanel = makeBoardPanel();
-	boardpanel.add(pView, 0);
-
+	for(int i = 0; i < playerViewList.size(); i++){
+	    boardpanel.add(playerViewList.get(i), 0);
+	}
+	
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1050);
 
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
-	pView.requestFocus();
+
+	for(int i = 0; i < playerViewList.size(); i++){
+	    playerViewList.get(i).requestFocus();
+	}
+	playerViewList.get(0).changeUpgrade(board.getPlayer(0));
     }
 
+    // Initializes all player views and sets their icon
+    private void setupPlayerViews(Board board, int numPlayers){
+	r = PlayerResources.getInstance();
+	playerViewList = new ArrayList<PlayerView>();
+	PlayerView pv;
+	int i = 1;
+	while(i < numPlayers){
+	    pv = new PlayerView(r, i);
+	    board.getPlayer(i).addListener(pv);
+	    playerViewList.add(pv);
+	    i++;
+	}
+	pv = new PlayerView(r, i);
+	board.getPlayer(i).addListener(pv);
+	playerViewList.add(pv);
+    }
+    
     //goint to rewrite the second part, each line will be a Jlabel
     private void createSidePanel(JFrame mainFrame, Board board) throws IOException {
 	JPanel sidePanel = new JPanel();
-  sidePanel.setLayout(null);
+	sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
 	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
 	sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
@@ -151,6 +169,7 @@ public class Deadwood{
 		y = roles.get(j).getArea().get(1);
 		role = new JPanel();
 		role.setBounds(x, y, 46, 46);
+		role.setBackground(Color.red);
 		mainFrame.add(role);
 		j++;
 	    }
@@ -218,8 +237,8 @@ public class Deadwood{
     public static void main(String args[]){
 	if(args.length != 1 || Integer.parseInt(args[0]) < 2 || Integer.parseInt(args[0]) > 8){
 	    System.out.println("Please specify a correct number of players");
-	}
-	else{
+	}	
+	else{	    
 	    int num_players = Integer.parseInt(args[0]);
 	    Board board = new Board(num_players);
 	    setupGame(num_players, board);
@@ -230,10 +249,13 @@ public class Deadwood{
 	    catch(IOException e){
 		e.printStackTrace();
 	    }
-	    GameKeeper.startGame(board);
+	    UI_Executor = Executors.newSingleThreadExecutor();
+	    Game_Executor = Executors.newSingleThreadExecutor();
+	    	    
+	    Game_Executor.execute(() -> GameKeeper.startGame(board));
 	}
     }
-
+    
     // Adds players to Board object and calls setupRooms()
     private static void setupGame(int num_players, Board board){
 	int i = 0;

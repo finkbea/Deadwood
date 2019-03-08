@@ -205,7 +205,7 @@ public class Player{
 
     public void setRole(Role role){
 	_role = role;
-  sendChangeRole();
+	sendChangeRole();
     }
 
     public void setRoleType(int type){

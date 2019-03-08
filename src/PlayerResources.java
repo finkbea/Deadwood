@@ -42,9 +42,9 @@ public class PlayerResources{
     }
   }
 
-  public ImageIcon getIcon(int id, int rank){
-    int x =rank + ((id-1)*6)-1;
-    return big[x];
+  public ImageIcon getIcon(int id, int rank){      
+      int x =rank + ((id-1)*6)-1;    
+      return big[x];
   }
 
   public static PlayerResources getInstance() {
