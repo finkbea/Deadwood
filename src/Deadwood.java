@@ -29,7 +29,7 @@ public class Deadwood{
 	}
 	public void mouseEntered(MouseEvent event) {
 	    UI_Executor.execute(() ->
-			     System.out.println("entered bottom panel"));
+				System.out.println("entered bottom panel"));
 	}
 	public void mousePressed(MouseEvent event) {
 	    System.out.println("pressed bottom panel");
@@ -64,7 +64,7 @@ public class Deadwood{
 	
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
-	mainFrame.setSize(1400, 1050);
+	mainFrame.setSize(1400, 1100);
 
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
@@ -102,43 +102,44 @@ public class Deadwood{
 	sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
 	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
-	sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
-
-  JLabel statPanel = new JLabel("Stat Panel:");
-  statPanel.setBounds(20,0,160,30);
-  statPanel.setForeground(Color.white);
-  sidePanel.add(statPanel);
+	//sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
+	sidePanel.setBackground(Color.decode("#0F2043"));
+	
+	JLabel statPanel = new JLabel("Stat Panel:");
+	statPanel.setBounds(20,0,160,30);
+	statPanel.setForeground(Color.white);
+	sidePanel.add(statPanel);
 	//JLabel playerStats;
 	for (int i =1; i<board.getNumPlayers()+1; i++){
 	    JLabel name = new JLabel("Player: "+board.getPlayer(i).getPid()+"");
-      name.setBounds(20,-70+(100*i),160,15);
-      name.setForeground(backGroundColor[i]);
+	    name.setBounds(20,-70+(100*i),160,15);
+	    name.setForeground(backGroundColor[i]);
 
-      JLabel score = new JLabel("Score: "+board.getPlayer(i).getScore());
-      score.setBounds(20,-55+(100*i),160,15);
-      score.setForeground(backGroundColor[i]);
+	    JLabel score = new JLabel("Score: "+board.getPlayer(i).getScore());
+	    score.setBounds(20,-55+(100*i),160,15);
+	    score.setForeground(backGroundColor[i]);
 
-      JLabel rank = new JLabel("Rank: "+board.getPlayer(i).getRank()+"");
-      rank.setBounds(20,-40+(100*i),160,15);
-      rank.setForeground(backGroundColor[i]);
+	    JLabel rank = new JLabel("Rank: "+board.getPlayer(i).getRank()+"");
+	    rank.setBounds(20,-40+(100*i),160,15);
+	    rank.setForeground(backGroundColor[i]);
 
-      JLabel dollars = new JLabel("Dollars: "+board.getPlayer(i).getDollars());
-      dollars.setBounds(20,-25+(100*i),160,15);
-      dollars.setForeground(backGroundColor[i]);
+	    JLabel dollars = new JLabel("Dollars: "+board.getPlayer(i).getDollars());
+	    dollars.setBounds(20,-25+(100*i),160,15);
+	    dollars.setForeground(backGroundColor[i]);
 
-      JLabel credits = new JLabel("Credits: "+board.getPlayer(i).getCredits());
-      credits.setBounds(20,-10+(100*i),160,15);
-      credits.setForeground(backGroundColor[i]);
+	    JLabel credits = new JLabel("Credits: "+board.getPlayer(i).getCredits());
+	    credits.setBounds(20,-10+(100*i),160,15);
+	    credits.setForeground(backGroundColor[i]);
 
-      JLabel rehearse = new JLabel("Times Rehearsed: "+board.getPlayer(i).getRehearseTokens());
-      rehearse.setBounds(20,5+(100*i),160,15);
-      rehearse.setForeground(backGroundColor[i]);
+	    JLabel rehearse = new JLabel("Times Rehearsed: "+board.getPlayer(i).getRehearseTokens());
+	    rehearse.setBounds(20,5+(100*i),160,15);
+	    rehearse.setForeground(backGroundColor[i]);
 	    sidePanel.add(name);
-      sidePanel.add(score);
-      sidePanel.add(rank);
-      sidePanel.add(dollars);
-      sidePanel.add(credits);
-      sidePanel.add(rehearse);
+	    sidePanel.add(score);
+	    sidePanel.add(rank);
+	    sidePanel.add(dollars);
+	    sidePanel.add(credits);
+	    sidePanel.add(rehearse);
 	}
 	mainFrame.add(sidePanel);
     }
@@ -146,8 +147,8 @@ public class Deadwood{
     // Creates bottom panel
     private void createBottomPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomPanel = new JPanel();
-	bottomPanel.setBounds(200, 900, 1200, 150);
-	bottomPanel.setBackground(Color.blue);
+	bottomPanel.setBounds(200, 900, 1200, 200);
+	bottomPanel.setBackground(Color.decode("#D5A458"));
 	bottomPanel.addMouseListener(new MyMouseListener());
 	mainFrame.add(bottomPanel);
     }
@@ -155,8 +156,8 @@ public class Deadwood{
     // Creates bottom left corner panel
     private void createBottomLeftPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomRightPanel = new JPanel();
-	bottomRightPanel.setBounds(0, 900, 200, 150);
-	bottomRightPanel.setBackground(Color.green);
+	bottomRightPanel.setBounds(0, 900, 200, 200);
+	bottomRightPanel.setBackground(Color.decode("#79CEDC"));
 	mainFrame.add(bottomRightPanel);
     }
 
