@@ -14,6 +14,7 @@ public class Deadwood{
     private JFrame mainFrame;
     private PlayerResources r;
     private SceneResources s;
+    private ShotCounterResources sc;
     private RoomView rView;
     private ArrayList<PlayerView> playerViewList;
     private static Executor UI_Executor;
@@ -49,7 +50,7 @@ public class Deadwood{
 	mainFrame.setLayout(null);
 
 	createSceneCardPanels(mainFrame, board);
-	CreateShotCountersPanels.main(mainFrame);
+	CreateShotCountersPanels.main(mainFrame, sc);
 	createRolePanels(mainFrame, board);
 	createSidePanel(mainFrame, board);
 	createBottomPanel(mainFrame);
