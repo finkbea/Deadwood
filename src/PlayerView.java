@@ -45,4 +45,8 @@ public class PlayerView extends JPanel implements Player.Listener{
 	PlayerResources r = PlayerResources.getInstance();
 	p1.setIcon(r.getIcon(p.getPid(), p.getRank()));
     }
+
+    public void changeMoney(Player p){
+	//score.setText("ads");
+    }
 }

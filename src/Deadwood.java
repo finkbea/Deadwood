@@ -94,7 +94,7 @@ public class Deadwood{
     }
     
     //goint to rewrite the second part, each line will be a Jlabel
-    private void createSidePanel(JFrame mainFrame, Board board) throws IOException {
+    public void createSidePanel(JFrame mainFrame, Board board) throws IOException {
 	JPanel sidePanel = new JPanel();
 	sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
@@ -141,7 +141,7 @@ public class Deadwood{
 	mainFrame.add(sidePanel);
     }
 
-    // Creates bottom panel
+    // Creates bottom panel with buttons
     private void createBottomPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomPanel = new JPanel();
 	bottomPanel.setBounds(200, 900, 1200, 200);

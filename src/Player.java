@@ -8,6 +8,7 @@ public class Player{
     public void playerMoved(Player p);
     public void roleTaken(Player p);
     public void changeUpgrade (Player p);
+    public void changeMoney(Player p);
   }
   public interface SidePanelListener{
     public void gotRehearse(Player p);
@@ -84,6 +85,12 @@ public class Player{
       }
     }
 
+    private synchronized void sendChangeMoney(){
+      for (Listener l : listeners){
+        l.changeMoney(this);
+      }
+    }
+    
     //returns the players score
     public int getScore(){
       return this.score;
@@ -119,13 +126,14 @@ public class Player{
     }
 
     // Adds currency to player fields
-    public void addCurrency(int money_type, int amount){
+    public void addCurrency(int money_type, int amount){	
 	if(money_type == 0){
 	    dollars += amount;
 	}
 	else{
 	    credits += amount;
 	}
+	sendChangeMoney();
     }
 
     public int getPid(){
