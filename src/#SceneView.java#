@@ -11,6 +11,14 @@ public class SceneView extends JPanel{
 
     private JLabel scene1;
 
+    private JLabel scene4;
+    private JLabel scene5;
+    private JLabel scene6;
+    private JLabel scene7;
+    private JLabel scene8;
+    private JLabel scene9;
+    private JLabel scene10;
+
     SceneView(){
 	super(null);
 

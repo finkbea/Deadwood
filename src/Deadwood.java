@@ -13,6 +13,7 @@ public class Deadwood{
 
     private JFrame mainFrame;
     private PlayerResources r;
+    private SceneResources s;
     private RoomView rView;
     private ArrayList<PlayerView> playerViewList;
     private static Executor UI_Executor;
@@ -38,9 +39,10 @@ public class Deadwood{
     }
 
     // Creates the whole board with all necessary panels
-    private Deadwood(Board board) throws IOException{	
+    private Deadwood(Board board) throws IOException{		
 	setupPlayerViews(board, board.getNumPlayers());	
-
+	setupSceneViews(board);
+	
 	mainFrame = new JFrame();
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,9 +71,13 @@ public class Deadwood{
 	for(int i = 0; i < playerViewList.size(); i++){
 	    playerViewList.get(i).requestFocus();
 	}
-	playerViewList.get(0).changeUpgrade(board.getPlayer(0));
     }
 
+    // Initializes all scene views and sets icons
+    private void setupSceneViews(Board board){
+	s = SceneResources.getInstance();
+    }
+    
     // Initializes all player views and sets their icon
     private void setupPlayerViews(Board board, int numPlayers){
 	r = PlayerResources.getInstance();
@@ -203,6 +209,7 @@ public class Deadwood{
 		y = room_list.get(i).getArea().get(1);
 		room = new JPanel();
 		room.setBounds(x, y, 205, 115);
+		room.setBackground(Color.green);
 		createSceneRolePanels(room_list.get(i), room);
 		mainFrame.add(room);
 	    }
