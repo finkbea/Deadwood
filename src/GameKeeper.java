@@ -52,7 +52,7 @@ public class GameKeeper{
 	    printTurnOptions(board, turn);
 	    sc = new Scanner(System.in);
 	    command = sc.nextLine();
-	    turnEnd = (inputAdmin(command, turn, board));
+	    turnEnd = (inputAdmin(command, turn, board, false));
 	}
     }
 
@@ -85,37 +85,42 @@ public class GameKeeper{
 
     /* Responsible for handling all the input strings on a players turn. If the command
        is not recognized, a 'bad input' message is printed out. */
-    private static int inputAdmin(String command, int turn, Board board){
+    public static int inputAdmin(String command, int turn, Board board, boolean isTurnOver){
 	int turnEnd = 0;
 
-	if(command.equals("end")){
-	    turnEnd = endInput(turn);
-	}
-	else if(command.equals("who")){
-	    whoInput(command, turn, board);
-	}
-	else if(command.equals("where")){
-	    whereInput(command, turn, board);
-	}
-	else if(command.contains("move")){
-	    moveInput(command, turn, board);
-	}
-	else if(command.equals("rehearse")){
-	    rehearseInput(command, turn, board);
-	}
-	else if(command.equals("act")){
-	    actInput(command, turn, board);
-	}
-	else if(command.contains("upgrade")){
-	    upgradeInput(command, turn, board);
-	}
-	else if(command.contains("work")){
-	    workInput(command, turn, board);
+	if(isTurnOver == false){
+	    if(command.equals("end")){
+		turnEnd = endInput(turn);
+	    }
+	    else if(command.equals("who")){
+		whoInput(command, turn, board);
+	    }
+	    else if(command.equals("where")){
+		whereInput(command, turn, board);
+	    }
+	    else if(command.contains("move")){
+		moveInput(command, turn, board);
+	    }
+	    else if(command.equals("rehearse")){
+		rehearseInput(command, turn, board);
+	    }
+	    else if(command.equals("act")){
+		actInput(command, turn, board);
+	    }
+	    else if(command.contains("upgrade")){
+		upgradeInput(command, turn, board);
+	    }
+	    else if(command.contains("work")){
+		workInput(command, turn, board);
+	    }
+	    else{
+		System.out.println("Command not recognized, please try again. ");
+	    }
 	}
 	else{
-	    System.out.println("Command not recognized, please try again. ");
+	    turnEnd = 1;
 	}
-	System.out.println(turnEnd);
+
 	return(turnEnd);
     }
 
@@ -133,6 +138,7 @@ public class GameKeeper{
 	    board.getPlayer(pnum).resetAction();
 	    board.getPlayer(pnum).resetMove();
 	    board.getPlayer(pnum).updateRoom(board.getTrailers());
+	    board.getPlayer(pnum).getCurrentRoom().addPlayer(temp);
 	    board.getPlayer(pnum).resetRehearseTokens();
 	    board.getPlayer(pnum).resetRole();
 	    pnum++;
@@ -435,7 +441,8 @@ public class GameKeeper{
 	if(current_room.isNeighbor(desired_room) == 1){
 	    temp.updateRoom(desired_room);
 	    temp.move();
-      //PlayerView.playerMoved(board.getCurrentPlayer());
+	    desired_room.addPlayer(temp);
+	    current_room.removePlayer(temp);
 	}
 	else{
 	    System.out.println("Room is not neighboring room. Try something else.");

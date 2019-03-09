@@ -34,6 +34,6 @@ public class Controller extends JPanel {
     }
 
     public void endClick(){
-	executor.execute(() -> GameKeeper.endInput(board.getCurrentPlayerID()));
+	executor.execute(() -> GameKeeper.inputAdmin("end",board.getCurrentPlayerID(), board, true));
     }
 }
