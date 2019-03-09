@@ -21,22 +21,6 @@ public class Deadwood{
     private static Executor UI_Executor;
     private static Executor Game_Executor;
 
-    // JUST A TEST, GET RID OF THIS LATER....
-    private class ButtonMouseListener implements MouseListener{
-	public void mouseClicked(MouseEvent event){
-	    System.out.println("clicked bUTTON");
-	}
-	public void mouseExited(MouseEvent event) {
-	}
-	public void mouseEntered(MouseEvent event) {
-	}
-	public void mousePressed(MouseEvent event) {
-	    System.out.println("pressed BUTTON");
-	}
-	public void mouseReleased(MouseEvent event) {
-	}
-    }
-
     // Creates the whole board with all necessary panels
     private Deadwood(Board board) throws IOException{
 	setupPlayerViews(board, board.getNumPlayers());
@@ -96,82 +80,9 @@ public class Deadwood{
 	playerViewList.add(pv);
     }
 
-    //goint to rewrite the second part, each line will be a Jlabel
-    /*public void createSidePanel(JFrame mainFrame, Board board) throws IOException {
-	JPanel sidePanel = new JPanel();
-	sidePanel.setLayout(null);
-	sidePanel.setBounds(0, 0, 200, 900);
-	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
-	//sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
-	sidePanel.setBackground(Color.decode("#0F2043"));
-
-	JLabel statPanel = new JLabel("Stat Panel:");
-	statPanel.setBounds(20,0,160,30);
-	statPanel.setForeground(Color.white);
-	sidePanel.add(statPanel);
-	//JLabel playerStats;
-	for (int i =1; i<board.getNumPlayers()+1; i++){
-	    JLabel name = new JLabel("Player: "+board.getPlayer(i).getPid()+"");
-	    name.setBounds(20,-70+(100*i),160,15);
-	    name.setForeground(backGroundColor[i]);
-
-	    JLabel score = new JLabel("Score: "+board.getPlayer(i).getScore());
-	    score.setBounds(20,-55+(100*i),160,15);
-	    score.setForeground(backGroundColor[i]);
-
-	    JLabel rank = new JLabel("Rank: "+board.getPlayer(i).getRank()+"");
-	    rank.setBounds(20,-40+(100*i),160,15);
-	    rank.setForeground(backGroundColor[i]);
-
-	    JLabel dollars = new JLabel("Dollars: "+board.getPlayer(i).getDollars());
-	    dollars.setBounds(20,-25+(100*i),160,15);
-	    dollars.setForeground(backGroundColor[i]);
-
-	    JLabel credits = new JLabel("Credits: "+board.getPlayer(i).getCredits());
-	    credits.setBounds(20,-10+(100*i),160,15);
-	    credits.setForeground(backGroundColor[i]);
-
-	    JLabel rehearse = new JLabel("Times Rehearsed: "+board.getPlayer(i).getRehearseTokens());
-	    rehearse.setBounds(20,5+(100*i),160,15);
-	    rehearse.setForeground(backGroundColor[i]);
-	    sidePanel.add(name);
-	    sidePanel.add(score);
-	    sidePanel.add(rank);
-	    sidePanel.add(dollars);
-	    sidePanel.add(credits);
-	    sidePanel.add(rehearse);
-	}
-	mainFrame.add(sidePanel);
-}*/
-
     // Creates bottom panel with buttons
     private void createBottomPanel(JFrame mainFrame) throws IOException{
-	JPanel bottomPanel = new JPanel();
-	bottomPanel.setBounds(200, 900, 1200, 200);
-	bottomPanel.setBackground(Color.decode("#D5A458"));
-	bottomPanel.setLayout(null);
-
-	JButton b = new JButton();
-	b.setBounds(535, 60, 60, 60);
-	b.setVisible(true);
-	bottomPanel.add(b);
-	b.setLayout(null);
-	JLabel act = new JLabel("Act");
-	act.setBounds(20, 22, 150, 15);
-	b.add(act);
-	b.addMouseListener(new ButtonMouseListener());
-
-	JButton b2 = new JButton();
-	b2.setBounds(605, 60, 75, 60);
-	b2.setVisible(true);
-	bottomPanel.add(b2);
-	b2.setLayout(null);
-	JLabel rehearse = new JLabel("Rehearse");
-	rehearse.setBounds(5, 23, 100, 10);
-	b2.add(rehearse);
-	b2.addMouseListener(new ButtonMouseListener());
-
-	mainFrame.add(bottomPanel);
+	BottomPanel bp = new BottomPanel(mainFrame);
     }
 
     // Creates bottom left corner panel
