@@ -89,8 +89,7 @@ public class GameKeeper{
 	int turnEnd = 0;
 
 	if(command.equals("end")){
-	    turnEnd = 1;
-	    System.out.println("Player "+turn+" turn is over.");
+	    turnEnd = endInput(turn);
 	}
 	else if(command.equals("who")){
 	    whoInput(command, turn, board);
@@ -116,10 +115,15 @@ public class GameKeeper{
 	else{
 	    System.out.println("Command not recognized, please try again. ");
 	}
-
+	System.out.println(turnEnd);
 	return(turnEnd);
     }
 
+    public static int endInput(int turn){
+	System.out.println("Player " + turn+" turn is over.");
+	return 1;
+    }
+    
     /* Used on game startup and new days. Puts players back in Trailers,
        resets each players rehearse tokens, and resets all roles. */
     private static void resetPlayers(Board board){
@@ -423,7 +427,7 @@ public class GameKeeper{
     /* Grabs the desired room that the player wants to move to and first checks if
        it is a neighboring room of their current room. If it is, it updates the players
        room. If not, it prints an error message. */
-    private static void moveInput(String command, int turn, Board board){
+    public static void moveInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	String desired_room_string = getDesiredRoom(command);
 	Room desired_room = board.getRoom(desired_room_string);
@@ -439,7 +443,7 @@ public class GameKeeper{
     }
 
     // Adds a rehearse token to player
-    private static void rehearseInput(String command, int turn, Board board){
+    public static void rehearseInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	temp.rehearse();
 	temp.useAction();
@@ -448,7 +452,7 @@ public class GameKeeper{
     /* First checks if player is in role. If not, prints error. Then rolls dice
        to check for success or fail and calculates currency accordingly depending
        on main role or side role. */
-    private static void actInput(String command, int turn, Board board){
+    public static void actInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	if(temp.getCurrentRoom().getShotCounters() > 0){
 	    if(temp.getRole() == null){
@@ -481,7 +485,7 @@ public class GameKeeper{
     /* Upgrades current player to desired rank. First checks that they're in casting
        office, then checks for 2 <= rank <= 6, then checks if there is enough money.
        Prints error messages accordingly. */
-    private static void upgradeInput(String command, int turn, Board board){
+    public static void upgradeInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	if(!temp.getCurrentRoom().getName().equals("Casting Office")){
 	    System.out.println("Not in Casting Office. Try again.");
@@ -508,7 +512,7 @@ public class GameKeeper{
     /* Updates player to be working in desired role. First checks if the role exists, then if
        the player rank is >= the role rank, then checks if the role is not already taken. Prints
        error messages accordingly. */
-    private static void workInput(String command, int turn, Board board){
+    public static void workInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
 	String desired_role_string = getDesiredRoleString(command);
 	Role role = findRole(desired_role_string, temp);

@@ -11,6 +11,7 @@ import java.util.concurrent.*;
 
 public class Deadwood{
 
+    private Controller controller;
     private JFrame mainFrame;
     private PlayerResources r;
     private SceneResources s;
@@ -25,9 +26,9 @@ public class Deadwood{
 
     // Creates the whole board with all necessary panels and views
     private Deadwood(Board board) throws IOException{
+	controller = new Controller(board);
 	setupPlayerViews(board, board.getNumPlayers());
-	setupSceneViews(board);
-	
+	setupSceneViews(board);	
 	
 	mainFrame = new JFrame();
   
@@ -37,8 +38,7 @@ public class Deadwood{
 
 	createSceneCardPanels(mainFrame, board);
 	CreateShotCountersPanels.main(mainFrame, sc);
-	createBottomPanel(mainFrame);
-
+	BottomPanel bp = new BottomPanel(mainFrame, controller);
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
 	
@@ -99,7 +99,7 @@ public class Deadwood{
 
     // Creates bottom panel with buttons
     private void createBottomPanel(JFrame mainFrame) throws IOException{
-	BottomPanel bp = new BottomPanel(mainFrame);
+	
     }
 
     // Creates bottom left corner panel
