@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class Room{
 
+  public interface Listener{
+public void showScene(int sceneNum);
+  }
+
+      private List<Listener> listeners;
     private ArrayList<Room> neighbors = new ArrayList<Room>();
     private ArrayList<String> neighborHelper = new ArrayList<String>(); //neighbors as strings
     private ArrayList<Role> roles = new ArrayList<Role>();
@@ -10,11 +15,13 @@ public class Room{
     private ArrayList<Upgrade> officeUpgrades = new ArrayList<Upgrade>();
     private ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
     private ArrayList<Integer> blankSpace = new ArrayList<Integer>(); //where players sit w/o a role
+    private ArrayList<Player> occupants = new ArrayList<Player>();
     private Scene _scene;
     public String _name;
     public int shotCounters;
 
     Room(String name, int shots, ArrayList<ArrayList> takesArea, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a, ArrayList<Integer> b){
+      	listeners = new LinkedList<Listener>();
 	_name = name;
 	shotCounters = shots;
 	this.roles=r;
@@ -35,6 +42,23 @@ public class Room{
       this._name="Trailers";
       this.neighborHelper=h;
       this.blankSpace=b;
+    }
+
+    public synchronized void addListener(Listener l){
+      listeners.add(l);
+    }
+    private synchronized void enter(){
+      for (Listener l : listeners){
+        l.showScene(this);
+      }
+    }
+
+    public void addPlayer(Player p){
+      occupants.add(p);
+
+    }
+    public void removePlayer(Player p){
+      occupants.remove(p);
     }
 
     public ArrayList<Integer> getBlankSpace(){
