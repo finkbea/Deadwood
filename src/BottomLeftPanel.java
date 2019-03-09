@@ -21,7 +21,7 @@ public class BottomLeftPanel extends JPanel implements Board.Listener{
     setBounds(0, 900, 200, 200);
     setBackground(Color.black);
     label = new JLabel("yo");
-    label.setBounds(20, 0, 150, 150);
+    label.setBounds(40, 20, 150, 150);
     label.setForeground(Color.white);
     add(label);
     setVisible(true);
