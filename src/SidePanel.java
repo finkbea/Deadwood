@@ -30,7 +30,6 @@ public class SidePanel extends JPanel implements Player.Listener{
     setLayout(null);
     setBounds(0, 0, 200, 900);
     Color[] backGroundColor = new Color[]{Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
-    //sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
     setBackground(Color.decode("#0F2043"));
 
     JLabel statPanel = new JLabel("Stat Panel:");
@@ -78,12 +77,8 @@ public class SidePanel extends JPanel implements Player.Listener{
     }
     setVisible(true);
   }
-  public void playerMoved(Player p){
-
-  }
-  public void roleTaken(Player p){
-
-  }
+  public void playerMoved(Player p){}
+  public void roleTaken(Player p){}
 
   public void updateScore(Player p){
     int x = p.getPid()-1;

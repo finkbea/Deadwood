@@ -17,6 +17,7 @@ public class Deadwood{
     private ShotCounterResources sc;
     private RoomView rView;
     private SidePanel sidePanel;
+    private BottomLeftPanel bottomLeftPanel;
     private ArrayList<PlayerView> playerViewList;
     private static Executor UI_Executor;
     private static Executor Game_Executor;
@@ -35,10 +36,12 @@ public class Deadwood{
 	CreateShotCountersPanels.main(mainFrame, sc);
 	createRolePanels(mainFrame, board);
 	createBottomPanel(mainFrame);
-	createBottomLeftPanel(mainFrame);
 	CreateBlankAreaPanels.main(mainFrame);
 
   sidePanel = new SidePanel(mainFrame, board.getPlayers());
+  bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
+
+  board.addListener(bottomLeftPanel);
 
 	JPanel boardpanel = makeBoardPanel();
 	for(int i = 0; i < playerViewList.size(); i++){
@@ -46,6 +49,7 @@ public class Deadwood{
       board.getPlayer(i).addListener(sidePanel);
 	}
   mainFrame.add(sidePanel);
+  mainFrame.add(bottomLeftPanel);
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1100);

@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.LinkedList;
 
 /* The Board object holds all the players, rooms, used/unused scenes,
    and number of players. It does not keep track of which player is in each room (Player object
    does this). After the game is setup, this object is passed to GameKeeper.java in order to
    properly run the game. */
 public class Board{
+
+  public interface Listener {
+    public void currentPlayer(int n);
+  }
 
     private int num_players;
     private ArrayList<Player> player_list = new ArrayList<Player>();
@@ -15,14 +21,34 @@ public class Board{
     private int numWrappedScenes;
     private Player currentPlayer;
     private int currentPlayerID;
-
+    private List<Listener> listeners;
 
     Board(int numPlayers){
 	num_players = numPlayers;
 	numWrappedScenes = 0;
+  listeners = new LinkedList<Listener>();
     }
+
+    public synchronized void addListener(Listener l){
+      listeners.add(l);
+    }
+    private synchronized void sendPlayer(){
+      for (Listener l : listeners){
+        l.currentPlayer(currentPlayerID);
+      }
+    }
+
     public void setCurrentPlayerID(int i){
       this.currentPlayerID=i;
+      System.out.println(currentPlayerID);
+      sendPlayer();
+    }
+    public void setCurrentPlayer(){
+      for (int i =0; i < player_list.size(); i++){
+        if (player_list.get(i).getPid()==currentPlayerID){
+          currentPlayer=player_list.get(i);
+        }
+      }
     }
     public Player getCurrentPlayer(){
       return currentPlayer;
