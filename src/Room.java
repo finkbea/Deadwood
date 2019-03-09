@@ -9,7 +9,7 @@ public class Room{
     private ArrayList<Integer> area = new ArrayList<Integer>();
     private ArrayList<Upgrade> officeUpgrades = new ArrayList<Upgrade>();
     private ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
-    private ArrayList<Integer> blankSpace = new ArrayList<Integer>();
+    private ArrayList<Integer> blankSpace = new ArrayList<Integer>(); //where players sit w/o a role
     private Scene _scene;
     public String _name;
     public int shotCounters;
@@ -21,7 +21,7 @@ public class Room{
 	this.neighborHelper=h;
 	this.area=a;
 	this.takesArea=takesArea;
-	this.blankSpace=b;	
+	this.blankSpace=b;
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o,  ArrayList<Integer> b){

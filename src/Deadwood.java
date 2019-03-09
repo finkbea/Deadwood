@@ -26,30 +26,28 @@ public class Deadwood{
     private Deadwood(Board board) throws IOException{
 	setupPlayerViews(board, board.getNumPlayers());
 	setupSceneViews(board);
-  mainFrame = new JFrame();
-
+	mainFrame = new JFrame();
+  
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	mainFrame.setLayout(null);
 
 	createSceneCardPanels(mainFrame, board);
 	CreateShotCountersPanels.main(mainFrame, sc);
-	createRolePanels(mainFrame, board);
 	createBottomPanel(mainFrame);
-	CreateBlankAreaPanels.main(mainFrame);
 
-  sidePanel = new SidePanel(mainFrame, board.getPlayers());
-  bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
-
-  board.addListener(bottomLeftPanel);
-
+	sidePanel = new SidePanel(mainFrame, board.getPlayers());
+	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
+	
+	board.addListener(bottomLeftPanel);
+	
 	JPanel boardpanel = makeBoardPanel();
 	for(int i = 0; i < playerViewList.size(); i++){
 	    boardpanel.add(playerViewList.get(i), 0);
-      board.getPlayer(i).addListener(sidePanel);
+	    board.getPlayer(i).addListener(sidePanel);
 	}
-  mainFrame.add(sidePanel);
-  mainFrame.add(bottomLeftPanel);
+	mainFrame.add(sidePanel);
+	mainFrame.add(bottomLeftPanel);
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1100);
@@ -97,30 +95,6 @@ public class Deadwood{
 	mainFrame.add(bottomRightPanel);
     }
 
-    // Creates all role panels on the rooms
-    private void createRolePanels(JFrame mainFrame, Board board) throws IOException{
-	ArrayList<Room> room_list = board.getRoomList();
-	ArrayList<Role> roles;
-	int x;
-	int y;
-	JPanel role;
-	int i = 0;
-	while(i < room_list.size()){
-	    int j = 0;
-	    roles = room_list.get(i).getRoles();
-	    while(j < roles.size()){
-		x = roles.get(j).getArea().get(0) + 200;
-		y = roles.get(j).getArea().get(1);
-		role = new JPanel();
-		role.setBounds(x, y, 46, 46);
-		role.setBackground(Color.red);
-		mainFrame.add(role);
-		j++;
-	    }
-	    i++;
-	}
-    }
-
     // Makes the panel that displays the Deadwood game background
     private JPanel makeBoardPanel() throws IOException{
 	JPanel boardpanel = new JPanel(null);
@@ -146,8 +120,8 @@ public class Deadwood{
 		x = room_list.get(i).getArea().get(0) + 200;
 		y = room_list.get(i).getArea().get(1);
 		room = new JPanel();
-		room.setBounds(x, y, 205, 115);
-		room.setBackground(Color.green);
+		room.setBounds(x, y, 205, 115);		
+		room.setBackground(Color.decode("#FFCE00"));
 		createSceneRolePanels(room_list.get(i), room);
 		mainFrame.add(room);
 	    }

@@ -27,8 +27,8 @@ public class BottomLeftPanel extends JPanel implements Board.Listener{
     setVisible(true);
   }
 
-  public void currentPlayer(int n){
-    setBackground(backGroundColor[n-1]);
+  public void currentPlayer(int n){      
+      setBackground(backGroundColor[n-1]);
     label.setText("Player "+n+"\'s turn");
   }
 }
