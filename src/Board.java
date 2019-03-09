@@ -44,7 +44,7 @@ public class Board{
 	while(j < room_list.size()){
 	    room  = room_list.get(j);
 	    int i = 0;
-	    while(i < room.getNeighborHelper().size()){	
+	    while(i < room.getNeighborHelper().size()){
 		room.addNeighbor(getRoom(room.getNeighborHelper().get(i)));
 		i++;
 	    }
@@ -100,6 +100,9 @@ public class Board{
        the player list */
     public int getPlayerListSize(){
 	return (player_list.size());
+    }
+    public ArrayList<Player> getPlayers(){
+      return this.player_list;
     }
 
     /* Call on game startup and on new days */

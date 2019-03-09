@@ -16,6 +16,7 @@ public class Deadwood{
     private SceneResources s;
     private ShotCounterResources sc;
     private RoomView rView;
+    private SidePanel sidePanel;
     private ArrayList<PlayerView> playerViewList;
     private static Executor UI_Executor;
     private static Executor Game_Executor;
@@ -37,11 +38,11 @@ public class Deadwood{
     }
 
     // Creates the whole board with all necessary panels
-    private Deadwood(Board board) throws IOException{		
-	setupPlayerViews(board, board.getNumPlayers());	
+    private Deadwood(Board board) throws IOException{
+	setupPlayerViews(board, board.getNumPlayers());
 	setupSceneViews(board);
-	
-	mainFrame = new JFrame();
+  mainFrame = new JFrame();
+
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	mainFrame.setLayout(null);
@@ -49,16 +50,18 @@ public class Deadwood{
 	createSceneCardPanels(mainFrame, board);
 	CreateShotCountersPanels.main(mainFrame, sc);
 	createRolePanels(mainFrame, board);
-	createSidePanel(mainFrame, board);
 	createBottomPanel(mainFrame);
 	createBottomLeftPanel(mainFrame);
 	CreateBlankAreaPanels.main(mainFrame);
 
+  sidePanel = new SidePanel(mainFrame, board.getPlayers());
+
 	JPanel boardpanel = makeBoardPanel();
 	for(int i = 0; i < playerViewList.size(); i++){
 	    boardpanel.add(playerViewList.get(i), 0);
+      board.getPlayer(i).addListener(sidePanel);
 	}
-	
+  mainFrame.add(sidePanel);
 	mainFrame.add(boardpanel);
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1100);
@@ -75,7 +78,7 @@ public class Deadwood{
     private void setupSceneViews(Board board){
 	s = SceneResources.getInstance();
     }
-    
+
     // Initializes all player views and sets their icon
     private void setupPlayerViews(Board board, int numPlayers){
 	r = PlayerResources.getInstance();
@@ -92,16 +95,16 @@ public class Deadwood{
 	board.getPlayer(i).addListener(pv);
 	playerViewList.add(pv);
     }
-    
+
     //goint to rewrite the second part, each line will be a Jlabel
-    public void createSidePanel(JFrame mainFrame, Board board) throws IOException {
+    /*public void createSidePanel(JFrame mainFrame, Board board) throws IOException {
 	JPanel sidePanel = new JPanel();
 	sidePanel.setLayout(null);
 	sidePanel.setBounds(0, 0, 200, 900);
 	Color[] backGroundColor = new Color[]{Color.black, Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
 	//sidePanel.setBackground(backGroundColor[board.getCurrentPlayerID()]);
 	sidePanel.setBackground(Color.decode("#0F2043"));
-	 
+
 	JLabel statPanel = new JLabel("Stat Panel:");
 	statPanel.setBounds(20,0,160,30);
 	statPanel.setForeground(Color.white);
@@ -139,7 +142,7 @@ public class Deadwood{
 	    sidePanel.add(rehearse);
 	}
 	mainFrame.add(sidePanel);
-    }
+}*/
 
     // Creates bottom panel with buttons
     private void createBottomPanel(JFrame mainFrame) throws IOException{
@@ -147,7 +150,7 @@ public class Deadwood{
 	bottomPanel.setBounds(200, 900, 1200, 200);
 	bottomPanel.setBackground(Color.decode("#D5A458"));
 	bottomPanel.setLayout(null);
-	
+
 	JButton b = new JButton();
 	b.setBounds(535, 60, 60, 60);
 	b.setVisible(true);
@@ -167,7 +170,7 @@ public class Deadwood{
 	rehearse.setBounds(5, 23, 100, 10);
 	b2.add(rehearse);
 	b2.addMouseListener(new ButtonMouseListener());
-	
+
 	mainFrame.add(bottomPanel);
     }
 
@@ -264,8 +267,8 @@ public class Deadwood{
     public static void main(String args[]){
 	if(args.length != 1 || Integer.parseInt(args[0]) < 2 || Integer.parseInt(args[0]) > 8){
 	    System.out.println("Please specify a correct number of players");
-	}	
-	else{	    
+	}
+	else{
 	    int num_players = Integer.parseInt(args[0]);
 	    Board board = new Board(num_players);
 	    setupGame(num_players, board);
@@ -278,11 +281,11 @@ public class Deadwood{
 	    }
 	    UI_Executor = Executors.newSingleThreadExecutor();
 	    Game_Executor = Executors.newSingleThreadExecutor();
-	    	    
+
 	    Game_Executor.execute(() -> GameKeeper.startGame(board));
 	}
     }
-    
+
     // Adds players to Board object and calls setupRooms()
     private static void setupGame(int num_players, Board board){
 	int i = 0;

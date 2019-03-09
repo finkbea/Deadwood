@@ -7,11 +7,6 @@ public class Player{
   public interface Listener {
     public void playerMoved(Player p);
     public void roleTaken(Player p);
-    public void changeUpgrade (Player p);
-    public void changeMoney(Player p);
-  }
-  public interface SidePanelListener{
-    public void gotRehearse(Player p);
     public void updateScore(Player p);
   }
 
@@ -69,11 +64,6 @@ public class Player{
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
-    private synchronized void sendChangeUpgrade(){
-      for (Listener l : listeners){
-        l.changeUpgrade(this);
-      }
-    }
     private synchronized void sendChangeMove(){
       for (Listener l : listeners){
         l.playerMoved(this);
@@ -85,12 +75,12 @@ public class Player{
       }
     }
 
-    private synchronized void sendChangeMoney(){
+    private synchronized void sendUpdate(){
       for (Listener l : listeners){
-        l.changeMoney(this);
+        l.updateScore(this);
       }
     }
-    
+
     //returns the players score
     public int getScore(){
       return this.score;
@@ -126,14 +116,14 @@ public class Player{
     }
 
     // Adds currency to player fields
-    public void addCurrency(int money_type, int amount){	
+    public void addCurrency(int money_type, int amount){
 	if(money_type == 0){
 	    dollars += amount;
 	}
 	else{
 	    credits += amount;
 	}
-	sendChangeMoney();
+  sendUpdate();
     }
 
     public int getPid(){
@@ -163,6 +153,7 @@ public class Player{
 
     public void rehearse(){
 	rehearseTokens++;
+  sendUpdate();
     }
 
     public int getRehearseTokens(){
@@ -171,6 +162,7 @@ public class Player{
 
     public void resetRehearseTokens(){
 	rehearseTokens = 0;
+  sendUpdate();
     }
 
     /*
