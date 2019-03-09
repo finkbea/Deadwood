@@ -12,7 +12,7 @@ import java.util.concurrent.*;
 // Creates whole bottom panel with buttons
 public class BottomPanel{
 
-    private class ButtonMouseListener implements MouseListener{
+    private class ActButtonMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent event){
 	    System.out.println("clicked button");
 	}
@@ -21,8 +21,55 @@ public class BottomPanel{
 	public void mousePressed(MouseEvent event){
 	    System.out.println("Pressed button");
 	}
-	public void mouseReleased(MouseEvent event){}
-	
+	public void mouseReleased(MouseEvent event){}	
+    }
+
+    private class RehearseButtonMouseListener implements MouseListener{
+	public void mouseClicked(MouseEvent event){
+	    System.out.println("clicked button");
+	}
+	public void mouseExited(MouseEvent event){}
+	public void mouseEntered(MouseEvent event){}
+	public void mousePressed(MouseEvent event){
+	    System.out.println("Pressed button");
+	}
+	public void mouseReleased(MouseEvent event){}	
+    }
+
+    private class UpgradeButtonMouseListener implements MouseListener{
+	public void mouseClicked(MouseEvent event){
+	    System.out.println("clicked button");
+	}
+	public void mouseExited(MouseEvent event){}
+	public void mouseEntered(MouseEvent event){}
+	public void mousePressed(MouseEvent event){
+	    System.out.println("Pressed button");
+	}
+	public void mouseReleased(MouseEvent event){}	
+    }
+
+    private class EndButtonMouseListener implements MouseListener{
+	public void mouseClicked(MouseEvent event){
+	    System.out.println("clicked button");
+	}
+	public void mouseExited(MouseEvent event){}
+	public void mouseEntered(MouseEvent event){}
+	public void mousePressed(MouseEvent event){
+	    System.out.println("Pressed button");
+	}
+	public void mouseReleased(MouseEvent event){}	
+    }
+
+    private class MoveButtonMouseListener implements MouseListener{
+	public void mouseClicked(MouseEvent event){
+	    System.out.println("clicked button");
+	}
+	public void mouseExited(MouseEvent event){}
+	public void mouseEntered(MouseEvent event){}
+	public void mousePressed(MouseEvent event){
+	    System.out.println("Pressed button");
+	}
+	public void mouseReleased(MouseEvent event){}	
     }
     
     public BottomPanel(JFrame mainFrame) throws IOException{
@@ -40,7 +87,7 @@ public class BottomPanel{
 	JLabel act = new JLabel("Act");
 	act.setBounds(60, 40, 150, 15);
 	a_b.add(act);
-	a_b.addMouseListener(new ButtonMouseListener());
+	a_b.addMouseListener(new ActButtonMouseListener());
 
 	JButton r_b = new JButton();
 	r_b.setBounds(230, 60, 150, 100);
@@ -51,7 +98,7 @@ public class BottomPanel{
 	JLabel rehearse = new JLabel("Rehearse");
 	rehearse.setBounds(40, 40, 100, 10);
 	r_b.add(rehearse);
-	r_b.addMouseListener(new ButtonMouseListener());
+	r_b.addMouseListener(new RehearseButtonMouseListener());
 
 	JButton u_b = new JButton();
 	u_b.setBounds(400, 60, 150, 100);
@@ -61,7 +108,7 @@ public class BottomPanel{
 	JLabel upgrade = new JLabel("Upgrade");
 	upgrade.setBounds(40, 40, 100, 15);
 	u_b.add(upgrade);
-	u_b.addMouseListener(new ButtonMouseListener());
+	u_b.addMouseListener(new UpgradeButtonMouseListener());
 	u_b.setBackground(Color.decode("#79CEDC"));
 
 	JButton e_b = new JButton();
@@ -72,7 +119,7 @@ public class BottomPanel{
 	JLabel end = new JLabel("End Turn");
 	end.setBounds(45, 40, 100, 15);
 	e_b.add(end);
-	e_b.addMouseListener(new ButtonMouseListener());
+	e_b.addMouseListener(new EndButtonMouseListener());
 	e_b.setBackground(Color.decode("#79CEDC"));
 
 	JButton m_b = new JButton();
@@ -83,7 +130,7 @@ public class BottomPanel{
 	JLabel move = new JLabel("Move");
 	move.setBounds(50, 40, 100, 15);
 	m_b.add(move);
-	m_b.addMouseListener(new ButtonMouseListener());
+	m_b.addMouseListener(new MoveButtonMouseListener());
 	m_b.setBackground(Color.decode("#79CEDC"));
 
 	mainFrame.add(bottomPanel);

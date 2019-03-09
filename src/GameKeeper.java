@@ -15,17 +15,17 @@ public class GameKeeper{
 	    resetPlayers(board);
 	    hydrateSets(board);
 	    turn = 1;
-      board.setCurrentPlayerID(turn);
+	    board.setCurrentPlayerID(turn);
 	    while(isEndOfDay(board) == 0){
 		if(turn > board.getNumPlayers()){
 		    turn = 1;
-        board.setCurrentPlayerID(turn);
+		    board.setCurrentPlayerID(turn);
 		}
 		listener(board, turn);
 		board.getPlayer(turn).resetMove();
 		board.getPlayer(turn).resetAction();
 		turn++;
-    board.setCurrentPlayerID(turn);
+		board.setCurrentPlayerID(turn);
 	    }
 	    day++;
 	}

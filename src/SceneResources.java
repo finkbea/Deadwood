@@ -35,7 +35,7 @@ public class SceneResources{
 	}
     }
 
-    public ImageIcon getScene(int sceneNum){
+    public ImageIcon getSceneIcon(int sceneNum){
 	return big[sceneNum-1];
     }
 

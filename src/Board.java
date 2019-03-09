@@ -26,12 +26,18 @@ public class Board{
     Board(int numPlayers){
 	num_players = numPlayers;
 	numWrappedScenes = 0;
-  listeners = new LinkedList<Listener>();
+	listeners = new LinkedList<Listener>();
     }
 
+    public ArrayList<Scene> getAllScenes(){
+	return unused_scenes;
+    }
+    
+    // Adds listeners to board
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
+    
     private synchronized void sendPlayer(){
       for (Listener l : listeners){
         l.currentPlayer(currentPlayerID);

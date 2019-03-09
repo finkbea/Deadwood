@@ -19,13 +19,16 @@ public class Deadwood{
     private SidePanel sidePanel;
     private BottomLeftPanel bottomLeftPanel;
     private ArrayList<PlayerView> playerViewList;
+    private ArrayList<SceneView> sceneViewList;
     private static Executor UI_Executor;
     private static Executor Game_Executor;
 
-    // Creates the whole board with all necessary panels
+    // Creates the whole board with all necessary panels and views
     private Deadwood(Board board) throws IOException{
 	setupPlayerViews(board, board.getNumPlayers());
 	setupSceneViews(board);
+	
+	
 	mainFrame = new JFrame();
   
 	mainFrame.setTitle("Deadwood");
@@ -42,10 +45,12 @@ public class Deadwood{
 	board.addListener(bottomLeftPanel);
 	
 	JPanel boardpanel = makeBoardPanel();
+	// Adds playerViews as listeners to players
 	for(int i = 0; i < playerViewList.size(); i++){
 	    boardpanel.add(playerViewList.get(i), 0);
 	    board.getPlayer(i).addListener(sidePanel);
 	}
+
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);
 	mainFrame.add(boardpanel);
@@ -55,6 +60,7 @@ public class Deadwood{
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
 
+	// Requests focus for all playerViews
 	for(int i = 0; i < playerViewList.size(); i++){
 	    playerViewList.get(i).requestFocus();
 	}
@@ -63,6 +69,15 @@ public class Deadwood{
     // Initializes all scene views and sets icons
     private void setupSceneViews(Board board){
 	s = SceneResources.getInstance();
+	sceneViewList = new ArrayList<SceneView>();
+	SceneView sv;
+	int i = 1;
+	while(i < 41){
+	    sv = new SceneView(s, i);
+	    board.getAllScenes().get(i-1).addListener(sv);
+	    sceneViewList.add(sv);
+	    i++;
+	}
     }
 
     // Initializes all player views and sets their icon
