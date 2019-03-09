@@ -22,14 +22,11 @@ public class SceneView extends JPanel implements Scene.Listener{
 	sceneRes = s;
 	scene = new JLabel();
 	add(scene, 0);
-	scene.setBounds(0,0,205,115);	
+	scene.setBounds(0,0,205,115);
 	setVisible(true);
     }
 
-    public void enteredRoom(){	
-    }
-
-    public void showScene(int sceneNum){
-	scene.setIcon(sceneRes.getSceneIcon(sceneNum));
+    public void showScene(Scene s){
+	//scene.setIcon(sceneRes.getSceneIcon(sceneNum));
     }
 }

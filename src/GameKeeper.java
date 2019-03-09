@@ -128,7 +128,7 @@ public class GameKeeper{
 	System.out.println("Player " + turn+" turn is over.");
 	return 1;
     }
-    
+
     /* Used on game startup and new days. Puts players back in Trailers,
        resets each players rehearse tokens, and resets all roles. */
     private static void resetPlayers(Board board){
@@ -138,7 +138,7 @@ public class GameKeeper{
 	    board.getPlayer(pnum).resetAction();
 	    board.getPlayer(pnum).resetMove();
 	    board.getPlayer(pnum).updateRoom(board.getTrailers());
-	    board.getPlayer(pnum).getCurrentRoom().addPlayer(temp);
+	    board.getPlayer(pnum).getCurrentRoom().addPlayer(board.getPlayer(pnum));
 	    board.getPlayer(pnum).resetRehearseTokens();
 	    board.getPlayer(pnum).resetRole();
 	    pnum++;

@@ -1,10 +1,12 @@
 // Each room has an instance of the Room class. Scene is added in accordingly on start game and hydrateSet()
 import java.util.ArrayList;
+import java.util.List;
+import java.util.LinkedList;
 
 public class Room{
 
   public interface Listener{
-public void showScene(int sceneNum);
+public void showScene(Room r);
   }
 
       private List<Listener> listeners;

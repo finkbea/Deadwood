@@ -6,9 +6,9 @@ import java.util.LinkedList;
 
 public class Scene{
 
-    public interface Listener{
-	public void showScene(int sceneNum);
-    }
+  public interface Listener{
+    public void showScene(Scene s);
+  }
 
     private List<Listener> listeners;
     private String _name;
@@ -18,9 +18,9 @@ public class Scene{
     private int number;
     private String image;
     private int num_roles;
-    
+
     Scene(String name, String l, int n, String i, ArrayList<Role> roles, int budget){
-	listeners = new LinkedList<Listener>();
+  listeners = new LinkedList<Listener>();
 	_name = name;
 	_roles = roles;
 	_budget = budget;
@@ -32,9 +32,14 @@ public class Scene{
     }
 
     public synchronized void addListener(Listener l){
-	listeners.add(l);
+      listeners.add(l);
     }
-    
+    private synchronized void enter(){
+      for (Listener l : listeners){
+        l.showScene(this);
+      }
+    }
+
     public String getName(){
 	return _name;
     }

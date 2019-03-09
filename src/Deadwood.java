@@ -28,10 +28,10 @@ public class Deadwood{
     private Deadwood(Board board) throws IOException{
 	controller = new Controller(board);
 	setupPlayerViews(board, board.getNumPlayers());
-	setupSceneViews(board);	
-	
+	setupSceneViews(board);
+
 	mainFrame = new JFrame();
-  
+
 	mainFrame.setTitle("Deadwood");
 	mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	mainFrame.setLayout(null);
@@ -41,9 +41,9 @@ public class Deadwood{
 	BottomPanel bp = new BottomPanel(mainFrame, controller);
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
-	
+
 	board.addListener(bottomLeftPanel);
-	
+
 	JPanel boardpanel = makeBoardPanel();
 	// Adds playerViews as listeners to players
 	for(int i = 0; i < playerViewList.size(); i++){
@@ -99,7 +99,7 @@ public class Deadwood{
 
     // Creates bottom panel with buttons
     private void createBottomPanel(JFrame mainFrame) throws IOException{
-	
+
     }
 
     // Creates bottom left corner panel
@@ -135,7 +135,7 @@ public class Deadwood{
 		x = room_list.get(i).getArea().get(0) + 200;
 		y = room_list.get(i).getArea().get(1);
 		room = new JPanel();
-		room.setBounds(x, y, 205, 115);		
+		room.setBounds(x, y, 205, 115);
 		room.setBackground(Color.decode("#FFCE00"));
 		createSceneRolePanels(room_list.get(i), room);
 		mainFrame.add(room);
