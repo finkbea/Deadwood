@@ -64,7 +64,7 @@ public class Deadwood{
 	for(int i = 0; i < playerViewList.size(); i++){
 	    playerViewList.get(i).requestFocus();
 	}
-    }
+b    }
 
     // Initializes all scene views and sets icons
     private void setupSceneViews(Board board){
