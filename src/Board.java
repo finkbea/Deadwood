@@ -45,8 +45,12 @@ public class Board{
     }
 
     public void setCurrentPlayerID(int i){
-      this.currentPlayerID=i;
-      System.out.println(currentPlayerID);
+	if(i <= player_list.size()){
+	    this.currentPlayerID=i;
+	}
+	else{
+	    this.currentPlayerID = 1;
+	}
       sendPlayer();
     }
     public void setCurrentPlayer(){

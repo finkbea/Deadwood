@@ -76,7 +76,7 @@ public class Player{
     }
 
     private synchronized void sendUpdate(){
-      for (Listener l : listeners){
+	for (Listener l : listeners){
         l.updateScore(this);
       }
     }

@@ -97,11 +97,6 @@ public class Deadwood{
 	playerViewList.add(pv);
     }
 
-    // Creates bottom panel with buttons
-    private void createBottomPanel(JFrame mainFrame) throws IOException{
-
-    }
-
     // Creates bottom left corner panel
     private void createBottomLeftPanel(JFrame mainFrame) throws IOException{
 	JPanel bottomRightPanel = new JPanel();
@@ -186,7 +181,7 @@ public class Deadwood{
 	    UI_Executor = Executors.newSingleThreadExecutor();
 	    Game_Executor = Executors.newSingleThreadExecutor();
 
-	    Game_Executor.execute(() -> GameKeeper.startGame(board));
+	    GameKeeper.startGame(board);
 	}
     }
 
