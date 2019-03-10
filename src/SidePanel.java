@@ -81,7 +81,7 @@ public class SidePanel extends JPanel implements Player.Listener{
   public void roleTaken(Player p){}
 
   public void updateScore(Player p){
-    int x = p.getPid()-1;
+      int x = p.getPid()-1;
     scores.get(x).setText("Score: "+p.getScore());
     ranks.get(x).setText("Rank: "+p.getRank());
     dollars.get(x).setText("Dollars: "+p.getDollars());

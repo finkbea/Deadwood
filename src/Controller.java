@@ -25,8 +25,7 @@ public class Controller extends JPanel {
     }
 
     public void upgradeClick(){
-	executor.execute(() -> System.out.println("do upgrade stuff"));
-			 //GameKeeper.upgradeInput("", board.getCurrentPlayerID(), board));
+	executor.execute(() -> GameKeeper.upgradeInput("", board.getCurrentPlayerID(), board));
     }
 
     public void moveClick(){
@@ -34,6 +33,6 @@ public class Controller extends JPanel {
     }
 
     public void endClick(){
-	executor.execute(() -> GameKeeper.inputAdmin("end",board.getCurrentPlayerID(), board, true));
+	executor.execute(() -> board.setCurrentPlayerID(board.getCurrentPlayerID() + 1));
     }
 }

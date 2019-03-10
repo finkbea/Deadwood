@@ -8,25 +8,10 @@ public class GameKeeper{
        players. When game is over, calculateWinner() is called to print the winner.*/
     public static void startGame(Board board){
 	System.out.println("Get ready to rumble! Starting game!");
-	int turn;
 	int day = 1;
 
 	while(day <= 4){
-	    resetPlayers(board);
-	    hydrateSets(board);
-	    turn = 1;
-	    board.setCurrentPlayerID(turn);
-	    while(isEndOfDay(board) == 0){
-		if(turn > board.getNumPlayers()){
-		    turn = 1;
-		    board.setCurrentPlayerID(turn);
-		}
-		listener(board, turn);
-		board.getPlayer(turn).resetMove();
-		board.getPlayer(turn).resetAction();
-		turn++;
-		board.setCurrentPlayerID(turn);
-	    }
+	    dayKeeper(board);
 	    day++;
 	}
 
@@ -34,6 +19,24 @@ public class GameKeeper{
 	calculateWinner(board);
     }
 
+    public static void dayKeeper(Board board){	
+	int turn = 1;
+	resetPlayers(board);
+	hydrateSets(board);
+	board.setCurrentPlayerID(turn);
+	while(isEndOfDay(board) == 0){
+	    if(turn > board.getNumPlayers()){
+		turn = 1;
+		board.setCurrentPlayerID(turn);
+	    }
+	    listener(board, turn);	    
+	    board.getPlayer(turn).resetMove();
+	    board.getPlayer(turn).resetAction();
+	    turn++;
+	    board.setCurrentPlayerID(turn);
+	}
+    }
+    
     private static void hydrateSets(Board board){
 	board.hydrateSets();
     }
@@ -44,7 +47,7 @@ public class GameKeeper{
 
     /* While the end command has not been given, the current player can do whatever
        they want by inputting commands. */
-    private static void listener(Board board, int turn){
+    public static void listener(Board board, int turn){
 	String command="";
 	Scanner sc;
 	int turnEnd = 0;
@@ -52,8 +55,9 @@ public class GameKeeper{
 	    printTurnOptions(board, turn);
 	    sc = new Scanner(System.in);
 	    command = sc.nextLine();
-	    turnEnd = (inputAdmin(command, turn, board, false));
-	}
+	    turn = board.getCurrentPlayerID();
+	    turnEnd = (inputAdmin(command, turn, board));	    
+	}	
     }
 
     // Prints the available options for the player to do on their turn
@@ -85,48 +89,38 @@ public class GameKeeper{
 
     /* Responsible for handling all the input strings on a players turn. If the command
        is not recognized, a 'bad input' message is printed out. */
-    public static int inputAdmin(String command, int turn, Board board, boolean isTurnOver){
+    public static int inputAdmin(String command, int turn, Board board){
 	int turnEnd = 0;
 
-	if(isTurnOver == false){
-	    if(command.equals("end")){
-		turnEnd = endInput(turn);
-	    }
-	    else if(command.equals("who")){
-		whoInput(command, turn, board);
-	    }
-	    else if(command.equals("where")){
-		whereInput(command, turn, board);
-	    }
-	    else if(command.contains("move")){
-		moveInput(command, turn, board);
-	    }
-	    else if(command.equals("rehearse")){
-		rehearseInput(command, turn, board);
-	    }
-	    else if(command.equals("act")){
-		actInput(command, turn, board);
-	    }
-	    else if(command.contains("upgrade")){
-		upgradeInput(command, turn, board);
-	    }
-	    else if(command.contains("work")){
-		workInput(command, turn, board);
-	    }
-	    else{
-		System.out.println("Command not recognized, please try again. ");
-	    }
+	if(command.equals("end")){
+	    turnEnd = 1;
+	    System.out.println("Player " + turn+" turn is over.");
+	}
+	else if(command.equals("who")){
+	    whoInput(command, turn, board);
+	}
+	else if(command.equals("where")){
+	    whereInput(command, turn, board);
+	}
+	else if(command.contains("move")){
+	    moveInput(command, turn, board);
+	}
+	else if(command.equals("rehearse")){
+	    rehearseInput(command, turn, board);
+	}
+	else if(command.equals("act")){
+	    actInput(command, turn, board);
+	}
+	else if(command.contains("upgrade")){
+	    upgradeInput(command, turn, board);
+	}
+	else if(command.contains("work")){
+	    workInput(command, turn, board);
 	}
 	else{
-	    turnEnd = 1;
+	    System.out.println("Command not recognized, please try again. ");
 	}
-
 	return(turnEnd);
-    }
-
-    public static int endInput(int turn){
-	System.out.println("Player " + turn+" turn is over.");
-	return 1;
     }
 
     /* Used on game startup and new days. Puts players back in Trailers,
@@ -452,8 +446,18 @@ public class GameKeeper{
     // Adds a rehearse token to player
     public static void rehearseInput(String command, int turn, Board board){
 	Player temp = board.getPlayer(turn);
-	temp.rehearse();
-	temp.useAction();
+	if(temp.getRole() != null){
+	    if(temp.getRehearseTokens() <= temp.getCurrentRoom().getScene().getBudget()){
+		temp.rehearse();
+		temp.useAction();
+	    }
+	    else{
+		System.out.println("Rehearsing too many times!");
+	    }
+	}
+	else{
+	    System.out.println("Not in a role.");
+	}
     }
 
     /* First checks if player is in role. If not, prints error. Then rolls dice
