@@ -87,6 +87,5 @@ public class SidePanel extends JPanel implements Player.Listener{
     dollars.get(x).setText("Dollars: "+p.getDollars());
     credits.get(x).setText("Credits: "+p.getCredits());
     rehearses.get(x).setText("Times Rehearsed: "+p.getRehearseTokens());
-    System.out.println("Updating player "+p.getPid());
   }
 }
