@@ -219,7 +219,9 @@ public class Player{
     // Used when scene is wrapped or day is over
     public void resetRole(){
 	_role = null;
+  rehearseTokens=0;
 	roleType = 0;
+  sendUpdate();
     }
 
     public int getRoleType(){
