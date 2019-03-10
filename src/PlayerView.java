@@ -19,13 +19,15 @@ public class PlayerView extends JPanel implements Player.Listener{
 	setLayout(null);
 
 	panelOffSet = (playerNum-1) * 5;
-	
+
 	p1 = new JLabel();
 	add(p1, 0);
 	p1.setBounds(0, 0, 40, 40);
 	setBounds(1060 + panelOffSet, 242, 40, 40);
 	p1.setIcon(r.getIcon(playerNum, 1));
+  setOpaque(false);
 	p1.setVisible(true);
+
     }
 
     public void playerMoved(Player p){
