@@ -95,6 +95,7 @@ public class Deadwood{
 	pv = new PlayerView(r, i);
 	board.getPlayer(i).addListener(pv);
 	playerViewList.add(pv);
+	System.out.println(playerViewList.size());
     }
 
     // Creates bottom left corner panel
