@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 
-public class Scene{
+public class Scene implements Room.Listener{
 
   public interface Listener{
     public void showScene(Scene s);
+    public void closeScene(Scene s);
   }
 
     private List<Listener> listeners;
@@ -18,6 +19,7 @@ public class Scene{
     private int number;
     private String image;
     private int num_roles;
+    private ArrayList<Integer> area;
 
     Scene(String name, String l, int n, String i, ArrayList<Role> roles, int budget){
   listeners = new LinkedList<Listener>();
@@ -34,9 +36,14 @@ public class Scene{
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
-    private synchronized void enter(){
+    private synchronized void enterListener(){
       for (Listener l : listeners){
         l.showScene(this);
+      }
+    }
+    private synchronized void overListener(){
+      for (Listener l : listeners){
+        l.closeScene(this);
       }
     }
 
@@ -59,4 +66,23 @@ public class Scene{
     public int getNumRoles(){
 	return num_roles;
     }
+
+    public int getNumber(){
+      return this.number;
+    }
+
+    public ArrayList<Integer> getArea(){
+      return this.area;
+    }
+
+
+    //Room.Listener
+    public void enter(ArrayList<Integer> n){
+      this.area=n;
+      enterListener();
+    }
+    public void over(){
+      overListener();
+    }
+
 }
