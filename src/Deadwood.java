@@ -136,12 +136,13 @@ public class Deadwood{
 		x = room_list.get(i).getArea().get(0) + 200;
 		y = room_list.get(i).getArea().get(1);
 		room = new JPanel();
-		room.setBounds(x, y, 205, 115);
-		//BufferedImage image = ImageIO.read(new File("resources/cards/cardback.jpeg"));
-		//JLabel label = new JLabel(new ImageIcon(image));
-		//label.setBounds(0, 0, 205, 115);
-		//room.add(label);		
-		room.setBackground(Color.decode("#FFCE00"));
+		room.setBounds(x, y-5, 205, 120);
+		room.setOpaque(false);
+		BufferedImage image = ImageIO.read(new File("resources/cards/card_back.png"));
+		JLabel label = new JLabel(new ImageIcon(image));
+		label.setBounds(0, 0, 205, 115);
+		room.add(label);		
+		//room.setBackground(Color.decode("#FFCE00"));
 		createSceneRolePanels(room_list.get(i), room);
 		mainFrame.add(room);
 	    }
