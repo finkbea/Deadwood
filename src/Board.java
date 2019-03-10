@@ -32,12 +32,12 @@ public class Board{
     public ArrayList<Scene> getAllScenes(){
 	return unused_scenes;
     }
-    
+
     // Adds listeners to board
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
-    
+
     private synchronized void sendPlayer(){
       for (Listener l : listeners){
         l.currentPlayer(currentPlayerID);
@@ -97,6 +97,7 @@ public class Board{
 	    if(!room_list.get(i).getName().equals("Casting Office") &&
 	       !room_list.get(i).getName().equals("Trailers")){
 	    room_list.get(i).placeScene(unused_scenes.get(i));
+      room_list.get(i).addListener(unused_scenes.get(i));
 	    updateScenes(unused_scenes.get(i));
 	    }
 	    i++;

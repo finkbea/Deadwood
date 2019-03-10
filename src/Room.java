@@ -6,7 +6,8 @@ import java.util.LinkedList;
 public class Room{
 
   public interface Listener{
-public void showScene(Room r);
+public void enter(ArrayList<Integer> n);
+public void over();
   }
 
       private List<Listener> listeners;
@@ -49,15 +50,22 @@ public void showScene(Room r);
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
-    private synchronized void enter(){
+    private synchronized void playerEnter(){
+      if (_scene !=null){
+        for (Listener l : listeners){
+          l.enter(area);
+        }
+      }
+    }
+    private synchronized void sceneOver(){
       for (Listener l : listeners){
-        l.showScene(this);
+        l.over();
       }
     }
 
     public void addPlayer(Player p){
       occupants.add(p);
-
+      playerEnter();
     }
     public void removePlayer(Player p){
       occupants.remove(p);
@@ -131,6 +139,7 @@ public void showScene(Room r);
     }
 
     public void wrapScene(){
+      sceneOver();
 	_scene = null;
     }
 
