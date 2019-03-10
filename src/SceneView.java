@@ -34,6 +34,6 @@ public class SceneView extends JPanel implements Scene.Listener{
     setBounds(s.getArea().get(0), s.getArea().get(1), s.getArea().get(3), s.getArea().get(2));
     }
     public void closeScene(Scene s){
-
+    setBounds(0,0,0,0);
     }
 }
