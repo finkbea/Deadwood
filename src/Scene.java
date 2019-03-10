@@ -28,7 +28,6 @@ public class Scene implements Room.Listener{
 	_budget = budget;
 	this.line=l;
 	this.number =n;
-	System.out.println(number);
 	this.image=i;
 	num_roles = roles.size();
     }

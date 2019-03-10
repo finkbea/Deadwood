@@ -48,8 +48,10 @@ public class Deadwood{
 	// Adds playerViews as listeners to players
 	for(int i = 0; i < playerViewList.size(); i++){
 	    boardpanel.add(playerViewList.get(i), 0);
+      System.out.println("Deadwood.java: 51:  playerViewList.size: "+playerViewList.size());
 	    board.getPlayer(i).addListener(sidePanel);
 	}
+  board.getPlayer(board.getPlayerListSize()).addListener(sidePanel);
 
 
 	mainFrame.add(sidePanel);
@@ -100,7 +102,6 @@ public class Deadwood{
 	pv = new PlayerView(r, i);
 	board.getPlayer(i).addListener(pv);
 	playerViewList.add(pv);
-	System.out.println(playerViewList.size());
     }
 
     // Creates bottom left corner panel
