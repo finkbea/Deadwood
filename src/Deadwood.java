@@ -51,6 +51,7 @@ public class Deadwood{
 	    board.getPlayer(i).addListener(sidePanel);
 	}
 
+
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);
 	mainFrame.add(boardpanel);
@@ -64,7 +65,11 @@ public class Deadwood{
 	for(int i = 0; i < playerViewList.size(); i++){
 	    playerViewList.get(i).requestFocus();
 	}
-b    }
+  for (int j =0; j<sceneViewList.size(); j++){
+    boardpanel.add(sceneViewList.get(j), 0);
+    sceneViewList.get(j).requestFocus();
+  }
+    }
 
     // Initializes all scene views and sets icons
     private void setupSceneViews(Board board){
