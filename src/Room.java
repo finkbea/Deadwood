@@ -9,7 +9,7 @@ public class Room{
 public void enter(ArrayList<Integer> n);
 public void over();
 public void incrementShots(int n);
-      public void sendRoom(Room room);
+public void sendRoom(Room room);
   }
 
     private List<Listener> listeners;
@@ -49,16 +49,16 @@ public void incrementShots(int n);
       this.blankSpace=b;
     }
 
-    public synchronized void sendRooms(){
-	for(Listener l : listeners){
-	    System.out.println("bb");
-	    l.sendRoom(this);
-	}
-    }
-    
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
+    public synchronized void sendRooms(){
+  for(Listener l : listeners){
+      System.out.println("bb");
+      l.sendRoom(this);
+  }
+    }
+
     private synchronized void playerEnter(){
       if (_scene !=null){
         for (Listener l : listeners){

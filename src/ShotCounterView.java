@@ -26,7 +26,6 @@ public class ShotCounterView extends JPanel implements Room.Listener{
     shotCounter.setBounds(0, 0, n.get(2), n.get(3));
     setOpaque(false);
     setVisible(true);
-
   }
 
   public void enter(ArrayList<Integer> n){
@@ -41,5 +40,6 @@ public class ShotCounterView extends JPanel implements Room.Listener{
       setVisible(false);
     }
   }
-    public void sendRoom(Room room){}
+    public void sendRoom(Room room){
+    }
 }
