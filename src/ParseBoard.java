@@ -130,7 +130,7 @@ public class ParseBoard {
   public static Room createRoom(Element set) {
     String name = set.getAttribute("name");
     ArrayList<String> takesHelper = new ArrayList<String>();
-    ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
+    ArrayList<ArrayList<Integer>> takesArea = new ArrayList<ArrayList<Integer>>();
     for_each(set.getElementsByTagName("take"),
               (Element take) -> {
                 takesHelper.add(getTakes(take));

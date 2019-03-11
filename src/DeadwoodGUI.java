@@ -19,6 +19,7 @@ public class DeadwoodGUI{
     private RoomView rView;
     private SidePanel sidePanel;
     private BottomLeftPanel bottomLeftPanel;
+    private BottomPanel bottomPanel;
     private ArrayList<PlayerView> playerViewList;
     private ArrayList<SceneView> sceneViewList;
     private ArrayList<ShotCounterView> shotViewList;
@@ -30,6 +31,7 @@ public class DeadwoodGUI{
 	setupSceneViews(board);
   setupShotCounterViews(board);
 
+
 	mainFrame = new JFrame();
 
 	mainFrame.setTitle("Deadwood");
@@ -37,8 +39,10 @@ public class DeadwoodGUI{
 	mainFrame.setLayout(null);
 
 	createSceneCardPanels(mainFrame, board);
+  //sc = new ShotCounterResources();
+  //CreateShotCountersPanels.main(mainFrame, sc);
 
-	BottomPanel bp = new BottomPanel(mainFrame, controller);
+	bottomPanel = new BottomPanel(mainFrame, controller);
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
 
