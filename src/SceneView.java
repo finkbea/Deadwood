@@ -24,6 +24,7 @@ public class SceneView extends JPanel implements Scene.Listener{
 	scene.setBounds(0,0,205,115);
   //setBounds(0, 0, 205, 115);
   //scene.setIcon(s.getSceneIcon(1));
+  setOpaque(false);
 	setVisible(true);
     }
 
