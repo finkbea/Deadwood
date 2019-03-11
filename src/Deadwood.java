@@ -20,18 +20,18 @@ public class Deadwood{
 	if(args.length != 1 || Integer.parseInt(args[0]) < 2 || Integer.parseInt(args[0]) > 8){
 	    System.out.println("Please specify a correct number of players");
 	}
-	else{	    
+	else{
 	    UI_Executor = Executors.newSingleThreadExecutor();
 	    Game_Executor = Executors.newSingleThreadExecutor();
 	    int num_players = Integer.parseInt(args[0]);
 	    Board board = new Board(num_players);
-	    
+
 	    setupGame(num_players, board);
 	    setupScenes(args, board);
-	    
+
 	    createGUI(board);
 	    //Deadwood dw = new Deadwood(board);
-	    
+
 	    GameKeeper.startGame(board);
 	}
     }

@@ -19,7 +19,7 @@ public class GameKeeper{
 	calculateWinner(board);
     }
 
-    public static void dayKeeper(Board board){	
+    public static void dayKeeper(Board board){
 	int turn = 1;
 	resetPlayers(board);
 	hydrateSets(board);
@@ -29,14 +29,14 @@ public class GameKeeper{
 		turn = 1;
 		board.setCurrentPlayerID(turn);
 	    }
-	    listener(board, turn);	    
+	    listener(board, turn);
 	    board.getPlayer(turn).resetMove();
 	    board.getPlayer(turn).resetAction();
 	    turn++;
 	    board.setCurrentPlayerID(turn);
 	}
     }
-    
+
     private static void hydrateSets(Board board){
 	board.hydrateSets();
     }
@@ -56,8 +56,8 @@ public class GameKeeper{
 	    sc = new Scanner(System.in);
 	    command = sc.nextLine();
 	    turn = board.getCurrentPlayerID();
-	    turnEnd = (inputAdmin(command, turn, board));	    
-	}	
+	    turnEnd = (inputAdmin(command, turn, board));
+	}
     }
 
     // Prints the available options for the player to do on their turn
@@ -185,7 +185,7 @@ public class GameKeeper{
     // Rolls dice, returns roll
     private static int rollDice(int numberOfDice){
 	Random rand = new Random();
-	int roll = rand.nextInt(7);
+	int roll = rand.nextInt(6)+1;
 	return roll;
     }
 
@@ -474,11 +474,11 @@ public class GameKeeper{
 		int roll = rollDice(1);
 		int budget = temp.getCurrentRoom().getScene().getBudget();
 
-		if(roll < budget){
+		if(temp.act(roll, budget)==false){
 		    payoutFail(temp);
 		    System.out.println("fail roll");
 		}
-		else if(roll >= budget){
+		else if(temp.act(roll, budget) == true){
 		    System.out.println("success roll");
 		    temp.getCurrentRoom().removeShot();
 		    payoutSuccess(temp);

@@ -9,7 +9,6 @@ public class Player{
     public void roleTaken(Player p);
     public void updateScore(Player p);
   }
-
     private int pid;
     private int dollars;
     private int credits;
@@ -23,6 +22,8 @@ public class Player{
     private List<Listener> listeners;
     private String color;
     private int score=dollars+credits+(5*rank);
+    private int lastRoll;
+
 
     Player(int p_id){
       listeners = new LinkedList<Listener>();
@@ -33,6 +34,7 @@ public class Player{
 	rehearseTokens = 0;
 	justMoved = false;
 	actionUsed = false;
+  lastRoll=1;
   switch (pid){
     case 1:
       color="blue";
@@ -76,7 +78,7 @@ public class Player{
     }
 
     private synchronized void sendUpdate(){
-	for (Listener l : listeners){
+	    for (Listener l : listeners){
         l.updateScore(this);
       }
     }
@@ -84,6 +86,10 @@ public class Player{
     //returns the players score
     public int getScore(){
       return this.score;
+    }
+
+    public int getLastRoll(){
+      return this.lastRoll;
     }
 
     //returns the players color
@@ -201,6 +207,16 @@ public class Player{
 	else if(new_rank == 6 && money_type == 1){
 	    credits = credits - 25;
 	}
+    }
+
+    public boolean act(int roll, int budget){
+      boolean acting = false;
+      if ((roll+rehearseTokens)>=budget){
+        acting=true;
+      }
+      this.lastRoll=roll;
+      sendUpdate();
+      return acting;
     }
 
     public void setRole(Role role){

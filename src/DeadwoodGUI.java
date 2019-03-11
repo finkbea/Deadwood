@@ -16,10 +16,12 @@ public class DeadwoodGUI{
     private PlayerResources r;
     private SceneResources s;
     private ShotCounterResources sc;
+    //private DiceResources dc;
     private RoomView rView;
     private SidePanel sidePanel;
     private BottomLeftPanel bottomLeftPanel;
     private BottomPanel bottomPanel;
+    //private DiceView diceView;
     private ArrayList<PlayerView> playerViewList;
     private ArrayList<SceneView> sceneViewList;
     private ArrayList<ShotCounterView> shotViewList;
@@ -55,7 +57,6 @@ public class DeadwoodGUI{
 	    board.getPlayer(i).addListener(sidePanel);
 	}
 	board.getPlayer(board.getPlayerListSize()).addListener(sidePanel);
-
 
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);

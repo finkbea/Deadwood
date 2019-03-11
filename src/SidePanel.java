@@ -18,14 +18,18 @@ public class SidePanel extends JPanel implements Player.Listener{
   private ArrayList<JLabel> dollars;
   private ArrayList<JLabel> credits;
   private ArrayList<JLabel> rehearses;
+  private ArrayList<JLabel> lastRolls;
+  private PlayerResources res;
 
   public SidePanel(JFrame mainFrame, ArrayList<Player> players) throws IOException {
+    res = PlayerResources.getInstance();
     names = new ArrayList<JLabel>();
     scores = new ArrayList<JLabel>();
     ranks = new ArrayList<JLabel>();
     dollars = new ArrayList<JLabel>();
     credits = new ArrayList<JLabel>();
     rehearses = new ArrayList<JLabel>();
+    lastRolls = new ArrayList<JLabel>();
     sidePanel = new JPanel();
     setLayout(null);
     setBounds(0, 0, 200, 900);
@@ -68,12 +72,18 @@ public class SidePanel extends JPanel implements Player.Listener{
       rehearse.setForeground(backGroundColor[i]);
       rehearses.add(rehearse);
 
+      JLabel lastRoll = new JLabel();
+      lastRoll.setBounds(100, -55+(100*(i+1)), 40, 40);
+      lastRoll.setIcon(res.getIcon(players.get(i).getPid(), players.get(i).getLastRoll()));
+      lastRolls.add(lastRoll);
+
       add(name);
       add(score);
       add(rank);
       add(dollar);
       add(credit);
       add(rehearse);
+      add(lastRoll);
     }
     setVisible(true);
   }
@@ -81,11 +91,14 @@ public class SidePanel extends JPanel implements Player.Listener{
   public void roleTaken(Player p){}
 
   public void updateScore(Player p){
-      int x = p.getPid()-1;
+    res = PlayerResources.getInstance();
+    int x = p.getPid()-1;
     scores.get(x).setText("Score: "+p.getScore());
     ranks.get(x).setText("Rank: "+p.getRank());
     dollars.get(x).setText("Dollars: "+p.getDollars());
     credits.get(x).setText("Credits: "+p.getCredits());
     rehearses.get(x).setText("Times Rehearsed: "+p.getRehearseTokens());
+    System.out.println(p.getLastRoll());
+    lastRolls.get(x).setIcon(res.getIcon(p.getPid(), p.getLastRoll()));
   }
 }

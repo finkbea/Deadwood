@@ -24,13 +24,8 @@ public class ShotCounterView extends JPanel implements Room.Listener{
 
     add(shotCounter, 0);
     shotCounter.setBounds(0, 0, n.get(2), n.get(3));
-    //setBounds(n.get(0), n.get(1), n.get(2), n.get(3));
-    //shotCounter.setIcon(s.getIcon());
-    //setBackground(Color.blue);
     setOpaque(false);
-
     setVisible(true);
-    //shotCounter.setVisible(true);
 
   }
 
