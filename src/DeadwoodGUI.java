@@ -31,7 +31,7 @@ public class DeadwoodGUI{
 	controller = new Controller(board);
 	setupPlayerViews(board, board.getNumPlayers());
 	setupSceneViews(board);
-  setupShotCounterViews(board);
+	setupShotCounterViews(board);
 
 
 	mainFrame = new JFrame();
@@ -47,7 +47,8 @@ public class DeadwoodGUI{
 	bottomPanel = new BottomPanel(mainFrame, controller);
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
-
+	UpgradeView upgradeView = new UpgradeView(board, controller);	
+	
 	board.addListener(bottomLeftPanel);
 
 	JPanel boardpanel = makeBoardPanel();
@@ -55,9 +56,10 @@ public class DeadwoodGUI{
 	for(int i = 0; i < playerViewList.size(); i++){
 	    boardpanel.add(playerViewList.get(i), 0);
 	    board.getPlayer(i).addListener(sidePanel);
-	}
+	}	
 	board.getPlayer(board.getPlayerListSize()).addListener(sidePanel);
-
+	boardpanel.add(upgradeView);
+	
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);
 	mainFrame.add(boardpanel);

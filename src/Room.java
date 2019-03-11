@@ -85,6 +85,10 @@ public void sendRoom(Room room);
       occupants.remove(p);
     }
 
+    public ArrayList<Upgrade> getUpgrades(){
+	return officeUpgrades;
+    }
+    
     public ArrayList<Integer> getBlankSpace(){
       return this.blankSpace;
     }

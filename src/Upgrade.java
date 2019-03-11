@@ -18,4 +18,8 @@ public class Upgrade{
       this.currency=1;
     }
   }
+
+    public ArrayList<Integer> getArea(){
+	return area;
+    }
 }

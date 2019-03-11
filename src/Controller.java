@@ -39,4 +39,35 @@ public class Controller extends JPanel {
     public void clickScene(Room room){
 	executor.execute(() -> System.out.println(room.getName()));
     }
+
+    public void d1Click(){
+	System.out.println("d1 click");
+    }
+    public void d2Click(){
+	System.out.println("d2 click");
+    }
+    public void d3Click(){
+	System.out.println("d3 click");
+    }
+    public void d4Click(){
+	System.out.println("d4 click");
+    }
+    public void d5Click(){
+	System.out.println("d5 click");
+    }
+    public void c1Click(){
+	System.out.println("c1 click");
+    }
+    public void c2Click(){
+	System.out.println("c2 click");
+    }
+    public void c3Click(){
+	System.out.println("c3 click");
+    }
+    public void c4Click(){
+	System.out.println("c4 click");
+    }
+    public void c5Click(){
+	System.out.println("c5 click");
+    }
 }
