@@ -13,12 +13,14 @@ public class ShotCounterView extends JPanel implements Room.Listener{
 
   private JLabel shotCounter;
   private ArrayList<Integer> area;
+  private int number;
 
-  public ShotCounterView(ShotCounterResources s, ArrayList<Integer> n){
+  public ShotCounterView(ShotCounterResources s, ArrayList<Integer> n, int x){
     super(null);
     setLayout(null);
     shotCounter = new JLabel();
     this.area=n;
+    this.number=x;
 
     add(shotCounter, 0);
     shotCounter.setBounds(0, 0, n.get(2), n.get(3));
@@ -26,7 +28,6 @@ public class ShotCounterView extends JPanel implements Room.Listener{
     //shotCounter.setIcon(s.getIcon());
     //setBackground(Color.blue);
     setOpaque(false);
-
 
     setVisible(true);
     //shotCounter.setVisible(true);
@@ -40,7 +41,9 @@ public class ShotCounterView extends JPanel implements Room.Listener{
     }
   public void over(){
   }
-  public void incrementShots(){
-    //setVisible(false);
+  public void incrementShots(int n){
+    if (n<=number){
+      setVisible(false);
+    }
   }
 }

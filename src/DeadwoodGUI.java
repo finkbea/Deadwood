@@ -87,7 +87,7 @@ public class DeadwoodGUI{
       ShotCounterView scv;
       for (int x =0; x<board.getRoomList().size(); x++){
         for (int y=0; y<board.getRoomList().get(x).getShotCounters(); y++){
-          scv = new ShotCounterView(sc, board.getRoomList().get(x).getShotArea(y));
+          scv = new ShotCounterView(sc, board.getRoomList().get(x).getShotArea(y), y);
           board.getRoomList().get(x).addListener(scv);
           shotViewList.add(scv);
         }

@@ -8,7 +8,7 @@ public class Room{
   public interface Listener{
 public void enter(ArrayList<Integer> n);
 public void over();
-public void incrementShots();
+public void incrementShots(int n);
   }
 
       private List<Listener> listeners;
@@ -65,7 +65,7 @@ public void incrementShots();
     }
     private synchronized void shotListener(){
       for (Listener l: listeners){
-        l.incrementShots();
+        l.incrementShots(shotCounters);
       }
     }
 
