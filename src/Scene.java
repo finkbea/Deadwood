@@ -7,8 +7,10 @@ import java.util.LinkedList;
 public class Scene implements Room.Listener{
 
   public interface Listener{
-    public void showScene(Scene s);
-    public void closeScene(Scene s);
+      public void showScene(Scene s);
+      public void closeScene(Scene s);
+      public void clickScene();
+      public void setRoom(Room room);
   }
 
     private List<Listener> listeners;
@@ -20,9 +22,10 @@ public class Scene implements Room.Listener{
     private String image;
     private int num_roles;
     private ArrayList<Integer> area;
-
+    private Room _room;
+    
     Scene(String name, String l, int n, String i, ArrayList<Role> roles, int budget){
-  listeners = new LinkedList<Listener>();
+	listeners = new LinkedList<Listener>();
 	_name = name;
 	_roles = roles;
 	_budget = budget;
@@ -30,8 +33,16 @@ public class Scene implements Room.Listener{
 	this.number =n;
 	this.image=i;
 	num_roles = roles.size();
+	_room = null;
     }
 
+    public synchronized void sendRoomToListeners(){
+	System.out.println("sss");
+	for (Listener l : listeners){
+	    l.setRoom(_room);
+	}  
+    }
+    
     public synchronized void addListener(Listener l){
       listeners.add(l);
     }
@@ -77,13 +88,19 @@ public class Scene implements Room.Listener{
 
     //Room.Listener
     public void enter(ArrayList<Integer> n){
-      this.area=n;
+	System.out.println("llll");
+	this.area=n;
       enterListener();
     }
     public void over(){
       overListener();
-    }
+    }    
     public void incrementShots(int n){
     }
-
+    public void sendRoom(Room room){
+	System.out.println("ddd");
+	_room = room;
+	sendRoomToListeners();
+    }
+    
 }

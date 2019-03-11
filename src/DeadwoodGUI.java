@@ -102,7 +102,7 @@ public class DeadwoodGUI{
 	SceneView sv;
 	int i = 1;
 	while(i < 41){
-	    sv = new SceneView(s, i);
+	    sv = new SceneView(s, i, controller);
 	    board.getAllScenes().get(i-1).addListener(sv);
 	    sceneViewList.add(sv);
 	    i++;

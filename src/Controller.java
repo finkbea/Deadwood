@@ -35,4 +35,8 @@ public class Controller extends JPanel {
     public void endClick(){
 	executor.execute(() -> board.setCurrentPlayerID(board.getCurrentPlayerID() + 1));
     }
+
+    public void clickScene(Room room){
+	executor.execute(() -> System.out.println(room.getName()));
+    }
 }

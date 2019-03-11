@@ -41,4 +41,5 @@ public class ShotCounterView extends JPanel implements Room.Listener{
       setVisible(false);
     }
   }
+    public void sendRoom(Room room){}
 }
