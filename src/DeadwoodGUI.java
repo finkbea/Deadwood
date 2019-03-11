@@ -48,6 +48,7 @@ public class DeadwoodGUI{
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
 	UpgradeView upgradeView = new UpgradeView(board, controller);	
+	SceneMovePanels smp = new SceneMovePanels(board, controller);
 	
 	board.addListener(bottomLeftPanel);
 
@@ -59,6 +60,7 @@ public class DeadwoodGUI{
 	}	
 	board.getPlayer(board.getPlayerListSize()).addListener(sidePanel);
 	boardpanel.add(upgradeView);
+	boardpanel.add(smp);
 	
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);

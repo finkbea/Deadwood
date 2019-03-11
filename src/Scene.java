@@ -9,8 +9,6 @@ public class Scene implements Room.Listener{
   public interface Listener{
       public void showScene(Scene s);
       public void closeScene(Scene s);
-      public void clickScene();
-      public void setRoom(Room room);
   }
 
     private List<Listener> listeners;
@@ -34,13 +32,6 @@ public class Scene implements Room.Listener{
 	this.image=i;
 	num_roles = roles.size();
 	_room = null;
-    }
-
-    public synchronized void sendRoomToListeners(){
-	System.out.println("sss");
-	for (Listener l : listeners){
-	    l.setRoom(_room);
-	}  
     }
     
     public synchronized void addListener(Listener l){
@@ -96,11 +87,6 @@ public class Scene implements Room.Listener{
       overListener();
     }    
     public void incrementShots(int n){
-    }
-    public void sendRoom(Room room){
-	System.out.println("ddd");
-	_room = room;
-	sendRoomToListeners();
     }
     
 }

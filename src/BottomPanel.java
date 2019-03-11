@@ -84,22 +84,6 @@ public class BottomPanel{
 	    });
 	e_b.setBackground(Color.decode("#79CEDC"));
 
-	JButton m_b = new JButton();
-	m_b.setBounds(570, 60, 150, 100);
-	m_b.setVisible(true);
-	bottomPanel.add(m_b);
-	m_b.setLayout(null);
-	JLabel move = new JLabel("Move");
-	move.setBounds(50, 40, 100, 15);
-	m_b.add(move);
-	m_b.addMouseListener(new MouseAdapter(){
-		@Override
-		public void mouseClicked(MouseEvent e){
-		    moveClick(controller);
-		}
-	    });
-	m_b.setBackground(Color.decode("#79CEDC"));
-	
 	mainFrame.add(bottomPanel);
     }
 
@@ -118,8 +102,5 @@ public class BottomPanel{
     private synchronized void endClick(Controller controller){
 	controller.endClick();
     }
-    
-    private synchronized void moveClick(Controller controller){
-	controller.moveClick();
-    }
+
 }

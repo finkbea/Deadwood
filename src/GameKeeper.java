@@ -151,13 +151,17 @@ public class GameKeeper{
 
     // Returns String of room name from command line when 'move' is called
     private static String getDesiredRoom(String command){
+	System.out.println(command);
 	String temp = "";
 	String[] tokens = command.split(" ");
 	if(tokens.length > 2){
 	    temp += tokens[1] + " " + tokens[2];
 	}
+	else if(tokens.length == 2){
+	    temp += tokens[0] + " " + tokens[1];
+	}
 	else{
-	    temp += tokens[1];
+	    temp += tokens[0];
 	}
 	return temp;
     }

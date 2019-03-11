@@ -26,12 +26,7 @@ public class SceneView extends JPanel implements Scene.Listener{
 	scene = new JLabel();
 	add(scene, 0);
 	scene.setBounds(0,0,205,115);
-	scene.addMouseListener(new MouseAdapter(){
-		@Override
-		public void mouseClicked(MouseEvent e){
-		    c.clickScene(_room);
-		}		
-	    });
+
 	//setBounds(0, 0, 205, 115);
 	//scene.setIcon(s.getSceneIcon(1));
 	setOpaque(false);
@@ -49,12 +44,5 @@ public class SceneView extends JPanel implements Scene.Listener{
     setBounds(0,0,0,0);
     }
 
-    public void setRoom(Room room){
-	System.out.println("asd");
-	_room = room;
-    }
-    
-    public void clickScene(){
-    }
 }
 
