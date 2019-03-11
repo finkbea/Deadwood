@@ -147,6 +147,9 @@ public class Player{
     public int getRank(){
 	return rank;
     }
+    public void setRank(int n){
+      this.rank=n;
+    }
 
     // Since Player object keeps track of room, updateRoom()
     public void updateRoom(Room room){

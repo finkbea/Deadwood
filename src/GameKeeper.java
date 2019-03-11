@@ -10,10 +10,19 @@ public class GameKeeper{
 	System.out.println("Get ready to rumble! Starting game!");
 	int day = 1;
 
-	while(day <= 4){
-	    dayKeeper(board);
-	    day++;
-	}
+  if (board.getNumPlayers()<=3){
+    while (day <=3){
+      dayKeeper(board);
+      day++;
+    }
+  }
+  else{
+    while(day <= 4){
+        dayKeeper(board);
+        day++;
+    }
+  }
+
 
 	System.out.println("Game is over!");
 	calculateWinner(board);
