@@ -83,5 +83,7 @@ public class Scene implements Room.Listener{
     public void over(){
       overListener();
     }
+    public void incrementShots(){
+    }
 
 }

@@ -21,12 +21,14 @@ public class DeadwoodGUI{
     private BottomLeftPanel bottomLeftPanel;
     private ArrayList<PlayerView> playerViewList;
     private ArrayList<SceneView> sceneViewList;
+    private ArrayList<ShotCounterView> shotViewList;
 
     // Creates the whole board with all necessary panels and views
     public DeadwoodGUI(Board board) throws IOException{
 	controller = new Controller(board);
 	setupPlayerViews(board, board.getNumPlayers());
 	setupSceneViews(board);
+  setupShotCounterViews(board);
 
 	mainFrame = new JFrame();
 
@@ -35,7 +37,7 @@ public class DeadwoodGUI{
 	mainFrame.setLayout(null);
 
 	createSceneCardPanels(mainFrame, board);
-	CreateShotCountersPanels.main(mainFrame, sc);
+
 	BottomPanel bp = new BottomPanel(mainFrame, controller);
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
@@ -68,6 +70,24 @@ public class DeadwoodGUI{
 	    boardpanel.add(sceneViewList.get(j), 0);
 	    sceneViewList.get(j).requestFocus();
 	}
+  for (int k = 0; k<shotViewList.size(); k++){
+    boardpanel.add(shotViewList.get(k), 0);
+    shotViewList.get(k).requestFocus();
+  }
+    }
+
+    //Initializes all shotCounter views and sets their icons
+    private void setupShotCounterViews(Board board){
+      sc = ShotCounterResources.getInstance();
+      shotViewList = new ArrayList<ShotCounterView>();
+      ShotCounterView scv;
+      for (int x =0; x<board.getRoomList().size(); x++){
+        for (int y=0; y<board.getRoomList().get(x).getShotCounters(); y++){
+          scv = new ShotCounterView(sc, board.getRoomList().get(x).getShotArea(y));
+          board.getRoomList().get(x).addListener(scv);
+          shotViewList.add(scv);
+        }
+      }
     }
 
     // Initializes all scene views and sets icons

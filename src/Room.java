@@ -8,6 +8,7 @@ public class Room{
   public interface Listener{
 public void enter(ArrayList<Integer> n);
 public void over();
+public void incrementShots();
   }
 
       private List<Listener> listeners;
@@ -16,14 +17,14 @@ public void over();
     private ArrayList<Role> roles = new ArrayList<Role>();
     private ArrayList<Integer> area = new ArrayList<Integer>();
     private ArrayList<Upgrade> officeUpgrades = new ArrayList<Upgrade>();
-    private ArrayList<ArrayList> takesArea = new ArrayList<ArrayList>();
+    private ArrayList<ArrayList<Integer>> takesArea = new ArrayList<ArrayList<Integer>>();
     private ArrayList<Integer> blankSpace = new ArrayList<Integer>(); //where players sit w/o a role
     private ArrayList<Player> occupants = new ArrayList<Player>();
     private Scene _scene;
     public String _name;
     public int shotCounters;
 
-    Room(String name, int shots, ArrayList<ArrayList> takesArea, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a, ArrayList<Integer> b){
+    Room(String name, int shots, ArrayList<ArrayList<Integer>> takesArea, ArrayList<Role> r, ArrayList<String> h, ArrayList<Integer> a, ArrayList<Integer> b){
       	listeners = new LinkedList<Listener>();
 	_name = name;
 	shotCounters = shots;
@@ -62,6 +63,11 @@ public void over();
         l.over();
       }
     }
+    private synchronized void shotListener(){
+      for (Listener l: listeners){
+        l.incrementShots();
+      }
+    }
 
     public void addPlayer(Player p){
       occupants.add(p);
@@ -73,10 +79,6 @@ public void over();
 
     public ArrayList<Integer> getBlankSpace(){
       return this.blankSpace;
-    }
-
-    public ArrayList<ArrayList> getTakesArea(){
-	return takesArea;
     }
 
     // Returns the Strings of neighboring rooms
@@ -91,6 +93,10 @@ public void over();
 
     public String getName(){
 	return _name;
+    }
+
+    public ArrayList<Integer> getShotArea(int n){
+      return this.takesArea.get(n);
     }
 
     public void addNeighbor(Room room){
@@ -132,6 +138,7 @@ public void over();
 
     public void removeShot(){
 	shotCounters--;
+  shotListener();
     }
 
     public int getShotCounters(){
