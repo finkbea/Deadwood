@@ -60,84 +60,84 @@ public class SceneMovePanels extends JPanel{
 	    case 0: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.tsClick();
+			    c.roomClick("Train Station");
 			}
 		});
 		break;
 	    case 1: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.shClick();
+			    c.roomClick("Secret Hideout");
 			}
 		});
 		break;
 	    case 2: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.cClick();
+			    c.roomClick("Church");
 			}
 		});
 		break;
 	    case 3: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.hClick();
+			    c.roomClick("Hotel");
 			}
 		});
 		break;
 	    case 4: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.msClick();
+			    c.roomClick("Main Street");
 			}
 		});
 		break;
 	    case 5: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.jClick();
+			    c.roomClick("Jail");
 			}
 		});
 		break;
 	    case 6: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.gsClick();
+			    c.roomClick("General Store");
 			}
 		});
 		break;
 	    case 7: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.rClick();
+			    c.roomClick("Ranch");
 			}
 		});
 		break;
 	    case 8: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.bClick();
+			    c.roomClick("Bank");
 			}
 		});
 		break;
 	    case 9: labelList.get(i).addMouseListener(new MouseAdapter(){
 		        @Override
 			public void mouseClicked(MouseEvent e){
-			    c.sClick();
+			    c.roomClick("Saloon");
 			}
 		});
 		break;
 	    case 10: labelList.get(i).addMouseListener(new MouseAdapter(){
 		    @Override
 		    public void mouseClicked(MouseEvent e){
-			c.tClick();
+			c.roomClick("Trailers");
 		    }
 		});
 		break;
 	    case 11: labelList.get(i).addMouseListener(new MouseAdapter(){
 		    @Override
 		    public void mouseClicked(MouseEvent e){
-			c.coClick();
+			c.roomClick("Casting Office");
 		    }
 		});
 		break;

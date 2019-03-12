@@ -10,18 +10,18 @@ public class GameKeeper{
 	System.out.println("Get ready to rumble! Starting game!");
 	int day = 1;
 
-  if (board.getNumPlayers()<=3){
-    while (day <=3){
-      dayKeeper(board);
-      day++;
-    }
-  }
-  else{
-    while(day <= 4){
-        dayKeeper(board);
-        day++;
-    }
-  }
+	if (board.getNumPlayers()<=3){
+	    while (day <=3){
+		dayKeeper(board);
+		day++;
+	    }
+	}
+	else{
+	    while(day <= 4){
+		dayKeeper(board);
+		day++;
+	    }
+	}
 
 
 	System.out.println("Game is over!");
@@ -216,10 +216,11 @@ public class GameKeeper{
 	else if(tokens.length == 5){
 	    temp += tokens[1] + " " + tokens[2] + " " + tokens[3] + " " + tokens[4];
 	}
-	else{
-	    temp += tokens[1];
+	else if(tokens.length == 2){
+	    temp += tokens[0] + " " + tokens[1];
 	}
-
+	else
+	    temp += tokens[0];
 	return temp;
     }
 
@@ -227,7 +228,7 @@ public class GameKeeper{
        returns the role once it is found. If it is never found, an error message is printed
        out. */
     private static Role findRole(String desired_role, Player p){
-	Role role = new Role(1, null, "fake role", "this is a fake role");
+	Role role = null;
 	int found = 0;
 	Room room = p.getCurrentRoom();
 	for(int i = 0; i < room.getNumberOfRoles(); i++){
@@ -540,17 +541,23 @@ public class GameKeeper{
 	Player temp = board.getPlayer(turn);
 	String desired_role_string = getDesiredRoleString(command);
 	Role role = findRole(desired_role_string, temp);
-	int role_type = getRoleType(desired_role_string, temp);
-	if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
-	    temp.useAction();
-	    temp.setRole(role);
-	    role.workRole();
-	    temp.setRoleType(role_type);
+	if(role != null){
+	    int role_type = getRoleType(desired_role_string, temp);
+	    if(temp.getRank() >= role.getRank() && temp.getRole() == null && role.isBeingWorked() == 0){
+		temp.useAction();
+		temp.setRole(role);
+		role.workRole();
+		temp.setRoleType(role_type);
+	    }
+	    else{
+		System.out.println("The role rank is larger than player rank or "+
+				   "the player already has a role or the role is already taken. Try again.");
+	    }
 	}
 	else{
-	    System.out.println("The role rank is larger than player rank or "+
-	 	       "the player already has a role or the role is already taken. Try again.");
+	    System.out.println("Cannot take that role");
 	}
+	
     }
 
 }

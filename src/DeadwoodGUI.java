@@ -41,14 +41,15 @@ public class DeadwoodGUI{
 	mainFrame.setLayout(null);
 
 	createSceneCardPanels(mainFrame, board);
-  //sc = new ShotCounterResources();
-  //CreateShotCountersPanels.main(mainFrame, sc);
+	//sc = new ShotCounterResources();
+	//CreateShotCountersPanels.main(mainFrame, sc);
 
 	bottomPanel = new BottomPanel(mainFrame, controller);
 	sidePanel = new SidePanel(mainFrame, board.getPlayers());
 	bottomLeftPanel = new BottomLeftPanel(mainFrame, board);
 	UpgradeView upgradeView = new UpgradeView(board, controller);	
 	SceneMovePanels smp = new SceneMovePanels(board, controller);
+	WorkRolePanels wrp = new WorkRolePanels(board, controller);
 	
 	board.addListener(bottomLeftPanel);
 
@@ -61,7 +62,7 @@ public class DeadwoodGUI{
 	board.getPlayer(board.getPlayerListSize()).addListener(sidePanel);
 	boardpanel.add(upgradeView);
 	boardpanel.add(smp);
-	
+	boardpanel.add(wrp);
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);
 	mainFrame.add(boardpanel);

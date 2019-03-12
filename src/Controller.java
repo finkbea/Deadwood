@@ -76,52 +76,11 @@ public class Controller extends JPanel {
 	System.out.println("c5 click");
     }
     
-    public void tsClick(){
-	executor.execute(() -> GameKeeper.moveInput("Train Station", board.getCurrentPlayerID(), board));
+    public void roomClick(String roomName){
+	executor.execute(() -> GameKeeper.moveInput(board.getRoom(roomName).getName(), board.getCurrentPlayerID(), board));
     }
 
-    public void shClick(){
-	executor.execute(() -> GameKeeper.moveInput("Secret Hideout", board.getCurrentPlayerID(), board));
+    public void roleClick(String roleName){
+	executor.execute(() -> GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board));
     }
-
-    public void cClick(){
-	executor.execute(() -> GameKeeper.moveInput("Church", board.getCurrentPlayerID(), board));
-    }
-
-    public void hClick(){
-	executor.execute(() -> GameKeeper.moveInput("Hotel", board.getCurrentPlayerID(), board));
-    }
-
-    public void msClick(){
-	executor.execute(() -> GameKeeper.moveInput("Main Street", board.getCurrentPlayerID(), board));
-    }
-
-    public void jClick(){
-	executor.execute(() -> GameKeeper.moveInput("Jail", board.getCurrentPlayerID(), board));
-    }
-
-    public void gsClick(){
-	executor.execute(() -> GameKeeper.moveInput("General Store", board.getCurrentPlayerID(), board));
-    }
-
-    public void rClick(){
-	executor.execute(() -> GameKeeper.moveInput("Ranch", board.getCurrentPlayerID(), board));
-    }
-
-    public void bClick(){
-	executor.execute(() -> GameKeeper.moveInput("Bank", board.getCurrentPlayerID(), board));
-    }
-
-    public void sClick(){
-	executor.execute(() -> GameKeeper.moveInput("Saloon", board.getCurrentPlayerID(), board));
-    }
-
-    public void tClick(){
-	executor.execute(() -> GameKeeper.moveInput("Trailers", board.getCurrentPlayerID(), board));
-    }
-
-    public void coClick(){
-	executor.execute(() -> GameKeeper.moveInput("Casting Office", board.getCurrentPlayerID(), board));
-    }
-    
 }
