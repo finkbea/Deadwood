@@ -9,11 +9,14 @@ import java.awt.Color;
 import java.util.*;
 import java.util.concurrent.*;
 
+//The labels for each upgrade so you can click directly on the board to upgrade. Their are seperate labels for each upgrade that just listen to the mouse and if they get clicked on then
+//the user pays that amount to upgrade to the level shown. 
+
 public class UpgradeView extends JPanel{
 
     private ArrayList<JLabel> labelList;
     private Controller c;
- 
+
     public UpgradeView(Board board, Controller controller){
 	super(null);
 	c = controller;
@@ -24,7 +27,7 @@ public class UpgradeView extends JPanel{
 	setOpaque(false);
 
 	JLabel l;
-	
+
 	int i = 0;
 	while(i < area.size()){
 	    l = new JLabel();
@@ -32,7 +35,7 @@ public class UpgradeView extends JPanel{
 	    labelList.add(l);
 	    l.setBounds(area.get(i).getArea().get(0), area.get(i).getArea().get(1), area.get(i).getArea().get(2), area.get(i).getArea().get(3));
 	    l.setVisible(true);
-	    i++;	    
+	    i++;
 	}
 
 	i = 0;
@@ -114,4 +117,3 @@ public class UpgradeView extends JPanel{
     }
 
 }
-

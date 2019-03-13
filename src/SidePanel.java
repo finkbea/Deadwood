@@ -9,6 +9,15 @@ import java.awt.Color;
 import java.util.concurrent.*;
 import java.util.ArrayList;
 
+//The sidePanel is one of our larger classes, it listens to all of the players in the game. It creates empty arrayLists of Jlabels for each stat displayed which are initialized
+//inside the constructor. At the top there is a small JLabel that just displays that it is a stat panel in white text. For each player in the game we create a label for every attribute:
+//name, score, rank, dollars, credits, rehearses on current space, and their last roll for acting. These are all added to the Jpanel and set inside the for loop, with each stat
+//being incremented slightly downwards. We add these labels to the arraylists created earlier and set everything to visible. Whenever a player does something that changes any of their
+//stats we update all of the stats for that player.
+
+//The dice are for displayed the players last roll when acting, they do not take into account the times rehearsed so the players will have to add that to the dice to see their final roll.
+//They all start at one and are not to be confused with the player dice on the board which are what shows the players rank (which is shown again in the stat panel).
+
 public class SidePanel extends JPanel implements Player.Listener{
 
   private JPanel sidePanel;
@@ -40,7 +49,7 @@ public class SidePanel extends JPanel implements Player.Listener{
     statPanel.setBounds(20,0,160,30);
     statPanel.setForeground(Color.white);
     add(statPanel);
-    //JLabel playerStats;
+
     for (int i =0; i<players.size(); i++){
       JLabel name = new JLabel("Player: "+players.get(i).getPid()+"");
       name.setBounds(20,-70+(100*(i+1)),160,15);
@@ -87,9 +96,11 @@ public class SidePanel extends JPanel implements Player.Listener{
     }
     setVisible(true);
   }
+  //part of the player listener, not necessary to use for this so these methods remain empty
   public void playerMoved(Player p){}
   public void roleTaken(Player p){}
 
+  //this gets called whenever the player does anything to change any of their stats, all of their stats are then updated on the stat panel.
   public void updateScore(Player p){
     res = PlayerResources.getInstance();
     int x = p.getPid()-1;

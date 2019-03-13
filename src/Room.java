@@ -3,8 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 
+//We just have one type of room, there are no special types for the casting office or the trailer, they just use different constructors as called by the ParseBoard. Each room has a list
+//of neighbors, roles, an area for the scene card and for each take, and an additional area for players just sitting around who aren't on a role along with an arralist of players
+//in the room. Every room has an arrayList of office upgrades but only the offices ever gets initialized, outside of that the casting office and trailer are just rooms with no values
+//for their scnes, roles, takesArea, or shot counters. 
+
 public class Room{
 
+//the shot counter views and scenes listen to their respective rooms, have methods for when a player enters the room, when the scene is over, and for removing a shot counter
   public interface Listener{
 public void enter(ArrayList<Integer> n);
 public void over();
@@ -68,7 +74,7 @@ public void incrementShots(int n);
         l.incrementShots(shotCounters);
       }
     }
-
+    //lets the listeners know that a player entered the room
     public void addPlayer(Player p){
       occupants.add(p);
       playerEnter();
@@ -77,19 +83,7 @@ public void incrementShots(int n);
       occupants.remove(p);
     }
 
-    public ArrayList<Upgrade> getUpgrades(){
-	return officeUpgrades;
-    }
-    
-    public ArrayList<Integer> getBlankSpace(){
-      return this.blankSpace;
-    }
-
-    // Returns the Strings of neighboring rooms
-    public ArrayList<String> getNeighborHelper(){
-	return neighborHelper;
-    }
-
+    //adds a role to this room
     public void addRole(int rank, ArrayList<Integer> r, String name, String line){
 	Role role = new Role(rank, r, name, line);
 	roles.add(role);
@@ -99,28 +93,12 @@ public void incrementShots(int n);
 	return _name;
     }
 
-    public ArrayList<Integer> getShotArea(int n){
-      return this.takesArea.get(n);
-    }
-
     public void addNeighbor(Room room){
 	neighbors.add(room);
     }
-
+    //assigns a scene to this room
     public void placeScene(Scene scene){
 	_scene = scene;
-    }
-
-    public Scene getScene(){
-	return _scene;
-    }
-
-    public int getNumberOfRoles(){
-	return (roles.size());
-    }
-
-    public ArrayList<Role> getRoles(){
-	return roles;
     }
 
     // Parses all neighbors in the neighbors arraylist and returns 0 (no) or 1 (yes) if neighbor or not
@@ -140,21 +118,53 @@ public void incrementShots(int n);
 	return is_neighbor;
     }
 
+    //lets the listeners know a shot has been removed and removes a shot from the shotcounter
     public void removeShot(){
 	shotCounters--;
   shotListener();
+    }
+    //lets the listeners know the scene is over and sets the current scene assigned to the room to null;
+    public void wrapScene(){
+  sceneOver();
+	_scene = null;
+    }
+
+    //the rest of this file is just get methods to get the various variables belonging to the room
+
+    public ArrayList<Integer> getShotArea(int n){
+      return this.takesArea.get(n);
+    }
+
+    public Scene getScene(){
+  return _scene;
+    }
+
+    public int getNumberOfRoles(){
+  return (roles.size());
+    }
+
+    public ArrayList<Role> getRoles(){
+	return roles;
     }
 
     public int getShotCounters(){
 	return shotCounters;
     }
 
-    public void wrapScene(){
-      sceneOver();
-	_scene = null;
-    }
-
     public ArrayList<Integer> getArea(){
 	return area;
+    }
+
+    public ArrayList<Upgrade> getUpgrades(){
+  return officeUpgrades;
+    }
+
+    public ArrayList<Integer> getBlankSpace(){
+  return this.blankSpace;
+    }
+
+    // Returns the Strings of neighboring rooms
+    public ArrayList<String> getNeighborHelper(){
+  return neighborHelper;
     }
 }

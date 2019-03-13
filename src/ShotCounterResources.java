@@ -7,6 +7,8 @@ import java.io.*;
 import java.awt.image.*;
 import java.awt.Color;
 
+//This literally just pulls the shot.png image for all the shotCounters from our resources folder, it is a singleton pattern because there is no reason to create multiple instances of it
+
 public class ShotCounterResources{
 
     private ImageIcon icon;
