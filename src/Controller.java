@@ -17,15 +17,19 @@ public class Controller extends JPanel {
     }
 
     public void actClick(){
-	executor.execute(() -> GameKeeper.actInput("", board.getCurrentPlayerID(), board));
+	executor.execute(() -> {
+		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "act") == true){
+		    GameKeeper.actInput("", board.getCurrentPlayerID(), board);
+		}		
+	    });
     }
 
     public void rehearseClick(){
-	executor.execute(() -> GameKeeper.rehearseInput("", board.getCurrentPlayerID(), board));
-    }
-
-    public void upgradeClick(){
-	executor.execute(() -> GameKeeper.upgradeInput("", board.getCurrentPlayerID(), board));
+	executor.execute(() -> {
+		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "rehearse") == true){
+		    GameKeeper.rehearseInput("", board.getCurrentPlayerID(), board);		    
+		}		
+	    });
     }
 
     public void moveClick(){
@@ -33,7 +37,11 @@ public class Controller extends JPanel {
     }
 
     public void endClick(){
-	executor.execute(() -> board.setCurrentPlayerID(board.getCurrentPlayerID() + 1));
+	executor.execute(() -> {
+		board.getPlayer(board.getCurrentPlayerID()).resetMove();
+		board.getPlayer(board.getCurrentPlayerID()).resetAction();
+		board.setCurrentPlayerID(board.getCurrentPlayerID() + 1);		
+	    });
     }
 
     public void d1Click(){
@@ -77,10 +85,20 @@ public class Controller extends JPanel {
     }
     
     public void roomClick(String roomName){
-	executor.execute(() -> GameKeeper.moveInput(board.getRoom(roomName).getName(), board.getCurrentPlayerID(), board));
+	executor.execute(() -> {
+		String cmd = "move "+ roomName;
+		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
+		    GameKeeper.moveInput(board.getRoom(roomName).getName(), board.getCurrentPlayerID(), board);
+	        }
+	    });
     }
 
     public void roleClick(String roleName){
-	executor.execute(() -> GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board));
+	executor.execute(() -> {
+		String cmd = "work " + roleName;
+		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
+		    GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board);
+		}
+	    });	
     }
 }

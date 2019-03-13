@@ -52,22 +52,6 @@ public class BottomPanel{
 		}
 	    });
 
-	JButton u_b = new JButton();
-	u_b.setBounds(400, 60, 150, 100);
-	u_b.setVisible(true);
-	bottomPanel.add(u_b);
-	u_b.setLayout(null);
-	JLabel upgrade = new JLabel("Upgrade");
-	upgrade.setBounds(40, 40, 100, 15);
-	u_b.add(upgrade);
-	u_b.addMouseListener(new MouseAdapter(){
-		@Override
-		public void mouseClicked(MouseEvent e){
-		    upgradeClick(controller);
-		}
-	    });
-	u_b.setBackground(Color.decode("#79CEDC"));
-
 	JButton e_b = new JButton();
 	e_b.setBounds(950, 60, 150, 100);
 	e_b.setVisible(true);
@@ -93,10 +77,6 @@ public class BottomPanel{
 
     private synchronized void rehearseClick(Controller controller){
 	controller.rehearseClick();
-    }
-    
-    private synchronized void upgradeClick(Controller controller){
-	controller.upgradeClick();
     }
     
     private synchronized void endClick(Controller controller){
