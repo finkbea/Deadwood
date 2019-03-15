@@ -112,7 +112,6 @@ public class GameKeeper{
 		if(command.contains("end") || command.contains("who") || command.contains("where") ||
 		   command.contains("move") || command.contains("rehearse") || command.contains("work") ||
 		   command.contains("act")){
-		    System.out.println("asd");
 		    valid = true;
 		}		
 	    }
@@ -205,7 +204,6 @@ public class GameKeeper{
 
     // Returns String of room name from command line when 'move' is called
     private static String getDesiredRoom(String command){
-	System.out.println(command);
 	String temp = "";
 	String[] tokens = command.split(" ");
 	if(tokens.length > 2){

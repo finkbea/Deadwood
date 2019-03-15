@@ -44,7 +44,6 @@ public class WorkRolePanels extends JPanel{
 		l.setVisible(true);
 		roleName = roomList.get(i).getRoles().get(j).getName();
 		roles.add(roleName);
-		System.out.println(roleName);
 		j++;
 	    }
 	    i++;

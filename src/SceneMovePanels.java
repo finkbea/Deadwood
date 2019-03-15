@@ -30,7 +30,6 @@ public class SceneMovePanels extends JPanel{
 
 	int i = 0;
 	while(i < roomList.size() - 2){
-	    System.out.println(Arrays.toString(roomList.get(i).getArea().toArray()));
 	    l = new JLabel();
 	    add(l, 0);
 	    labelList.add(l);
