@@ -56,39 +56,93 @@ public class Controller extends JPanel {
     }
 
     public void d2Click(){
-	System.out.println("d2 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 3) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(3);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(0, -10);
+		}
+	    });
     }
 
     public void d3Click(){
-	System.out.println("d3 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 4) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(4);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(0, -18);
+		}
+	    });
     }
 
     public void d4Click(){
-	System.out.println("d4 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 5) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(5);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(0, -28);
+		}
+	    });
     }
 
     public void d5Click(){
-	System.out.println("d5 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 6) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(6);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(0, -40);
+		}
+	    });
     }
 
     public void c1Click(){
-	System.out.println("c1 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 2) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(2);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(1, -5);
+		}
+	    });
     }
 
     public void c2Click(){
-	System.out.println("c2 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 3) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(3);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(1, -10);
+		}
+	    });
     }
 
     public void c3Click(){
-	System.out.println("c3 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 4) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(4);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(1, -15);
+		}
+	    });
     }
 
     public void c4Click(){
-	System.out.println("c4 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 5) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(5);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(1, -20);
+		}
+	    });
     }
 
     public void c5Click(){
-	System.out.println("c5 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 6) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(6);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(1, -25);
+		}
+	    });
     }
     
     public void roomClick(String roomName){
