@@ -45,7 +45,14 @@ public class Controller extends JPanel {
     }
 
     public void d1Click(){
-	System.out.println("d1 click");
+	executor.execute(() -> {
+		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 2) == 1
+		   && board.getPlayer(board.getCurrentPlayerID()).getCurrentRoom().getName().equals("Casting Office")){
+		    board.getPlayer(board.getCurrentPlayerID()).setRank(2);
+		    board.getPlayer(board.getCurrentPlayerID()).addCurrency(0, -4);
+		}
+	    });
+
     }
 
     public void d2Click(){

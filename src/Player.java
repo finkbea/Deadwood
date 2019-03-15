@@ -174,9 +174,6 @@ public class Player{
   sendUpdate();
     }
 
-    /*
-    UNNECESSARY, VALUES ARE STORED IN OFFICE
-    */
     public void updateRankAndMoney(int new_rank, int money_type){
 	rank = new_rank;
 

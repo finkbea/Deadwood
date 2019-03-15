@@ -305,7 +305,7 @@ public class GameKeeper{
     }
 
     // returns 0 for not enough, 1 for enough funds for rank
-    private static int getPlayerFunds(Player temp, int money_type, int new_rank){
+    public static int getPlayerFunds(Player temp, int money_type, int new_rank){
 	int enough_money = 0;
         if(new_rank == 2 && money_type == 0 && temp.getDollars() >= 4){
 	    enough_money = 1;
