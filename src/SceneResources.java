@@ -6,17 +6,18 @@ import javax.imageio.*;
 import java.io.*;
 import java.awt.image.*;
 import java.awt.Color;
+import java.util.ArrayList;
 
 //Similar to the other singleton pattern resource clases we have in our Deadwood, its got an array of ImageIcons for each image that are stored in our resources folder.
 //Each card has a scene number that is assigned, the only interesting thing here is the sub number 10 cards have a 0 in their name that we account for.
 
 public class SceneResources{
 
-    private ImageIcon[] big;
+    private ArrayList<ImageIcon> big;
     static SceneResources instance;
 
     public SceneResources(){
-	big = new ImageIcon[40];
+	big = new ArrayList<ImageIcon>();
 	final Class cls = SceneResources.class;
 	String fn = "";
 
@@ -28,7 +29,7 @@ public class SceneResources{
 		fn = String.format("resources/cards/%d.png", i+1);
 	    }
 	    try (InputStream r = cls.getResourceAsStream(fn)) {
-		big[i] = new ImageIcon (ImageIO.read(r));
+		big.add(new ImageIcon (ImageIO.read(r)));
 	    }
 	    catch (IOException e) {
 		System.err.println("fn=\"" + fn + "\"");
@@ -39,7 +40,8 @@ public class SceneResources{
     }
 
     public ImageIcon getSceneIcon(int sceneNum){
-	return big[sceneNum-1];
+	System.out.println(sceneNum);
+	return big.get(sceneNum-1);
     }
 
     public static SceneResources getInstance() {

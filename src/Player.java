@@ -210,7 +210,8 @@ public class Player{
     }
 
     public boolean act(int roll, int budget){
-      boolean acting = false;
+	System.out.println(rehearseTokens +", "+roll);
+	boolean acting = false;
       if ((roll+rehearseTokens)>=budget){
         acting=true;
       }

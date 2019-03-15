@@ -539,8 +539,8 @@ public class GameKeeper{
 		    temp.useAction();
 		    int roll = rollDice(1);
 		    int budget = temp.getCurrentRoom().getScene().getBudget();
-
-		    if(temp.act(roll, budget)==false){
+		    System.out.println("budget: "+budget+". Scene name: "+temp.getCurrentRoom().getScene().getName());
+		    if(temp.act(roll, budget) == false){
 			payoutFail(temp);
 			System.out.println("fail roll");
 		    }

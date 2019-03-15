@@ -96,8 +96,9 @@ public class Board{
 	while(i < room_list.size()){
 	    if(!room_list.get(i).getName().equals("Casting Office") &&
 	       !room_list.get(i).getName().equals("Trailers")){
-	    room_list.get(i).placeScene(unused_scenes.get(i));
-      room_list.get(i).addListener(unused_scenes.get(i));
+		System.out.println(unused_scenes.get(i).getName());
+		room_list.get(i).placeScene(unused_scenes.get(i));
+	    room_list.get(i).addListener(unused_scenes.get(i));
 	    updateScenes(unused_scenes.get(i));
 	    }
 	    i++;

@@ -27,7 +27,8 @@ public class Scene implements Room.Listener{
 
     //the base variables of a scene as gathered from the ParseCard reader reading the card.xml file
     Scene(String name, String l, int n, String i, ArrayList<Role> roles, int budget){
-	    listeners = new LinkedList<Listener>();
+	System.out.println(name + ", "+n);
+	listeners = new LinkedList<Listener>();
 	    _name = name;
 	    _roles = roles;
 	    _budget = budget;
