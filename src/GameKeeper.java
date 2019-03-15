@@ -28,6 +28,8 @@ public class GameKeeper{
 	calculateWinner(board);
     }
 
+    // Keeps track of days. Ends game when max number of days
+    // is met. Returns nothing.
     public static void dayKeeper(Board board){
 	int turn = 1;
 	resetPlayers(board);
@@ -46,6 +48,7 @@ public class GameKeeper{
 	}
     }
 
+    // Updates all sets with new scenes
     private static void hydrateSets(Board board){
 	board.hydrateSets();
     }

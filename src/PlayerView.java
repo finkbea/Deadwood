@@ -25,7 +25,7 @@ public class PlayerView extends JPanel implements Player.Listener{
 	p1.setBounds(0, 0, 40, 40);
 	setBounds(1060 + panelOffSet, 242, 40, 40);
 	p1.setIcon(r.getIcon(playerNum, 1));
-  setOpaque(false);
+	setOpaque(false);
 	p1.setVisible(true);
 
     }

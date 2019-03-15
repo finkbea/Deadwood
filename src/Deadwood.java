@@ -29,29 +29,31 @@ public class Deadwood{
 	    setupGame(num_players, board);
 	    setupScenes(args, board);
 
-      if (num_players==5){
-        for (int i=0; i<num_players+1; i++){
-          board.getPlayer(i).addCurrency(0, 2);
-        }
-      }
-      else if (num_players==6){
-        for (int i=0; i<num_players+1; i++){
-          board.getPlayer(i).addCurrency(0, 4);
-        }
-      }
-      else if (num_players == 7 || num_players==8){
-        for (int i=0; i<num_players+1; i++){
-          board.getPlayer(i).setRank(2);
-        }
-      }
+	    // Sets up special rules for number of players
+	    if (num_players==5){
+		for (int i=0; i<num_players+1; i++){
+		    board.getPlayer(i).addCurrency(0, 2);
+		}
+	    }
+	    else if (num_players==6){
+		for (int i=0; i<num_players+1; i++){
+		    board.getPlayer(i).addCurrency(0, 4);
+		}
+	    }
+	    else if (num_players == 7 || num_players==8){
+		for (int i=0; i<num_players+1; i++){
+		    board.getPlayer(i).setRank(2);
+		}
+	    }
 
 	    createGUI(board);
-	    //Deadwood dw = new Deadwood(board);
-
 	    GameKeeper.startGame(board);
 	}
     }
 
+    // Starts the GUI setup, returns nothing.
+    // Passes the single board object to DeadwoodGUI for it to use on panel
+    // creation.
     private static void createGUI(Board board) throws IOException{
 	DeadwoodGUI dw = new DeadwoodGUI(board);
     }

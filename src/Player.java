@@ -4,11 +4,11 @@ import java.util.List;
    and rank. */
 public class Player{
 
-  public interface Listener {
-    public void playerMoved(Player p);
-    public void roleTaken(Player p);
-    public void updateScore(Player p);
-  }
+    public interface Listener {
+	public void playerMoved(Player p);
+	public void roleTaken(Player p);
+	public void updateScore(Player p);
+    }
     private int pid;
     private int dollars;
     private int credits;
@@ -26,7 +26,7 @@ public class Player{
 
 
     Player(int p_id){
-      listeners = new LinkedList<Listener>();
+	listeners = new LinkedList<Listener>();
 	pid = p_id;
 	dollars = 0;
 	credits = 0;
@@ -34,67 +34,67 @@ public class Player{
 	rehearseTokens = 0;
 	justMoved = false;
 	actionUsed = false;
-  lastRoll=1;
-  switch (pid){
-    case 1:
-      color="blue";
-      break;
-    case 2:
-      color="orange";
-      break;
-    case 3:
-      color="green";
-      break;
-    case 4:
-      color="red";
-      break;
-    case 5:
-      color="yellow";
-      break;
-    case 6:
-      color="violet";
-      break;
-    case 7:
-      color="pink";
-      break;
-    case 8:
-      color="cyan";
-      break;
-  }
+	lastRoll=1;
+	switch (pid){
+	case 1:
+	    color="blue";
+	    break;
+	case 2:
+	    color="orange";
+	    break;
+	case 3:
+	    color="green";
+	    break;
+	case 4:
+	    color="red";
+	    break;
+	case 5:
+	    color="yellow";
+	    break;
+	case 6:
+	    color="violet";
+	    break;
+	case 7:
+	    color="pink";
+	    break;
+	case 8:
+	    color="cyan";
+	    break;
+	}
     }
 
     public synchronized void addListener(Listener l){
-      listeners.add(l);
+	listeners.add(l);
     }
     private synchronized void sendChangeMove(){
-      for (Listener l : listeners){
-        l.playerMoved(this);
-      }
+	for (Listener l : listeners){
+	    l.playerMoved(this);
+	}
     }
     private synchronized void sendChangeRole(){
-      for (Listener l : listeners){
-        l.roleTaken(this);
-      }
+	for (Listener l : listeners){
+	    l.roleTaken(this);
+	}
     }
 
     private synchronized void sendUpdate(){
-	    for (Listener l : listeners){
-        l.updateScore(this);
-      }
+	for (Listener l : listeners){
+	    l.updateScore(this);
+	}
     }
 
     //returns the players score
     public int getScore(){
-      return this.score;
+	return this.score;
     }
 
     public int getLastRoll(){
-      return this.lastRoll;
+	return this.lastRoll;
     }
 
     //returns the players color
     public String getColor(){
-      return this.color;
+	return this.color;
     }
     public boolean getJustMoved(){
 	return justMoved;
@@ -129,7 +129,7 @@ public class Player{
 	else{
 	    credits += amount;
 	}
-  sendUpdate();
+	sendUpdate();
     }
 
     public int getPid(){
@@ -148,7 +148,7 @@ public class Player{
 	return rank;
     }
     public void setRank(int n){
-      this.rank=n;
+	this.rank=n;
     }
 
     // Since Player object keeps track of room, updateRoom()
@@ -162,7 +162,7 @@ public class Player{
 
     public void rehearse(){
 	rehearseTokens++;
-  sendUpdate();
+	sendUpdate();
     }
 
     public int getRehearseTokens(){
@@ -171,7 +171,7 @@ public class Player{
 
     public void resetRehearseTokens(){
 	rehearseTokens = 0;
-  sendUpdate();
+	sendUpdate();
     }
 
     public void updateRankAndMoney(int new_rank, int money_type){
@@ -212,12 +212,12 @@ public class Player{
     public boolean act(int roll, int budget){
 	System.out.println(rehearseTokens +", "+roll);
 	boolean acting = false;
-      if ((roll+rehearseTokens)>=budget){
-        acting=true;
-      }
-      this.lastRoll=roll;
-      sendUpdate();
-      return acting;
+	if ((roll+rehearseTokens)>=budget){
+	    acting=true;
+	}
+	this.lastRoll=roll;
+	sendUpdate();
+	return acting;
     }
 
     public void setRole(Role role){
@@ -236,9 +236,9 @@ public class Player{
     // Used when scene is wrapped or day is over
     public void resetRole(){
 	_role = null;
-  rehearseTokens=0;
+	rehearseTokens=0;
 	roleType = 0;
-  sendUpdate();
+	sendUpdate();
     }
 
     public int getRoleType(){

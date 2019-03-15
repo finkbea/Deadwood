@@ -10,12 +10,12 @@ import java.util.LinkedList;
 
 public class Room{
 
-//the shot counter views and scenes listen to their respective rooms, have methods for when a player enters the room, when the scene is over, and for removing a shot counter
-  public interface Listener{
-public void enter(ArrayList<Integer> n);
-public void over();
-public void incrementShots(int n);
-  }
+    //the shot counter views and scenes listen to their respective rooms, have methods for when a player enters the room, when the scene is over, and for removing a shot counter
+    public interface Listener{
+	public void enter(ArrayList<Integer> n);
+	public void over();
+	public void incrementShots(int n);
+    }
 
     private List<Listener> listeners;
     private ArrayList<Room> neighbors = new ArrayList<Room>();
@@ -42,45 +42,45 @@ public void incrementShots(int n);
     }
     //constructor for the office
     Room(String name, ArrayList<String> h, ArrayList<Upgrade> o,  ArrayList<Integer> b){
-      this._name="Casting Office";
-      this.neighborHelper=h;
-      this.officeUpgrades=o;
-      this.blankSpace=b;
+	this._name="Casting Office";
+	this.neighborHelper=h;
+	this.officeUpgrades=o;
+	this.blankSpace=b;
     }
     //constructor for the trailer
     Room(String name, ArrayList<String> h,  ArrayList<Integer> b){
-      this._name="Trailers";
-      this.neighborHelper=h;
-      this.blankSpace=b;
+	this._name="Trailers";
+	this.neighborHelper=h;
+	this.blankSpace=b;
     }
 
     public synchronized void addListener(Listener l){
-      listeners.add(l);
+	listeners.add(l);
     }
     private synchronized void playerEnter(){
-      if (_scene !=null){
-        for (Listener l : listeners){
-          l.enter(area);
-        }
-      }
+	if (_scene !=null){
+	    for (Listener l : listeners){
+		l.enter(area);
+	    }
+	}
     }
     private synchronized void sceneOver(){
-      for (Listener l : listeners){
-        l.over();
-      }
+	for (Listener l : listeners){
+	    l.over();
+	}
     }
     private synchronized void shotListener(){
-      for (Listener l: listeners){
-        l.incrementShots(shotCounters);
-      }
+	for (Listener l: listeners){
+	    l.incrementShots(shotCounters);
+	}
     }
     //lets the listeners know that a player entered the room
     public void addPlayer(Player p){
-      occupants.add(p);
-      playerEnter();
+	occupants.add(p);
+	playerEnter();
     }
     public void removePlayer(Player p){
-      occupants.remove(p);
+	occupants.remove(p);
     }
 
     //adds a role to this room
@@ -121,26 +121,26 @@ public void incrementShots(int n);
     //lets the listeners know a shot has been removed and removes a shot from the shotcounter
     public void removeShot(){
 	shotCounters--;
-  shotListener();
+	shotListener();
     }
     //lets the listeners know the scene is over and sets the current scene assigned to the room to null;
     public void wrapScene(){
-  sceneOver();
+	sceneOver();
 	_scene = null;
     }
 
     //the rest of this file is just get methods to get the various variables belonging to the room
 
     public ArrayList<Integer> getShotArea(int n){
-      return this.takesArea.get(n);
+	return this.takesArea.get(n);
     }
 
     public Scene getScene(){
-  return _scene;
+	return _scene;
     }
 
     public int getNumberOfRoles(){
-  return (roles.size());
+	return (roles.size());
     }
 
     public ArrayList<Role> getRoles(){
@@ -156,15 +156,15 @@ public void incrementShots(int n);
     }
 
     public ArrayList<Upgrade> getUpgrades(){
-  return officeUpgrades;
+	return officeUpgrades;
     }
 
     public ArrayList<Integer> getBlankSpace(){
-  return this.blankSpace;
+	return this.blankSpace;
     }
 
     // Returns the Strings of neighboring rooms
     public ArrayList<String> getNeighborHelper(){
-  return neighborHelper;
+	return neighborHelper;
     }
 }

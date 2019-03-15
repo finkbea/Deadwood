@@ -16,6 +16,7 @@ public class Controller extends JPanel {
 	executor = Executors.newSingleThreadExecutor();	
     }
 
+    // Act click. Calls actInput on GameKeeper with current player
     public void actClick(){
 	executor.execute(() -> {
 		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "act") == true){
@@ -24,6 +25,7 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // Rehearse click. Calls rehearseinput from gamekeeper on current player
     public void rehearseClick(){
 	executor.execute(() -> {
 		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "rehearse") == true){
@@ -32,10 +34,7 @@ public class Controller extends JPanel {
 	    });
     }
 
-    public void moveClick(){
-	executor.execute(() -> System.out.println("do move stuff"));
-    }
-
+    // End turn click. Updates player turn in the board
     public void endClick(){
 	executor.execute(() -> {
 		board.getPlayer(board.getCurrentPlayerID()).resetMove();
@@ -44,6 +43,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 1st dollar panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void d1Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 2) == 1
@@ -55,6 +56,8 @@ public class Controller extends JPanel {
 
     }
 
+    // When the 2nd dollar panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void d2Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 3) == 1
@@ -65,6 +68,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 3rd dollar panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void d3Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 4) == 1
@@ -75,6 +80,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 4th dollar panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void d4Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 5) == 1
@@ -85,6 +92,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 5th dollar panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void d5Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 0, 6) == 1
@@ -95,6 +104,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 1st credit panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void c1Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 2) == 1
@@ -105,6 +116,9 @@ public class Controller extends JPanel {
 	    });
     }
 
+    
+    // When the 2nd credit panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void c2Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 3) == 1
@@ -115,6 +129,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 3rd credit panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void c3Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 4) == 1
@@ -125,6 +141,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 4th credit panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void c4Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 5) == 1
@@ -135,6 +153,8 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When the 5th credit panel is clicked in Casting Office.
+    // Checks if upgrade is valid, then updates the players money and rank.
     public void c5Click(){
 	executor.execute(() -> {
 		if(GameKeeper.getPlayerFunds(board.getPlayer(board.getCurrentPlayerID()), 1, 6) == 1
@@ -144,7 +164,10 @@ public class Controller extends JPanel {
 		}
 	    });
     }
-    
+
+    // When a room is clicked, sent to this function with the roomName.
+    // Then looks up roomName and calls a function in GameKeeper to set
+    // the player room after doing a serious of checks.     
     public void roomClick(String roomName){
 	executor.execute(() -> {
 		String cmd = "move "+ roomName;
@@ -154,6 +177,9 @@ public class Controller extends JPanel {
 	    });
     }
 
+    // When a role is clicked, sent to this function with the roleName.
+    // Then looks up roleName and calls a function in GameKeeper to set
+    // the player role after doing a serious of checks. 
     public void roleClick(String roleName){
 	executor.execute(() -> {
 		String cmd = "work " + roleName;

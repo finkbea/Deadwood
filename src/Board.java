@@ -9,9 +9,9 @@ import java.util.LinkedList;
    properly run the game. */
 public class Board{
 
-  public interface Listener {
-    public void currentPlayer(int n);
-  }
+    public interface Listener {
+	public void currentPlayer(int n);
+    }
 
     private int num_players;
     private ArrayList<Player> player_list = new ArrayList<Player>();
@@ -35,13 +35,13 @@ public class Board{
 
     // Adds listeners to board
     public synchronized void addListener(Listener l){
-      listeners.add(l);
+	listeners.add(l);
     }
 
     private synchronized void sendPlayer(){
-      for (Listener l : listeners){
-        l.currentPlayer(currentPlayerID);
-      }
+	for (Listener l : listeners){
+	    l.currentPlayer(currentPlayerID);
+	}
     }
 
     public void setCurrentPlayerID(int i){
@@ -51,20 +51,20 @@ public class Board{
 	else{
 	    this.currentPlayerID = 1;
 	}
-      sendPlayer();
+	sendPlayer();
     }
     public void setCurrentPlayer(){
-      for (int i =0; i < player_list.size(); i++){
-        if (player_list.get(i).getPid()==currentPlayerID){
-          currentPlayer=player_list.get(i);
-        }
-      }
+	for (int i =0; i < player_list.size(); i++){
+	    if (player_list.get(i).getPid()==currentPlayerID){
+		currentPlayer=player_list.get(i);
+	    }
+	}
     }
     public Player getCurrentPlayer(){
-      return currentPlayer;
+	return currentPlayer;
     }
     public int getCurrentPlayerID(){
-      return this.currentPlayerID;
+	return this.currentPlayerID;
     }
     public void addPlayer(Player player){
 	player_list.add(player);
@@ -96,10 +96,9 @@ public class Board{
 	while(i < room_list.size()){
 	    if(!room_list.get(i).getName().equals("Casting Office") &&
 	       !room_list.get(i).getName().equals("Trailers")){
-		System.out.println(unused_scenes.get(i).getName());
 		room_list.get(i).placeScene(unused_scenes.get(i));
-	    room_list.get(i).addListener(unused_scenes.get(i));
-	    updateScenes(unused_scenes.get(i));
+		room_list.get(i).addListener(unused_scenes.get(i));
+		updateScenes(unused_scenes.get(i));
 	    }
 	    i++;
 	}
@@ -140,7 +139,7 @@ public class Board{
 	return (player_list.size());
     }
     public ArrayList<Player> getPlayers(){
-      return this.player_list;
+	return this.player_list;
     }
 
     /* Call on game startup and on new days */

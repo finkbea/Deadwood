@@ -16,35 +16,35 @@ import java.util.concurrent.*;
 
 public class ShotCounterView extends JPanel implements Room.Listener{
 
-  private JLabel shotCounter;
-  private ArrayList<Integer> area;
-  private int number;
+    private JLabel shotCounter;
+    private ArrayList<Integer> area;
+    private int number;
 
-  public ShotCounterView(ShotCounterResources s, ArrayList<Integer> n, int x){
-    super(null);
-    setLayout(null);
-    shotCounter = new JLabel();
-    this.area=n;
-    this.number=x;
+    public ShotCounterView(ShotCounterResources s, ArrayList<Integer> n, int x){
+	super(null);
+	setLayout(null);
+	shotCounter = new JLabel();
+	this.area=n;
+	this.number=x;
 
-    add(shotCounter, 0);
-    shotCounter.setBounds(0, 0, n.get(2), n.get(3));
-    setOpaque(false);
-    setVisible(true);
-  }
-
-  public void enter(ArrayList<Integer> n){
-    ShotCounterResources s = ShotCounterResources.getInstance();
-    shotCounter.setIcon(s.getIcon());
-    setBounds(area.get(0),area.get(1),area.get(2),area.get(3));
+	add(shotCounter, 0);
+	shotCounter.setBounds(0, 0, n.get(2), n.get(3));
+	setOpaque(false);
+	setVisible(true);
     }
-  public void over(){
-  }
-  public void incrementShots(int n){
-    if (n<=number){
-      setVisible(false);
+
+    public void enter(ArrayList<Integer> n){
+	ShotCounterResources s = ShotCounterResources.getInstance();
+	shotCounter.setIcon(s.getIcon());
+	setBounds(area.get(0),area.get(1),area.get(2),area.get(3));
     }
-  }
+    public void over(){
+    }
+    public void incrementShots(int n){
+	if (n<=number){
+	    setVisible(false);
+	}
+    }
     public void sendRoom(Room room){
     }
 }
