@@ -42,7 +42,7 @@ public class SidePanel extends JPanel implements Player.Listener{
     sidePanel = new JPanel();
     setLayout(null);
     setBounds(0, 0, 200, 900);
-    Color[] backGroundColor = new Color[]{Color.blue, Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
+    Color[] backGroundColor = new Color[]{Color.decode("#3498db"), Color.orange, Color.green, Color.red, Color.yellow, Color.magenta, Color.pink, Color.cyan};
     setBackground(Color.decode("#0F2043"));
 
     JLabel statPanel = new JLabel("Stat Panel:");

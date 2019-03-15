@@ -262,13 +262,13 @@ public class GameKeeper{
 	String[] tokens = command.split(" ");
 
 	if(tokens.length == 3){
-	    temp += tokens[1] + " " + tokens[2];
+	    temp += tokens[0] + " " +tokens[1] + " " + tokens[2];
 	}
 	else if(tokens.length == 4){
-	    temp += tokens[1] + " " + tokens[2] + " " + tokens[3];
+	    temp += tokens[0] + " " + tokens[1] + " " + tokens[2] + " " + tokens[3];
 	}
 	else if(tokens.length == 5){
-	    temp += tokens[1] + " " + tokens[2] + " " + tokens[3] + " " + tokens[4];
+	    temp += tokens[0] + " " + tokens[1] + " " + tokens[2] + " " + tokens[3] + " " + tokens[4];
 	}
 	else if(tokens.length == 2){
 	    temp += tokens[0] + " " + tokens[1];
