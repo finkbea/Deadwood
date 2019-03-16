@@ -1,3 +1,8 @@
+Adicus Finkbeiner
+Thomas Jones-Moore
+
+------------------
+
 Rules of Deadwood: https://cheapass.com//wp-content/uploads/2016/07/Deadwood-Free-Edition-Rules.pdf
 
 User Interface Elements:
