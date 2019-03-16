@@ -54,21 +54,22 @@ public class DeadwoodGUI{
 	for(int i = 0; i < playerViewList.size(); i++){
 	    boardpanel.add(playerViewList.get(i), 0);
 	    board.getPlayer(i).addListener(sidePanel);
-      board.getPlayer(i).addListener(bottomPanel);
+	    board.getPlayer(i).addListener(bottomPanel);
 	}
 
 	board.getPlayer(board.getPlayerListSize()).addListener(sidePanel);
-  board.getPlayer(board.getPlayerListSize()).addListener(bottomPanel);
-  board.addListener(bottomPanel);
+	board.getPlayer(board.getPlayerListSize()).addListener(bottomPanel);
+	board.addListener(bottomPanel);
 	boardpanel.add(upgradeView);
 	boardpanel.add(smp);
 	boardpanel.add(wrp);
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);
-	mainFrame.add(boardpanel);
+	mainFrame.add(boardpanel);	
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1100);
 
+	
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
 
@@ -77,7 +78,7 @@ public class DeadwoodGUI{
 	    playerViewList.get(i).requestFocus();
 	}
 	for (int j =0; j<sceneViewList.size(); j++){
-	    boardpanel.add(sceneViewList.get(j), 0);
+	    boardpanel.add(sceneViewList.get(j), 2);
 	    sceneViewList.get(j).requestFocus();
 	}
 	for (int k = 0; k<shotViewList.size(); k++){
@@ -169,7 +170,7 @@ public class DeadwoodGUI{
 		BufferedImage image = ImageIO.read(new File("resources/cards/card_back.png"));
 		JLabel label = new JLabel(new ImageIcon(image));
 		label.setBounds(0, 0, 205, 115);
-		room.add(label);
+		room.add(label, -1);
 		createSceneRolePanels(room_list.get(i), room);
 		mainFrame.add(room);
 	    }

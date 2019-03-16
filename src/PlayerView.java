@@ -48,12 +48,13 @@ public class PlayerView extends JPanel implements Player.Listener{
 	if(x < 300 && y < 200){
 	    x = p.getCurrentRoom().getArea().get(0) + p.getRole().getArea().get(0);
 	    y = p.getCurrentRoom().getArea().get(1) + p.getRole().getArea().get(1);
-	    setBounds(x, y, 40, 40);
+	    setBounds(x, y, 40, 40);	    
 	    System.out.println(x + " " + y);
 	}
 	else{
 	    setBounds(x, y, 40, 40);
 	}
+	
     }
 
     public void updateScore(Player p){
