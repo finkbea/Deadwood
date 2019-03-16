@@ -10,7 +10,8 @@ import java.util.LinkedList;
 public class Board{
 
     public interface Listener {
-	public void currentPlayer(int n);
+	public void currentPlayerID(int n);
+  public void currentPlayer(Player p);
     }
 
     private int num_players;
@@ -38,10 +39,15 @@ public class Board{
 	listeners.add(l);
     }
 
-    private synchronized void sendPlayer(){
+    private synchronized void sendPlayerID(){
 	for (Listener l : listeners){
-	    l.currentPlayer(currentPlayerID);
+	    l.currentPlayerID(currentPlayerID);
 	}
+    }
+    private synchronized void sendPlayer(){
+  for (Listener l : listeners){
+      l.currentPlayer(currentPlayer);
+  }
     }
 
     public void setCurrentPlayerID(int i){
@@ -51,12 +57,15 @@ public class Board{
 	else{
 	    this.currentPlayerID = 1;
 	}
-	sendPlayer();
+  setCurrentPlayer();
+	sendPlayerID();
     }
     public void setCurrentPlayer(){
 	for (int i =0; i < player_list.size(); i++){
+
 	    if (player_list.get(i).getPid()==currentPlayerID){
 		currentPlayer=player_list.get(i);
+    	sendPlayer();
 	    }
 	}
     }

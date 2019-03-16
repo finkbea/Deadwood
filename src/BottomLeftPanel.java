@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.util.concurrent.*;
 import java.util.ArrayList;
 
+//This panel listens to the board and changes its color and message based on who's turn it is, for more information on how our panels work look at the SidePanel
+
 public class BottomLeftPanel extends JPanel implements Board.Listener{
 
     private JPanel bottomLeftPanel;
@@ -27,11 +29,12 @@ public class BottomLeftPanel extends JPanel implements Board.Listener{
 	setVisible(true);
     }
 
-    public void currentPlayer(int n){
-	if (n>=9){
-	    System.out.println("How?");
-	}
+    //listens to the board to change to the current player's turn
+    public void currentPlayerID(int n){
+
 	setBackground(backGroundColor[n-1]);
 	label.setText("Player "+n+"\'s turn");
     }
+    //this part of the listener interface is not used in this file
+    public void currentPlayer(Player p){}
 }

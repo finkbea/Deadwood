@@ -222,6 +222,7 @@ public class Player{
 
     public void setRole(Role role){
 	_role = role;
+  actionUsed=true;
 	sendChangeRole();
     }
 
