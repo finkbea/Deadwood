@@ -84,18 +84,18 @@ public class Scene implements Room.Listener{
 	return this.area;
     }
 
-
     //the room lets its listeners know when a player enters the room and the scene passes on this information to its listeners
     public void enter(ArrayList<Integer> n){
 	this.area=n;
 	enterListener();
     }
+    
     //when the rooms shot counters are depleted it tells the scene that it is over and the scene tells its listeners that it is over
     public void over(){
 	overListener();
     }
+    
     //a room listener method that is not used here
     public void incrementShots(int n){
     }
-
 }
