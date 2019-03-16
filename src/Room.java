@@ -6,7 +6,7 @@ import java.util.LinkedList;
 //We just have one type of room, there are no special types for the casting office or the trailer, they just use different constructors as called by the ParseBoard. Each room has a list
 //of neighbors, roles, an area for the scene card and for each take, and an additional area for players just sitting around who aren't on a role along with an arralist of players
 //in the room. Every room has an arrayList of office upgrades but only the offices ever gets initialized, outside of that the casting office and trailer are just rooms with no values
-//for their scnes, roles, takesArea, or shot counters. 
+//for their scnes, roles, takesArea, or shot counters.
 
 public class Room{
 
@@ -15,6 +15,7 @@ public class Room{
 	public void enter(ArrayList<Integer> n);
 	public void over();
 	public void incrementShots(int n);
+  public void reset();
     }
 
     private List<Listener> listeners;
@@ -74,6 +75,11 @@ public class Room{
 	    l.incrementShots(shotCounters);
 	}
     }
+    private synchronized void newScene(){
+  for (Listener l: listeners){
+      l.reset();
+  }
+    }
     //lets the listeners know that a player entered the room
     public void addPlayer(Player p){
 	occupants.add(p);
@@ -99,6 +105,7 @@ public class Room{
     //assigns a scene to this room
     public void placeScene(Scene scene){
 	_scene = scene;
+  newScene();
     }
 
     // Parses all neighbors in the neighbors arraylist and returns 0 (no) or 1 (yes) if neighbor or not
@@ -169,7 +176,7 @@ public class Room{
 	}
 	return role;
     }
-    
+
     public ArrayList<Integer> getBlankSpace(){
 	return this.blankSpace;
     }

@@ -68,6 +68,7 @@ public class Player{
     // Since Player object keeps track of room, updateRoom()
     public void updateRoom(Room room){
   _room = room;
+  sendChangeMove();
     }
 
     // Adds currency to player fields

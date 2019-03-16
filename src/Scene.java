@@ -89,13 +89,13 @@ public class Scene implements Room.Listener{
 	this.area=n;
 	enterListener();
     }
-    
+
     //when the rooms shot counters are depleted it tells the scene that it is over and the scene tells its listeners that it is over
     public void over(){
 	overListener();
     }
-    
-    //a room listener method that is not used here
-    public void incrementShots(int n){
-    }
+
+    //room listener methods that are not used here
+    public void incrementShots(int n){}
+    public void reset(){}
 }
