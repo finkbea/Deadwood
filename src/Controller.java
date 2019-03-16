@@ -184,11 +184,15 @@ public class Controller extends JPanel {
     // the player role after doing a serious of checks. 
     public void roleClick(String roleName){
 	executor.execute(() -> {
-		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "work") == true){
-		    String cmd = "work " + roleName;
-		    if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
-			GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board);
+		try{
+		    if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "work") == true){
+			String cmd = "work " + roleName;
+			if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
+			    GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board);
+			}
 		    }
+		}
+		catch(Exception e){
 		}
 	    });	
     }
