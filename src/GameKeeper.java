@@ -18,7 +18,7 @@ public class GameKeeper{
 	}
 	else{
 	    while(day <= 4){
-        System.out.println("Day: "+day);
+		System.out.println("Day: "+day);
 		dayKeeper(board);
 		day++;
 	    }

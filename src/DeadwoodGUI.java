@@ -65,10 +65,9 @@ public class DeadwoodGUI{
 	boardpanel.add(wrp);
 	mainFrame.add(sidePanel);
 	mainFrame.add(bottomLeftPanel);
-	mainFrame.add(boardpanel);	
+	mainFrame.add(boardpanel);		
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1100);
-
 	
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);
@@ -78,13 +77,14 @@ public class DeadwoodGUI{
 	    playerViewList.get(i).requestFocus();
 	}
 	for (int j =0; j<sceneViewList.size(); j++){
-	    boardpanel.add(sceneViewList.get(j), 2);
+	    boardpanel.add(sceneViewList.get(j), playerViewList.size());
 	    sceneViewList.get(j).requestFocus();
 	}
 	for (int k = 0; k<shotViewList.size(); k++){
 	    boardpanel.add(shotViewList.get(k), 0);
 	    shotViewList.get(k).requestFocus();
 	}
+
     }
 
     //Initializes all shotCounter views and sets their icons
