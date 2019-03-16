@@ -104,11 +104,15 @@ public class GameKeeper{
     public static boolean isCommandLegal(Board board, int turn, String command){
 	Player player = board.getPlayer(turn);
 	boolean valid = false;
-	if(player.getJustMoved() == false && player.getActionUsed() == false){
+	if(player.getRole() != null){
+	    if(command.contains("act") || command.contains("rehearse") || command.contains("end")){
+		valid = true;
+	    }
+	}
+	else if(player.getJustMoved() == false && player.getActionUsed() == false){
 	    if(player.getCurrentRoom().getName().equals("Casting Office")){
 		if(command.contains("end") || command.contains("who") || command.contains("where") ||
-		   command.contains("move") || command.contains("act") || command.contains("upgrade") ||
-		   command.contains("work")){
+		   command.contains("move") || command.contains("upgrade")){
 		    valid = true;
 		}
 	    }

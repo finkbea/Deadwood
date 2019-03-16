@@ -170,10 +170,12 @@ public class Controller extends JPanel {
     // the player room after doing a serious of checks.     
     public void roomClick(String roomName){
 	executor.execute(() -> {
-		String cmd = "move "+ roomName;
-		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
-		    GameKeeper.moveInput(board.getRoom(roomName).getName(), board.getCurrentPlayerID(), board);
-	        }
+		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "move") == true){
+		    String cmd = "move "+ roomName;
+		    if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
+			GameKeeper.moveInput(board.getRoom(roomName).getName(), board.getCurrentPlayerID(), board);
+		    }
+		}
 	    });
     }
 
@@ -182,10 +184,11 @@ public class Controller extends JPanel {
     // the player role after doing a serious of checks. 
     public void roleClick(String roleName){
 	executor.execute(() -> {
-		System.out.println(roleName);
-		String cmd = "work " + roleName;
-		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
-		    GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board);
+		if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), "work") == true){
+		    String cmd = "work " + roleName;
+		    if(GameKeeper.isCommandLegal(board, board.getCurrentPlayerID(), cmd) == true){
+			GameKeeper.workInput(roleName, board.getCurrentPlayerID(), board);
+		    }
 		}
 	    });	
     }
