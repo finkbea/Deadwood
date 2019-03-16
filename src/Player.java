@@ -2,6 +2,7 @@ import java.util.LinkedList;
 import java.util.List;
 /* Each Player has its own player class. Keeps track of current role, current room, currency,
    and rank. */
+
 public class Player{
 
     public interface Listener {
@@ -20,7 +21,6 @@ public class Player{
     private boolean justMoved;
     private boolean actionUsed;
     private List<Listener> listeners;
-    private String color;
     private int score=dollars+credits+(5*rank);
     private int lastRoll;
 
@@ -35,32 +35,6 @@ public class Player{
 	justMoved = false;
 	actionUsed = false;
 	lastRoll=1;
-	switch (pid){
-	case 1:
-	    color="blue";
-	    break;
-	case 2:
-	    color="orange";
-	    break;
-	case 3:
-	    color="green";
-	    break;
-	case 4:
-	    color="red";
-	    break;
-	case 5:
-	    color="yellow";
-	    break;
-	case 6:
-	    color="violet";
-	    break;
-	case 7:
-	    color="pink";
-	    break;
-	case 8:
-	    color="cyan";
-	    break;
-	}
     }
 
     public synchronized void addListener(Listener l){
@@ -83,35 +57,6 @@ public class Player{
 	}
     }
 
-    //returns the players score
-    public int getScore(){
-	return this.score;
-    }
-
-    public int getLastRoll(){
-	return this.lastRoll;
-    }
-
-    //returns the players color
-    public String getColor(){
-	return this.color;
-    }
-    public boolean getJustMoved(){
-	return justMoved;
-    }
-
-    public boolean getActionUsed(){
-	return actionUsed;
-    }
-
-    public void resetAction(){
-	actionUsed = false;
-    }
-
-    public void resetMove(){
-	justMoved = false;
-    }
-
     public void useAction(){
 	actionUsed = true;
     }
@@ -119,6 +64,10 @@ public class Player{
     public void move(){
 	justMoved = true;
 	sendChangeMove();
+    }
+    // Since Player object keeps track of room, updateRoom()
+    public void updateRoom(Room room){
+  _room = room;
     }
 
     // Adds currency to player fields
@@ -132,48 +81,21 @@ public class Player{
 	sendUpdate();
     }
 
-    public int getPid(){
-	return pid;
-    }
-
-    public int getDollars(){
-	return dollars;
-    }
-
-    public int getCredits(){
-	return credits;
-    }
-
-    public int getRank(){
-	return rank;
-    }
-    public void setRank(int n){
-	this.rank=n;
-    }
-
-    // Since Player object keeps track of room, updateRoom()
-    public void updateRoom(Room room){
-	_room = room;
-    }
-
-    public Room getCurrentRoom(){
-	return _room;
-    }
-
     public void rehearse(){
 	rehearseTokens++;
 	sendUpdate();
     }
 
-    public int getRehearseTokens(){
-	return rehearseTokens;
+    //checks if the player succeeds at acting and sends an update to its listeners
+    public boolean act(int roll, int budget){
+  boolean acting = false;
+  if ((roll+rehearseTokens)>=budget){
+      acting=true;
+  }
+  this.lastRoll=roll;
+  sendUpdate();
+  return acting;
     }
-
-    public void resetRehearseTokens(){
-	rehearseTokens = 0;
-	sendUpdate();
-    }
-
     public void updateRankAndMoney(int new_rank, int money_type){
 	rank = new_rank;
 
@@ -209,16 +131,29 @@ public class Player{
 	}
     }
 
-    public boolean act(int roll, int budget){
-	System.out.println(rehearseTokens +", "+roll);
-	boolean acting = false;
-	if ((roll+rehearseTokens)>=budget){
-	    acting=true;
-	}
-	this.lastRoll=roll;
-	sendUpdate();
-	return acting;
+
+    //These four methods just reset various attributes of the Player
+
+    public void resetAction(){
+  actionUsed = false;
     }
+
+    public void resetMove(){
+  justMoved = false;
+    }
+    public void resetRehearseTokens(){
+  rehearseTokens = 0;
+  sendUpdate();
+    }
+    // Used when scene is wrapped or day is over
+    public void resetRole(){
+  _role = null;
+  rehearseTokens=0;
+  roleType = 0;
+  sendUpdate();
+    }
+
+    //These three methods just set various attributes of the Player
 
     public void setRole(Role role){
 	_role = role;
@@ -230,20 +165,59 @@ public class Player{
 	roleType = type;
     }
 
-    public Role getRole(){
-	return _role;
+    public void setRank(int n){
+  this.rank=n;
     }
 
-    // Used when scene is wrapped or day is over
-    public void resetRole(){
-	_role = null;
-	rehearseTokens=0;
-	roleType = 0;
-	sendUpdate();
-    }
+
+    //The rest of this file is just methods to get the various variables stored in Player
 
     public int getRoleType(){
 	return roleType;
     }
+
+    public Role getRole(){
+  return _role;
+    }
+
+    public int getRehearseTokens(){
+  return rehearseTokens;
+    }
+
+    public Room getCurrentRoom(){
+  return _room;
+    }
+    public int getPid(){
+	return pid;
+    }
+
+    public int getDollars(){
+	return dollars;
+    }
+
+    public int getCredits(){
+	return credits;
+    }
+
+    public int getRank(){
+	return rank;
+    }
+
+    //returns the players score
+    public int getScore(){
+	return this.score;
+    }
+
+    public int getLastRoll(){
+	return this.lastRoll;
+    }
+    public boolean getJustMoved(){
+	return justMoved;
+    }
+
+    public boolean getActionUsed(){
+	return actionUsed;
+    }
+
 
 }

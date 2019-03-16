@@ -77,6 +77,8 @@ public class BottomPanel implements Player.Listener, Board.Listener{
     private synchronized void actClick(Controller controller){
       if(a_b.isEnabled()==true){
 	controller.actClick();
+  a_b.setVisible(false);
+  r_b.setVisible(false);
   a_b.setEnabled(false);
   r_b.setEnabled(false);
   a_b.setBackground(Color.decode("#808080"));
@@ -86,7 +88,10 @@ public class BottomPanel implements Player.Listener, Board.Listener{
 
     private synchronized void rehearseClick(Controller controller){
       if(r_b.isEnabled()==true){
+        System.out.println("click");
 	controller.rehearseClick();
+  a_b.setVisible(false);
+  r_b.setVisible(false);
   a_b.setEnabled(false);
   r_b.setEnabled(false);
   a_b.setBackground(Color.decode("#808080"));
@@ -121,6 +126,8 @@ public class BottomPanel implements Player.Listener, Board.Listener{
     }
 
     public void currentPlayer(Player p){
+      a_b.setVisible(true);
+      r_b.setVisible(true);
       a_b.setEnabled(false);
       r_b.setEnabled(false);
       a_b.setBackground(Color.decode("#808080"));

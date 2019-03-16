@@ -7,6 +7,9 @@ import java.io.*;
 import java.awt.image.*;
 import java.awt.Color;
 
+//the resources for the PlayerView, similar to our other resource classes this is a singleton pattern, it has an array of ImageIcons, 48 in total and there is one for each dice color and
+//number, it just iterates through those to add them to the array, then returns the desired ImageIcon. 
+
 public class PlayerResources{
 
     private ImageIcon[] big;
@@ -42,8 +45,8 @@ public class PlayerResources{
 	}
     }
 
-    public ImageIcon getIcon(int id, int rank){      
-	int x =rank + ((id-1)*6)-1;    
+    public ImageIcon getIcon(int id, int rank){
+	int x =rank + ((id-1)*6)-1;
 	return big[x];
     }
 

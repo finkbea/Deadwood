@@ -9,6 +9,9 @@ import java.awt.Color;
 import java.util.concurrent.*;
 import java.util.ArrayList;
 
+//The view for the player class, each player will have their own PlayerView, they have an offset so players don't stack on top of each other when not working. It listens to the player
+//and whenever the player takes a role it moves to the desired role, whenever a player moves it moves to that role and whenever a player's rank changes it will update that.
+
 public class PlayerView extends JPanel implements Player.Listener{
 
     private JLabel p1;

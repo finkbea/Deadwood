@@ -18,6 +18,7 @@ public class GameKeeper{
 	}
 	else{
 	    while(day <= 4){
+        System.out.println("Day: "+day);
 		dayKeeper(board);
 		day++;
 	    }
@@ -116,14 +117,14 @@ public class GameKeeper{
 		   command.contains("move") || command.contains("rehearse") || command.contains("work") ||
 		   command.contains("act")){
 		    valid = true;
-		}		
+		}
 	    }
 	}
 	else if((player.getJustMoved() == false && player.getActionUsed() == true) ||
 		(player.getJustMoved() == true && player.getActionUsed() == true)){
 	    if(command.contains("end") || command.contains("who") || command.contains("where")){
 		valid = true;
-	    }	    
+	    }
 	}
 	else if(player.getJustMoved() == true && player.getActionUsed() == false){
 	    if(player.getCurrentRoom().getName().equals("Casting Office")){
@@ -141,7 +142,7 @@ public class GameKeeper{
 	}
 	return valid;
     }
-    
+
     /* Responsible for handling all the input strings on a players turn. If the command
        is not recognized, a 'bad input' message is printed out. */
     public static int inputAdmin(String command, int turn, Board board){
@@ -440,6 +441,7 @@ public class GameKeeper{
     // returns 0 for no, 1 for yes
     private static int isEndOfDay(Board board){
 	int eod = 0;
+  System.out.println("number of wrapped scenes: "+board.numWrappedScenes());
 	if(board.numWrappedScenes() == 9){
 	    eod = 1;
 	}
