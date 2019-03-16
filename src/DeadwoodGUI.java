@@ -68,6 +68,9 @@ public class DeadwoodGUI{
 	mainFrame.add(boardpanel);		
 	mainFrame.pack();
 	mainFrame.setSize(1400, 1100);
+
+	DayKeeper daykeeper = new DayKeeper(board);
+	board.addListener(daykeeper);
 	
 	mainFrame.setVisible(true);
 	mainFrame.setResizable(false);

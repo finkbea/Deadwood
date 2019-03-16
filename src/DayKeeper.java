@@ -22,6 +22,7 @@ public class DayKeeper implements Board.Listener{
     public void incrementDay(){
 	if(board.numWrappedScenes() == 9){
 	    day++;
+	    resetPlayers(board);
 	    board.hydrateSets();
 	    board.setCurrentPlayerID(1);
 	}
@@ -29,7 +30,7 @@ public class DayKeeper implements Board.Listener{
     
     /* Used on game startup and new days. Puts players back in Trailers,                        
        resets each players rehearse tokens, and resets all roles. */
-    private static void resetPlayers(Board board){
+    private void resetPlayers(Board board){
 	int pnum = 1;
 	int i = 0;
 	while(i < board.getPlayerListSize()){
@@ -43,8 +44,7 @@ public class DayKeeper implements Board.Listener{
 	    i++;
 	}
     }
-    
-    
+        
     // Not used
     public void currentPlayerID(int n){}
     public void currentPlayer(Player p){};
