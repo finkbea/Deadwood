@@ -9,18 +9,43 @@ import java.util.*;
 import java.awt.BorderLayout;
 import java.util.concurrent.*;
 
-public class DayKeeper{
+public class DayKeeper implements Board.Listener{
 
     Board board;
     int day;
 
     public DayKeeper(Board board){
 	this.board = board;
-	day = 1;
-	
+	day = 1;	
     }
 
-    public void nextDay(){
-	day++;
+    public void incrementDay(){
+	if(board.numWrappedScenes() == 9){
+	    day++;
+	    board.hydrateSets();
+	    board.setCurrentPlayerID(1);
+	}
     }
+    
+    /* Used on game startup and new days. Puts players back in Trailers,                        
+       resets each players rehearse tokens, and resets all roles. */
+    private static void resetPlayers(Board board){
+	int pnum = 1;
+	int i = 0;
+	while(i < board.getPlayerListSize()){
+	    board.getPlayer(pnum).updateRoom(board.getTrailers());
+	    board.getPlayer(pnum).getCurrentRoom().addPlayer(board.getPlayer(pnum));
+	    board.getPlayer(pnum).resetRehearseTokens();
+	    board.getPlayer(pnum).resetRole();
+	    board.getPlayer(pnum).resetAction();
+	    board.getPlayer(pnum).resetMove();
+	    pnum++;
+	    i++;
+	}
+    }
+    
+    
+    // Not used
+    public void currentPlayerID(int n){}
+    public void currentPlayer(Player p){};
 }

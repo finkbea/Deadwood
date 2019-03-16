@@ -363,7 +363,8 @@ public class GameKeeper{
 
 	ArrayList<Player> main_role_players = new ArrayList<Player>();
 	for(int i = 0; i < board.getPlayerListSize(); i++){
-	    if(board.getPlayer(i+1).getRoleType() == 1){
+	    if(board.getPlayer(i+1).getCurrentRoom().getName().equals(room.getName())
+	       && board.getPlayer(i+1).getRoleType() == 1){
 		main_role_players.add(board.getPlayer(i+1));
 	    }
 	}
