@@ -37,5 +37,5 @@ public class BottomLeftPanel extends JPanel implements Board.Listener{
     }
     //this part of the listener interface is not used in this file
     public void currentPlayer(Player p){}
-    public void incrementDay(int n){}
+    public void incrementDay(){}
 }

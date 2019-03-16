@@ -138,6 +138,6 @@ public class BottomPanel implements Player.Listener, Board.Listener{
 
     //this part of the board interface is not used here
     public void currentPlayerID(int n){}
-    public void incrementDay(int n){}
+    public void incrementDay(){}
 
 }
