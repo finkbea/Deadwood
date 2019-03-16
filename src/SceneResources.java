@@ -40,7 +40,6 @@ public class SceneResources{
     }
 
     public ImageIcon getSceneIcon(int sceneNum){
-	System.out.println(sceneNum);
 	return big.get(sceneNum-1);
     }
 

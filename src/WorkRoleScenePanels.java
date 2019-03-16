@@ -36,14 +36,13 @@ public class WorkRoleScenePanels extends JPanel{
 	    l = new JLabel();
 	    add(l, 0);
 	    labelList.add(l);
-	    System.out.println(scene.getRoles().get(i).getArea().get(0)+" "+ scene.getRoles().get(i).getArea().get(1)+" "+ scene.getRoles().get(i).getArea().get(2)+" "+ scene.getRoles().get(i).getArea().get(3));
 	    l.setBounds(scene.getRoles().get(i).getArea().get(0), scene.getRoles().get(i).getArea().get(1), scene.getRoles().get(i).getArea().get(2), scene.getRoles().get(i).getArea().get(3));
 	    l.setVisible(true);
 	    roleName = scene.getRoles().get(i).getName();
 	    roles.add(roleName);
 	    i++;
 	}
-	
+
 	AddWorkRoleScenePanelMouseAdapters a = new AddWorkRoleScenePanelMouseAdapters(roles, labelList, controller, scene);
     }
 }

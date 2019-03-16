@@ -18,7 +18,6 @@ public class ShotCounterResources{
 	final Class cls = ShotCounterResources.class;
 
 	String fn = String.format("resources/shot.png");
-	System.out.println(fn);
 	try (InputStream r = cls.getResourceAsStream(fn)) {
 	    icon = new ImageIcon (ImageIO.read(r));
 	}

@@ -42,7 +42,7 @@ public class PlayerView extends JPanel implements Player.Listener{
 	else{
 	    xOffSet = panelOffSet;
 	}
-	setBounds(p.getCurrentRoom().getBlankSpace().get(0) - 200 + xOffSet, p.getCurrentRoom().getBlankSpace().get(1) + yOffSet, 40, 40);	
+	setBounds(p.getCurrentRoom().getBlankSpace().get(0) - 200 + xOffSet, p.getCurrentRoom().getBlankSpace().get(1) + yOffSet, 40, 40);
     }
 
     public void roleTaken(Player p){
@@ -52,12 +52,11 @@ public class PlayerView extends JPanel implements Player.Listener{
 	    x = p.getCurrentRoom().getArea().get(0) + p.getRole().getArea().get(0);
 	    y = p.getCurrentRoom().getArea().get(1) + p.getRole().getArea().get(1);
 	    setBounds(x, y, 40, 40);	    
-	    System.out.println(x + " " + y);
 	}
 	else{
 	    setBounds(x, y, 40, 40);
 	}
-	
+
     }
 
     public void updateScore(Player p){
