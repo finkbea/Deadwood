@@ -39,12 +39,14 @@ public class SceneView extends JPanel implements Scene.Listener{
     SceneResources res = SceneResources.getInstance();
     scene.setIcon(res.getSceneIcon(s.getNumber()));
     setBounds(s.getArea().get(0), s.getArea().get(1), s.getArea().get(3), s.getArea().get(2));
-    }
+    WorkRoleScenePanels wsrp = new WorkRoleScenePanels(s, c);
+    add(wsrp);
+  }
 
   //The scene alerts the view whenever it is over and since a scene can only show up once per game we just set the bounds to be all 0, effectively removing it from the board.
     public void closeScene(Scene s){
-    setBounds(0,0,0,0);
-    setVisible(false);
+	setBounds(0,0,0,0);
+	setVisible(false);
     }
 
 }

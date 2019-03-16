@@ -31,7 +31,6 @@ public class DeadwoodGUI{
 	setupSceneViews(board);
 	setupShotCounterViews(board);
 
-
 	mainFrame = new JFrame();
 
 	mainFrame.setTitle("Deadwood");

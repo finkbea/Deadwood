@@ -368,9 +368,12 @@ public class GameKeeper{
 	    for(int i = 0; i < room.getScene().getBudget(); i++){
 		rolls.add(rollDice(1));
 	    }
+
 	    Collections.sort(rolls);
+	    System.out.println(rolls);
 	    int j = rolls.size()-1;
-	    for(int i = 0; i < rolls.size(); i++){
+	    for(int i = 0; i < main_role_players.size() && j >= 0; i++){
+		System.out.println(j + ", "+rolls.get(j));
 		main_role_players.get(i).addCurrency(0, rolls.get(j));
 		j--;
 		if( (i+1) == main_role_players.size() ){

@@ -159,6 +159,17 @@ public class Room{
 	return officeUpgrades;
     }
 
+    public Role getSpecificRole(String roleName){
+	int i = 0;
+	Role role = null;
+	while(i < roles.size()){
+	    if(roles.get(i).getName().equals(roleName)){
+		role = roles.get(i);
+	    }
+	}
+	return role;
+    }
+    
     public ArrayList<Integer> getBlankSpace(){
 	return this.blankSpace;
     }

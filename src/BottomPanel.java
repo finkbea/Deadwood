@@ -85,7 +85,7 @@ public class BottomPanel implements Player.Listener, Board.Listener{
     }
 
     private synchronized void rehearseClick(Controller controller){
-      if(r_b.isEnabled()==true){
+	if(r_b.isEnabled()==true){
 	controller.rehearseClick();
   a_b.setEnabled(false);
   r_b.setEnabled(false);
