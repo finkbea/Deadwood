@@ -12,6 +12,7 @@ public class Board{
     public interface Listener {
 	public void currentPlayerID(int n);
   public void currentPlayer(Player p);
+  public void incrementDay(int n);
     }
 
     private int num_players;
@@ -47,6 +48,11 @@ public class Board{
     private synchronized void sendPlayer(){
   for (Listener l : listeners){
       l.currentPlayer(currentPlayer);
+  }
+    }
+    private synchronized void updateDay(){
+  for (Listener l : listeners){
+      l.incrementDay(numWrappedScenes);
   }
     }
 
@@ -189,6 +195,7 @@ public class Board{
 
     public void wrapScene(){
 	numWrappedScenes++;
+  updateDay();
     }
 
     public int numWrappedScenes(){
