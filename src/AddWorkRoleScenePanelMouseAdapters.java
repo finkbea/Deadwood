@@ -14,6 +14,8 @@ public class AddWorkRoleScenePanelMouseAdapters{
 
     private Controller c;
 
+    // Adds mouse event clicks to the roles that are in a scene and not in a room.
+    // Forwards the message to the controller through roleClick()
     public AddWorkRoleScenePanelMouseAdapters(ArrayList<String> roles, ArrayList<JLabel> labelList, Controller controller, Scene scene){
 	c = controller;
 	int i = 0;

@@ -14,7 +14,9 @@ public class WorkRolePanels extends JPanel{
     private ArrayList<JLabel> labelList;
     private Controller c;
     private ArrayList<String> roles;
-    
+
+    // Sets jpanel clickables for all room roles and adds forwards their clickable
+    // events onto the controller
     public WorkRolePanels(Board board, Controller controller){
 	super(null);
 	c = controller;

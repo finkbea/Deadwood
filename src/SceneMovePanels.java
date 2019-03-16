@@ -11,9 +11,11 @@ import java.util.concurrent.*;
 
 public class SceneMovePanels extends JPanel{
 
-    private ArrayList<JLabel> labelList;
+    private ArrayList<JLabel> labelList; // stores all labels
     private Controller c;
 
+    // Parses through all rooms and and sets the jpanels for the scene cards
+    // complete with mouse click events that are passed on to controller
     public SceneMovePanels(Board board, Controller controller){
 	super(null);
 	c = controller;

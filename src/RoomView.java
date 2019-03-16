@@ -16,7 +16,11 @@ public class RoomView extends JPanel{
     
     private int occupants;
     private List<Listener> listeners;
-    
+
+    // Notified when a player enters or leaves a room and lets
+    // the listeners know when a player enters or leaves the
+    // respective RoomView. There is one RoomView for each
+    // room. 
     RoomView(){	
 	occupants = 0;
 	listeners = new LinkedList<Listener>();
