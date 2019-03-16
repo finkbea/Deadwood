@@ -19,6 +19,9 @@ public class DayKeeper implements Board.Listener{
 	day = 1;	
     }
 
+    // Function taken from interface, listening to board.
+    // Resets players back to trailers, hydrates sets with
+    // new scene cards, and resets currentplayerID
     public void incrementDay(){
 	if(board.numWrappedScenes() == 9){
 	    day++;
